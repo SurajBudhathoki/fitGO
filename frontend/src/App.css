@@ -1,0 +1,48 @@
+.content {
+  text-align: center;
+}
+
+.navs {
+  list-style-type:none;
+  border: none;
+  background: none;
+  text-decoration: none;
+   color: white;
+  margin-left: 15px;
+}
+
+.logout {
+  float: right;
+}
+
+.paper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+ 
+  height: 500;
+  overflow: "auto";
+}
+
+.logo{
+list-style-type: none;
+text-decoration: none;
+color: white;
+
+}
+
+.menuItems {
+  height: 200px;
+  font-size: 40px;
+ 
+}
+
+.menuItems > a {
+  text-decoration: none;
+  color: green;
+}
+
+.homeImg, .gridImg {
+  opacity: 0.7;
+filter:brightness(40%);
+}
+

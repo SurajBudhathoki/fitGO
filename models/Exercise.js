@@ -13,7 +13,7 @@ var ExerciseSchema = new Schema({
         type: String,
     },
     exerciseImage : {
-        type: String,
+        type: Array, 
     }
 
 

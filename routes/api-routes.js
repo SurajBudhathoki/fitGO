@@ -61,6 +61,71 @@ module.exports = function (app) {
 
     });
 
+    //getting chest exercises
+    app.get('/exercises/chest', function (req, res) {
+        db.Exercise.find({
+                bodyPart: 'Chest'
+            })
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    //getting leg exercises
+    app.get('/exercises/legs', function (req, res) {
+        db.Exercise.find({
+                bodyPart: 'Legs'
+            })
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    //getting back exercises
+    app.get('/exercises/back', function (req, res) {
+        db.Exercise.find({
+                bodyPart: 'Back'
+            })
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    //getting arms exercises
+    app.get('/exercises/arms', function (req, res) {
+        db.Exercise.find({
+                bodyPart: 'Arms'
+            })
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    //getting shoulders exercises
+    app.get('/exercises/shoulders', function (req, res) {
+        db.Exercise.find({
+                bodyPart: 'Shoulders'
+            })
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
     //getting all programs
     app.get('/api/programs', function (req, res) {
         db.Program.find({})
