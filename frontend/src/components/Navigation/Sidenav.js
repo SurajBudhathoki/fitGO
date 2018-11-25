@@ -7,8 +7,8 @@ const Sidenav = (props) => (
          <Paper className= "paper">
                         <List>
                             <ListItem className="menuItems" button> <Link  to="/exercises">Exercises </Link>   </ListItem>
-                            <ListItem className="menuItems" button>About</ListItem>
-                            <ListItem className="menuItems" button>BMI</ListItem>
+                            <ListItem className="menuItems" button>Nav</ListItem>
+                            <ListItem className="menuItems" button>Nav</ListItem>
                         </List>
                     </Paper>
    

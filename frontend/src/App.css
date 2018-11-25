@@ -11,9 +11,6 @@
   margin-left: 15px;
 }
 
-.logout {
-  float: right;
-}
 
 .paper {
   margin-top: 10px;
@@ -46,3 +43,13 @@ color: white;
 filter:brightness(40%);
 }
 
+.welcome {
+  float: right;
+}
+
+.logout {
+ 
+  float: right;
+  font-size: 20px;
+  color: white;
+}

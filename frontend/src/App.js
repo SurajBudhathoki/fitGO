@@ -36,7 +36,7 @@ class App extends Component {
 
          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
          {this.state.loggedIn &&
-          <p>Welcome, {this.state.username}!</p>
+          <p className="welcome">Welcome, {this.state.username}!</p>
         }
 
         <div className="content">

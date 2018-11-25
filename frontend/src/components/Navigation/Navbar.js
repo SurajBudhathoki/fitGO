@@ -42,8 +42,14 @@ render() {
                         {loggedIn ? 
                         (
                             <Toolbar>
+                                  <Grid justify="space-between" container spacing={16}>
+                                    <Grid item md = {11}>
+                                <Link className="logo" to="/"> Logo </Link>
+                                </Grid> 
+                                <Grid item md= {1}>
                             <Link to="#" className="logout" onClick={this.logout}>Logout</Link>
-                            <Link className="logo" to="/"> Logo </Link> 
+                            </Grid>
+                            </Grid>
                             </Toolbar>
                         ) : (
                                 <Toolbar  >
