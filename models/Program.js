@@ -7,13 +7,16 @@ var ProgramSchema = new Schema({
         type: String,
     },
     days : {
-        type: Number,
+        type: String,
     },
     sets : {
-        type: Number,
+        type: String,
     },
     reps : {
-        type: Number,
+        type: String,
+    },
+    exercises : {
+        type: Array
     },
 
     User: [

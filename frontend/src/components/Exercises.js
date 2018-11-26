@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 export default class Exercises extends Component {
 
     state = {
-        exerciseList : [], 
+       
         backList: [],
         chestList: [],
         legsList: [],

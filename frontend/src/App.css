@@ -53,3 +53,7 @@ filter:brightness(40%);
   font-size: 20px;
   color: white;
 }
+
+.createGrid {
+  height: 800px;
+}
