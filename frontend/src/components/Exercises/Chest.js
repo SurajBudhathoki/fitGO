@@ -21,9 +21,12 @@ const Chest = (props) => (
                     <GridListTile>
                         <h1> {exercise.exerciseName} </h1>   
                         <h3>{exercise.bodyPart} </h3>
-                        <img src={exercise.exerciseImage[0]} alt= 'chestImg' />
+                        <img src= "https://www.mensjournal.com/wp-content/uploads/mf/rookie-mistakes-bench-press.jpg?w=1200&h=1200&crop=1"
+                        // {exercise.exerciseImage[0]} 
+                        alt= 'chestImg' />
                     </GridListTile>
                      </Grid>   
+
 
                  </Grid> 
                 ))     

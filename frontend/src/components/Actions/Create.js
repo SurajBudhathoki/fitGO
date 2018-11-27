@@ -12,7 +12,8 @@ export default class Create extends Component {
         this.state = {
             exerciseList : [],
             programName: '',
-            days:'',
+            days: '',
+            numDays:null,
        
             reps: '',
             sets:'',
@@ -21,6 +22,7 @@ export default class Create extends Component {
             
         }
         this.handleChange =  this.handleChange.bind(this);
+        this.renderNumOfDays = this.renderNumOfDays.bind(this);
     }
 
     componentDidMount() {
@@ -74,31 +76,59 @@ export default class Create extends Component {
     }
 
 
-    renderNumOfDays = (event) => {
-        event.preventDefault();
+    renderNumOfDays = () => {
+        //event.preventDefault();
 
-        const numDays = this.state.days;
+        const numDays = this.state.numDays;
         console.log(numDays);
 
-        for(let i=0; i < numDays; i++) {
+        // var arr = this.state.numDays.toString(10).split('').map(Number);
+        
 
-            console.log(numDays);
-            return(
-                <div>
-                    <TextField type="text" label="Exercise Name"
-                    margin="normal" value={this.state.exercise}
-                    onChange = {this.handleChange} name="exercise" />
-                                
-                     <TextField type="number" label="Sets"
-                    margin="normal" value= {this.state.sets}
-                    onChange=  {this.handleChange} name="sets" />
-                                
-                    <TextField type="number" label="Reps"
-                    margin="normal" value= {this.state.reps}
-                    onChange=  {this.handleChange} name="reps" />
-                </div>
-            )
+        // for(let i=0; i < 5; i++) {
+        //     console.log('hello')
+        // }  
+
+        if(numDays) {
+
+            // let arrayOfNumbers = numDays.map(Number);
+          
+     
+            
+            for(let i=0; i < numDays; i++) {
+
+                console.log('hello world');
+                
+
+                return(
+
+                    
+                    <ExpansionPanel>  
+
+                        <ExpansionPanelSummary> 
+                        day {numDays[i]}
+                        </ExpansionPanelSummary>
+
+                        <ExpansionPanelDetails> 
+                        <TextField type="text" label="Exercise Name"
+                        margin="normal" value={this.state.exercise}
+                        onChange = {this.handleChange} name="exercise" />
+                                    
+                         <TextField type="number" label="Sets"
+                        margin="normal" value= {this.state.sets}
+                        onChange=  {this.handleChange} name="sets" />
+                                    
+                        <TextField type="number" label="Reps"
+                        margin="normal" value= {this.state.reps}
+                        onChange=  {this.handleChange} name="reps" />
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                )
+            }
+         
         }
+        
+      
 
     }
 
@@ -124,11 +154,25 @@ export default class Create extends Component {
                                 
                                 <div> 
                                 <TextField type="number" label="Days"
-                                margin="normal" value= {this.state.days}
-                                onChange=  {this.handleChange} name="days" />
+                                margin="normal" value= {this.state.numDays}
+                                onChange=  {this.handleChange} name="numDays" />
 
-                                <button onClick={this.renderNumOfDays}> ok </button>
+                                {/* <button onClick={this.renderNumOfDays}> ok </button> */}
                                 </div>
+
+                                
+
+                                <br />  
+                               <div>
+                                   <Button variant="contained" color="primary"
+                                   onClick = {this.handleAdd} >
+                                       Add
+                                   </Button>
+                               </div>
+
+                              </form>
+
+                                <div> {this.renderNumOfDays()} </div>
 
                                 {/* <div>
                                 <TextField type="text" label="Exercise Name"
@@ -255,13 +299,7 @@ export default class Create extends Component {
                                         
                                                  
 
-                                    <br />  
-                               <div>
-                                   <Button variant="contained" color="primary"
-                                   onClick = {this.handleAdd} >
-                                       Add
-                                   </Button>
-                               </div>
+                                  
 
                                 {/* {this.state.numOfDays.map((days, index) => (
                                       <List key= {index}>
@@ -272,9 +310,9 @@ export default class Create extends Component {
                                   ))}    */}
                             
                                    
-                            </form>
+                            
 
-                            <p> {this.renderNumOfDays} </p>   
+                            {/* <div> {this.renderNumOfDays} </div>    */}
 
                         </Paper>
 

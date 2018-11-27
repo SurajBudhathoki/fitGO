@@ -7,6 +7,8 @@ var ProgramSchema = new Schema({
         type: String,
     },
 
+    numDays : Number,
+
     days : [{
         dayName : String,
 
