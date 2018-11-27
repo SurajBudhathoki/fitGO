@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
+import {Grid,Paper, GridList, GridListTile, GridListTileBar, List, Divider } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
 
@@ -8,7 +8,9 @@ import Sidenav from '../Navigation/Sidenav';
 export default class View extends Component {
 
     state = {
-        programList: []
+        programList: [],
+        dayList : [],
+        exerciseList: []
     }
 
     componentDidMount() {
@@ -18,11 +20,61 @@ export default class View extends Component {
     getPrograms = () => {
         axios.get('/api/programs')
         .then((result) => {
-            console.log(result.data);
-            this.setState({programList: result.data});       
-        })    
-    }
+           
+            this.setState({programList: result.data});
+            let dayList = []
+            for(let i = 0; i < this.state.programList.length; i++){
+      
+                
+      
+                 dayList.push(this.state.programList[i].days);
+      
+                
+            
+            }
 
+            console.log(dayList);
+            
+                   this.setState({
+                     dayList:dayList
+                   })
+        });
+
+      
+         
+      }
+    getDaylist = (index) =>{
+        const days = this.state.dayList
+        console.log(days)
+        if(days){
+        return days.map((day, index) =>{
+            console.log("Days Day", day)
+           
+            return day.map((value, index) =>{
+                return(
+                    <div>{value.dayName}
+
+                   {value.exercises.map((exercise,index) => {
+                       return(
+                           <List> {exercise.exerciseName}
+                                {exercise.sets} x
+                                {exercise.reps}
+                            </List>
+                       )
+                   })}   
+                   
+                    </div>
+                   
+                )
+            })
+        })
+        }
+        else{
+            return(
+                <div>Getting Days...</div>   
+            )
+        }
+    }
     render() {
         return(
             <div>
@@ -35,8 +87,34 @@ export default class View extends Component {
                     <Grid item xs={9}> 
                         <Paper className="paper" >
                             <h1> Available Programs</h1>
-                           
+                          
+                          {
+                              this.state.programList.map((program, index) =>  {
+                                  return(
+                                  <List key={index} >
+                                        {program.programName}
 
+                                        {program.days.map((day, index) => {
+                                            return(
+                                                <List key={index}> 
+                                                    {day.dayName}
+                                                    {day.exercises.map((exercise, index) => {
+                                                        return(
+                                                            <List key={index}>
+                                                                {exercise.exerciseName}
+                                                                {exercise.sets} x
+                                                                {exercise.reps}
+                                                            </List>
+                                                        )
+                                                    })}
+                                                </List> 
+                                            )
+                                        })}
+                                              
+                                  </List> 
+                              )})
+
+                          }
                         </Paper>
                     </Grid>
                  </Grid>   

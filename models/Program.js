@@ -6,18 +6,22 @@ var ProgramSchema = new Schema({
     programName : {
         type: String,
     },
-    days : {
-        type: String,
-    },
-    sets : {
-        type: String,
-    },
-    reps : {
-        type: String,
-    },
-    exercises : {
-        type: Array
-    },
+
+    days : [{
+        dayName : String,
+
+        exercises : [{
+
+            exerciseName: String,
+            sets: String,
+            reps: String
+        }]
+    }],
+  
+
+
+  
+ 
 
     User: [
         {
@@ -25,13 +29,6 @@ var ProgramSchema = new Schema({
             ref: "User"
         }
     ],
-    Exercise: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Exercise"
-        }
-    ]
-
 
 });
 

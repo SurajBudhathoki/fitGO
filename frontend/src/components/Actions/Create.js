@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {Grid,Paper, TextField, Select, Button, Table,TableHead, TableBody, Typography, TableRow, TableCell, FormControlLabel, Checkbox, List, ListItem, FormControl, FormLabel, RadioGroup, Radio,  ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
+import Addmodal from './Addmodal';
 
 
 export default class Create extends Component {
@@ -12,11 +13,11 @@ export default class Create extends Component {
             exerciseList : [],
             programName: '',
             days:'',
-            selectedDays:[],
-            exercises: [],
-            placeholder: 'Select',
-            reps: null,
+       
+            reps: '',
             sets:'',
+            exercise: '',
+            numOfDays: [1,2,3]
             
         }
         this.handleChange =  this.handleChange.bind(this);
@@ -24,13 +25,14 @@ export default class Create extends Component {
 
     componentDidMount() {
         this.getExercises();
+      
     }
 
     
 
     handleChange =  (event) => {
 
-        console.log(event.target.checked);
+        
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -43,10 +45,17 @@ export default class Create extends Component {
 
         axios.post('/api/programs', {
             programName: this.state.programName,
-            days: this.state.days,
-            exercises: this.state.exercises,
-            sets: this.state.sets,
-            reps: this.state.reps
+            days: {
+                dayName: this.state.days,
+
+                exercises: {
+                    exerciseName: this.state.exercise,
+                    sets: this.state.sets,
+                    reps: this.state.reps,
+                    
+                }
+            }
+            
         }).then(response => {
             console.log(response);
         }).catch(err => {
@@ -54,19 +63,46 @@ export default class Create extends Component {
         })
     }
 
+ 
+
     getExercises = () => {
         axios.get('/api/exercises')
         .then((result)=>{
             this.setState({exerciseList : result.data});
-            console.log(result.data);
+            
         })
     }
 
-    selectDays = () => {
-       
+
+    renderNumOfDays = (event) => {
+        event.preventDefault();
+
+        const numDays = this.state.days;
+        console.log(numDays);
+
+        for(let i=0; i < numDays; i++) {
+
+            console.log(numDays);
+            return(
+                <div>
+                    <TextField type="text" label="Exercise Name"
+                    margin="normal" value={this.state.exercise}
+                    onChange = {this.handleChange} name="exercise" />
+                                
+                     <TextField type="number" label="Sets"
+                    margin="normal" value= {this.state.sets}
+                    onChange=  {this.handleChange} name="sets" />
+                                
+                    <TextField type="number" label="Reps"
+                    margin="normal" value= {this.state.reps}
+                    onChange=  {this.handleChange} name="reps" />
+                </div>
+            )
+        }
+
+    }
 
     
-    }
 
     render() {
         return(
@@ -85,14 +121,34 @@ export default class Create extends Component {
                                 <div>
                                 <TextField type="text" label="Program Name" margin="normal"   value ={this.state.programName} onChange = {this.handleChange} name="programName" />
                                 </div>
-                                <div>
-                                {/* <TextField label="Days"  value ={this.state.days} onChange = {this.handleChange} 
-                                type="number" margin="normal" name="days" /> */}
-                                </div><br></br>
+                                
+                                <div> 
+                                <TextField type="number" label="Days"
+                                margin="normal" value= {this.state.days}
+                                onChange=  {this.handleChange} name="days" />
 
+                                <button onClick={this.renderNumOfDays}> ok </button>
+                                </div>
+
+                                {/* <div>
+                                <TextField type="text" label="Exercise Name"
+                                margin="normal" value={this.state.exercise}
+                                onChange = {this.handleChange} name="exercise" />
+                                
+                                <TextField type="number" label="Sets"
+                                margin="normal" value= {this.state.sets}
+                                onChange=  {this.handleChange} name="sets" />
+                                
+                                <TextField type="number" label="Reps"
+                                margin="normal" value= {this.state.reps}
+                                onChange=  {this.handleChange} name="reps" />
+                                </div> */}
+
+
+                                 
                                 {/* <Select native value = {this.state.days} >
                                
-                                    {this.state.selectDays.map((day,index)=>  (
+                                    {this.state.numOfDays.map((day,index)=>  (
                                         <option key = {index} > 
                                           {day}
                                         </option>
@@ -112,7 +168,7 @@ export default class Create extends Component {
 
 
 
-                                  <ExpansionPanel>
+                                  {/* <ExpansionPanel>
                                       <ExpansionPanelSummary>
                                           <Typography variant="h3"> Day 1</Typography>
                                       </ExpansionPanelSummary>
@@ -166,10 +222,10 @@ export default class Create extends Component {
                                             <TableBody>
                                             <TableRow> 
                                       <TableCell>             
-                                      <Select native name="exercises"  onChange= {this.handleChange} value={this.state.exercises} >
+                                      <Select native  name="exercises"  onChange= {this.handleChange} value={this.state.exercises} >
                                
                                         {this.state.exerciseList.map((exercises, index)=>(
-                                            
+                                                
                                                 <option key = {index} > 
                                               
                                                     {exercises.exerciseName}
@@ -188,12 +244,15 @@ export default class Create extends Component {
                                         </TableCell> 
                                       
                                         </TableRow>
+
+                                      
                                         </TableBody>
                                         </Table>   
 
                                       </ExpansionPanelDetails>
-                                  </ExpansionPanel>    
+                                  </ExpansionPanel>     */}
 
+                                        
                                                  
 
                                     <br />  
@@ -204,8 +263,18 @@ export default class Create extends Component {
                                    </Button>
                                </div>
 
+                                {/* {this.state.numOfDays.map((days, index) => (
+                                      <List key= {index}>
+                                          Day- {days}
+                                          <Addmodal exer = {this.state.exerciseList} />
+                                       
+                                      </List>
+                                  ))}    */}
                             
+                                   
                             </form>
+
+                            <p> {this.renderNumOfDays} </p>   
 
                         </Paper>
 

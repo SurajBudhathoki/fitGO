@@ -57,3 +57,10 @@ filter:brightness(40%);
 .createGrid {
   height: 800px;
 }
+
+.modal {
+  /* margin-top: 300px;
+  margin-left: 250px; */
+  width: 250px;
+  background-color: white;
+}

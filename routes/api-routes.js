@@ -149,6 +149,28 @@ module.exports = function (app) {
             });
     });
 
+    //posting a day
+    app.post('/api/days', function (req, res) {
+        db.Days.create(req.body)
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    //get days
+    app.get('/api/days', function (req, res) {
+        db.Days.find({})
+            .populate('exercises.Exercise')
+            .then(function (data) {
+                res.json(data);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
 
 
 }
