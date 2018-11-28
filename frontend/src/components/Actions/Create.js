@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {Grid,Paper, TextField, Select, Button, Table,TableHead, TableBody, Typography, TableRow, TableCell, FormControlLabel, Checkbox, List, ListItem, FormControl, FormLabel, RadioGroup, Radio,  ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel } from '@material-ui/core';
+import {Grid,Paper, TextField, Select, Button, Table,TableHead, TableBody, Typography, TableRow, TableCell, FormControlLabel, Checkbox, List, ListItem, FormControl, FormLabel, RadioGroup, Radio,  ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, Dialog, DialogContent, DialogTitle, DialogActions } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
 import Addmodal from './Addmodal';
@@ -14,12 +14,44 @@ export default class Create extends Component {
             programName: '',
             days: '',
             numDays:null,
-       
-            reps: '',
-            sets:'',
-            exercise: '',
-            numOfDays: [1,2,3]
-            
+            programID: '',
+            isUpdating: false,    
+            // reps: '',
+            // sets:'',
+            // exercise: '',
+            tihsProgram: [],
+            dayNumber: [],
+            dayID: '',
+            open: false,
+            dayObject: {},
+            exName1: '',
+            repName1: '',
+            setName1: '',
+            exName2: '',
+            repName2: '',
+            setName2: '',
+            dayObject : [
+                
+                        {
+                            dayname2: '',
+                            exercises: [{
+                                            exerciseName1: '',
+                                            sets1: null,
+                                            reps1: null
+                                        },
+                                        {
+                                            exerciseName2: '',
+                                            sets2: null,
+                                            reps2: null
+                                        },
+                                        {
+                                            exerciseName3: '',
+                                            sets3: null,
+                                            reps3: null
+                                        }
+                                    ]
+                        }
+                    ]
         }
         this.handleChange =  this.handleChange.bind(this);
         this.renderNumOfDays = this.renderNumOfDays.bind(this);
@@ -27,20 +59,32 @@ export default class Create extends Component {
 
     componentDidMount() {
         this.getExercises();
-      
+    
     }
 
-    
 
     handleChange =  (event) => {
 
-        
+        console.log(event.target.value)
+       
         this.setState({
             [event.target.name]: event.target.value
         });
 
-        
+
     }
+
+    handleClickOpen = (event) => {
+        event.preventDefault();
+        this.setState({ open: true });
+      };
+    
+      handleClose = (event) => {
+          event.preventDefault();
+        this.setState({ open: false });
+      };
+
+      
 
     handleAdd = (event) => {
         event.preventDefault();
@@ -54,272 +98,266 @@ export default class Create extends Component {
                     exerciseName: this.state.exercise,
                     sets: this.state.sets,
                     reps: this.state.reps,
-                    
+
                 }
             }
-            
+
         }).then(response => {
-            console.log(response);
+            
+            console.log(this.state.dayNumber);
+
+            this.setState({programID : response.data._id});
+
+            axios.get(`/api/programs/${this.state.programID}`)
+            .then((result) => {
+    
+                console.log(result.data.days[0]._id);
+                console.log(result.data)
+
+               this.setState({ dayID : result.data.days[0]._id })  
+
+            })
         }).catch(err => {
             console.log(err);
         })
+
+       
+
     }
 
- 
+
 
     getExercises = () => {
         axios.get('/api/exercises')
         .then((result)=>{
             this.setState({exerciseList : result.data});
-            
+
         })
     }
 
 
-    renderNumOfDays = () => {
-        //event.preventDefault();
+    renderNumOfDays = (event) => {
+         event.preventDefault();
 
+         
         const numDays = this.state.numDays;
         console.log(numDays);
 
-        // var arr = this.state.numDays.toString(10).split('').map(Number);
-        
 
-        // for(let i=0; i < 5; i++) {
-        //     console.log('hello')
-        // }  
 
-        if(numDays) {
 
-            // let arrayOfNumbers = numDays.map(Number);
-          
-     
-            
-            for(let i=0; i < numDays; i++) {
 
-                console.log('hello world');
-                
+            const dayArray = [1,2,3,4,5,6,7];
+            // const dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday']
 
-                return(
+            const dayNumber = dayArray.slice(0, numDays);
+            console.log(dayNumber);
 
-                    
-                    <ExpansionPanel>  
 
-                        <ExpansionPanelSummary> 
-                        day {numDays[i]}
-                        </ExpansionPanelSummary>
+            this.setState({ dayNumber : dayNumber})
 
-                        <ExpansionPanelDetails> 
-                        <TextField type="text" label="Exercise Name"
-                        margin="normal" value={this.state.exercise}
-                        onChange = {this.handleChange} name="exercise" />
-                                    
-                         <TextField type="number" label="Sets"
-                        margin="normal" value= {this.state.sets}
-                        onChange=  {this.handleChange} name="sets" />
-                                    
-                        <TextField type="number" label="Reps"
-                        margin="normal" value= {this.state.reps}
-                        onChange=  {this.handleChange} name="reps" />
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                )
-            }
-         
+
+           
+
+             
+
         }
-        
-      
 
+
+    // putExercises = (event) => {
+    //     event.preventDefault();
+
+    //     axios.put(`/api/programs/${this.state.programID}`, { days : this.state.dayObject } )
+    //     .then((result) => {
+    //         console.log(result.data)
+    //     })
+
+    // }
+
+
+    pushArray = (event) => {
+        event.preventDefault();
+
+        const List = [];
+
+
+       const dayObject = {dayName:this.state.days, exercises:[ { exerciseName: this.state.exName1, sets: this.state.setName1, reps: this.state.repName1 }, { exerciseName: this.state.exName2, sets: this.state.setName2, reps: this.state.repName2 }
+       ]}
+
+       
+
+
+        List.push(dayObject);
+        console.log(List);
+
+        this.setState({dayObject: dayObject });
+
+        
+  
+            axios.put(`/api/programs/${this.state.programID}`, { days : this.state.dayObject } )
+            .then((result) => {
+                console.log(result.data)
+            })
+    
     }
 
+       
     
 
+
     render() {
+        const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday'] 
+
         return(
-            
+
             <div>
                  <Grid container spacing={24}>
                     <Grid item xs={3}>
-                        
+
                         <Sidenav />
-                        
+
                     </Grid>
-                    <Grid item xs={9} className="createGrid"> 
+                    <Grid item xs={9} className="createGrid">
                         <Paper className="paper" >
                             <h1>Create a program</h1>
+                            
                             <form>
                                 <div>
                                 <TextField type="text" label="Program Name" margin="normal"   value ={this.state.programName} onChange = {this.handleChange} name="programName" />
                                 </div>
-                                
-                                <div> 
+
+                                {/* <div>
                                 <TextField type="number" label="Days"
                                 margin="normal" value= {this.state.numDays}
                                 onChange=  {this.handleChange} name="numDays" />
 
-                                {/* <button onClick={this.renderNumOfDays}> ok </button> */}
-                                </div>
+                                <button onClick={this.renderNumOfDays} > ok </button>
+
+                                 <button onClick={this.getPrograms} > get this program </button>
+                                </div> */}
+
 
                                 
+                               
+                               
+                                <div>
 
-                                <br />  
+                          
+
+                                    {
+                                    this.state.dayNumber.map((day, index)=> (
+                                        <List key = {index}>
+
+
+                                                <ExpansionPanel>
+
+                                                <ExpansionPanelSummary>
+                                                day {day}
+                                                </ExpansionPanelSummary>
+
+                                                <ExpansionPanelDetails>
+                                                <TextField type="text" label="Exercise Name"
+                                                margin="normal" value={this.state.exercise}
+                                                onChange = {this.handleChange} name="exercise" />
+
+                                                <TextField type="number" label="Sets"
+                                                margin="normal" value= {this.state.sets}
+                                                onChange=  {this.handleChange} name="sets" />
+
+                                                <TextField type="number" label="Reps"
+                                                margin="normal" value= {this.state.reps}
+                                                onChange=  {this.handleChange} name="reps" />
+
+                                                {/* <button onClick = {this.putExercises}> add exercise </button> */}
+                                                </ExpansionPanelDetails>
+                                            </ExpansionPanel>
+                                        </List>
+                                    ))
+                                }
+
+                                </div>
+
+                                 <br />
                                <div>
                                    <Button variant="contained" color="primary"
                                    onClick = {this.handleAdd} >
-                                       Add
+                                       Next
                                    </Button>
                                </div>
 
                               </form>
 
-                                <div> {this.renderNumOfDays()} </div>
+                        
+                            <button onClick = {this.handleClickOpen}> add a day </button>
+                                <Dialog  disableBackdropClick
+                                    disableEscapeKeyDown open={this.state.open} onClose={this.handleClose} >
+                                <DialogTitle>Pick a day </DialogTitle>
+                                <DialogContent>
+                                    
+                                <Select native value = {this.state.days} onChange={this.handleChange} name="days" >
+                                    <option value="" />
+                                    
+                                      {dayList.map((day,index) => (
+                                          <option key={index}>  {day}  </option>
+                                      ))}
+                                   
+                                    </Select>
 
-                                {/* <div>
-                                <TextField type="text" label="Exercise Name"
-                                margin="normal" value={this.state.exercise}
-                                onChange = {this.handleChange} name="exercise" />
-                                
-                                <TextField type="number" label="Sets"
-                                margin="normal" value= {this.state.sets}
-                                onChange=  {this.handleChange} name="sets" />
-                                
-                                <TextField type="number" label="Reps"
-                                margin="normal" value= {this.state.reps}
-                                onChange=  {this.handleChange} name="reps" />
-                                </div> */}
+                                </DialogContent>
+                                <DialogActions>
+                                   
+
+                                <Button onClick={this.handleClose} color="primary">
+                                    Confirm
+                                    </Button>
+                                </DialogActions>
+                                </Dialog>
+
+                                    
 
 
-                                 
                                 {/* <Select native value = {this.state.days} >
-                               
+
                                     {this.state.numOfDays.map((day,index)=>  (
-                                        <option key = {index} > 
+                                        <option key = {index} >
                                           {day}
                                         </option>
                                     ))}
                                 </Select> */}
 
-                                {/* <FormControl>
-                                    <FormLabel component="legend" > Days </FormLabel>
-                                    <RadioGroup value={this.state.days} name="days" onChange={this.handleChange} row >
-                                        <FormControlLabel value="1" control={<Radio />} label= "1" />
-                                        <FormControlLabel value="2" control={<Radio />} label= "2"/>
-                                        <FormControlLabel value="3" control={<Radio />} label= "3"/>
-                                    </RadioGroup>
-                                    <Button variant="contained" color="primary"
-                                   onClick = {this.selectDays} > Ok </Button>
-                                </FormControl> */}
+                                 
+
+                                Exercise name <input onChange={this.handleChange} type = "text" name="exerciseName" />
+                                Sets <input onChange={this.handleChange} type = "number" name = "sets" />
+                                Reps <input onChange={this.handleChange} type = "number" name = "reps" />
+                                
+                                Exercise name <input onChange={this.handleChange} type = "text" name="exName2" />
+                                Sets <input onChange={this.handleChange} type = "number" name = "setName2" />
+                                Reps <input onChange={this.handleChange} type = "number" name = "repName2" />
+                                <button onClick={this.pushArray} > add exercise</button>
+                                {/* <button onClick = {this.putExercises}> add exercise </button> */}
 
 
-
-                                  {/* <ExpansionPanel>
-                                      <ExpansionPanelSummary>
-                                          <Typography variant="h3"> Day 1</Typography>
-                                      </ExpansionPanelSummary>
-                                      <ExpansionPanelDetails>
-                                      <List name="exercises"  onChange= {this.handleChange} >
-                               
-                                        {this.state.exerciseList.map((exercises, index)=>(
-                                            
-                                                <ListItem key = {index} > 
-                                                <Checkbox  />
-                                                    {exercises.exerciseName}
-                                                </ListItem>
-                                            ) )}
-                                        </List>
-                                      </ExpansionPanelDetails>
-                                  </ExpansionPanel>
-
-                                    <ExpansionPanel>
-                                      <ExpansionPanelSummary>
-                                          <Typography variant="h3"> Day 2</Typography>
-                                      </ExpansionPanelSummary>
-                                      <ExpansionPanelDetails>
-                                      <List name="exercises"  onChange= {this.handleChange} >
-                               
-                                        {this.state.exerciseList.map((exercises, index)=>(
-                                            
-                                                <ListItem key = {index} > 
-                                                <Checkbox  />
-                                                    {exercises.exerciseName}
-                                                </ListItem>
-                                            ) )}
-                                        </List>
-                                      </ExpansionPanelDetails>
-                                  </ExpansionPanel>
-
-                                    <ExpansionPanel>
-                                      <ExpansionPanelSummary>
-                                          <Typography variant="h3"> Day 3</Typography>
-                                      </ExpansionPanelSummary>
-                                      <ExpansionPanelDetails>
-
-                                           <Table>
-                                           
-                                            <TableHead>
-                                            <TableRow>
-                                                <TableCell> Exercise  </TableCell>
-                                                <TableCell> Sets </TableCell>
-                                                <TableCell> Reps </TableCell>
-                                            </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                            <TableRow> 
-                                      <TableCell>             
-                                      <Select native  name="exercises"  onChange= {this.handleChange} value={this.state.exercises} >
-                               
-                                        {this.state.exerciseList.map((exercises, index)=>(
-                                                
-                                                <option key = {index} > 
-                                              
-                                                    {exercises.exerciseName}
-
-                                                  
-                                                </option>
-                                                
-                                            ) )}
-                                        </Select>
-                                        </TableCell>  
-                                        <TableCell>    
-                                        <TextField  name="sets"  onChange= {this.handleChange} value={this.state.sets} > </TextField>
-                                        </TableCell> 
-                                        <TableCell>
-                                        <TextField  name="reps"  onChange= {this.handleChange} value={this.state.reps} > </TextField>
-                                        </TableCell> 
-                                      
-                                        </TableRow>
-
-                                      
-                                        </TableBody>
-                                        </Table>   
-
-                                      </ExpansionPanelDetails>
-                                  </ExpansionPanel>     */}
-
-                                        
-                                                 
-
-                                  
 
                                 {/* {this.state.numOfDays.map((days, index) => (
                                       <List key= {index}>
                                           Day- {days}
                                           <Addmodal exer = {this.state.exerciseList} />
-                                       
+
                                       </List>
                                   ))}    */}
-                            
-                                   
-                            
+
+
+
 
                             {/* <div> {this.renderNumOfDays} </div>    */}
 
                         </Paper>
 
                     </Grid>
-                 </Grid>   
+                 </Grid>
             </div>
         )
     }
 
-}   
+}

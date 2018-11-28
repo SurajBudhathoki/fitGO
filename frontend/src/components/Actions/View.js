@@ -86,18 +86,18 @@ export default class View extends Component {
                     </Grid>
                     <Grid item xs={9}> 
                         <Paper className="paper" >
-                            <h1> Available Programs</h1>
+                            <h1> <u>Your Programs </u></h1>
                           
                           {
                               this.state.programList.map((program, index) =>  {
                                   return(
                                   <List key={index} >
-                                        {program.programName}
+                                      <h1> {program.programName} </h1>  
 
                                         {program.days.map((day, index) => {
                                             return(
                                                 <List key={index}> 
-                                                    {day.dayName}
+                                                  <h3> {day.dayName} </h3>  
                                                     {day.exercises.map((exercise, index) => {
                                                         return(
                                                             <List key={index}>

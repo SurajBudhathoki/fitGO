@@ -149,27 +149,40 @@ module.exports = function (app) {
             });
     });
 
-    //posting a day
-    app.post('/api/days', function (req, res) {
-        db.Days.create(req.body)
+
+    
+    //gettting a single program
+    app.get('/api/programs/:id', function (req, res) {
+        db.Program.findById(req.params.id)
             .then(function (data) {
-                res.json(data);
+                res.json(data)
+            }).catch(function (err) {
+                res.json(err)
             })
-            .catch(function (err) {
-                res.json(err);
-            });
+
     });
 
-    //get days
-    app.get('/api/days', function (req, res) {
-        db.Days.find({})
-            .populate('exercises.Exercise')
-            .then(function (data) {
-                res.json(data);
+
+    
+
+  
+    app.put('/api/programs/:id', function(req,res) {
+        db.Program.findByIdAndUpdate(req.params.id, req.body)
+            .then(function (response) {
+                res.json({ success: true})
+            }).catch(function (err) {
+                res.json(err)
             })
-            .catch(function (err) {
-                res.json(err);
-            });
+    });
+
+
+    app.delete('/api/programs/:id', function(req,res) {
+        db.Program.findByIdAndDelete(req.params.id)
+        .then(function (response) {
+            res.json({ success: true})
+        }).catch(function (err) {
+            res.json(err)
+        })
     });
 
 
