@@ -4,15 +4,7 @@ import Sidenav from '../Navigation/Sidenav';
 
 const Chest = (props) => (
     <div>
-         <Grid container spacing={24}>
-                    <Grid item xs={3}>
-                        
-                        <Sidenav />
-                        
-                    </Grid>
-                    <Grid item xs={9}> 
-        {/* mapping all chest exercises */}
-        <Paper className="paper">
+       
             {
                 props.displayChest.map((exercise, index) => (
                 
@@ -21,7 +13,7 @@ const Chest = (props) => (
                     <GridListTile>
                         <h1> {exercise.exerciseName} </h1>   
                         <h3>{exercise.bodyPart} </h3>
-                        <img src= "https://www.mensjournal.com/wp-content/uploads/mf/rookie-mistakes-bench-press.jpg?w=1200&h=1200&crop=1"
+                        <img src= ""
                         // {exercise.exerciseImage[0]} 
                         alt= 'chestImg' />
                     </GridListTile>
@@ -31,9 +23,7 @@ const Chest = (props) => (
                  </Grid> 
                 ))     
             }   
-        </Paper>   
-            </Grid>
-         </Grid>   
+       
     </div>
     
   )

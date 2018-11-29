@@ -119,7 +119,7 @@ export default class View extends Component {
                                       {/* <Button  color="primary" variant="contained" > edit</Button> */}
                                       
 
-                                        <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
+                                        {/* <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} /> */}
 
                                        <Delete key={program._id}  id={program._id}  onDelete={this.deleteProgram} 
                                        onUpdate = {this.showUpdate}
@@ -171,7 +171,7 @@ export default class View extends Component {
 
                                          :  
                                          
-                                         <div> wew </div>
+                                         <div> </div>
                                     
                                         }
                         </Paper>

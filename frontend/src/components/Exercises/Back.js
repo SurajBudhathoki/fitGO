@@ -4,7 +4,7 @@ import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui
 const Back = (props) => (
     <div>
         
-        <Paper className="paper">
+        
             {
                 props.displayBack.map((exercise, index) => (
                 
@@ -20,7 +20,7 @@ const Back = (props) => (
                  </Grid> 
                 ))     
             }   
-        </Paper>   
+      
 
     </div>
     

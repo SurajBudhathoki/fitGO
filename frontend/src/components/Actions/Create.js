@@ -96,15 +96,15 @@ export default class Create extends Component {
 
         days.push({
            
-            days: {
-                dayName: this.state.dayName,
+           
+                // dayName: this.state.dayName,
 
-                exercises: {
+                //  exercises: {
                     exerciseName : this.state.exerciseName,
                     sets: this.state.sets,
                     reps: this.state.reps,
-                }
-            }
+               // }
+           
 
         })
 
@@ -126,7 +126,9 @@ export default class Create extends Component {
             
           { 
               programName: this.state.programName,
-               days: this.state.dayToAdd 
+               days:{ 
+                 dayName: this.state.dayName,      
+                exercises: this.state.daysToAdd }
         
         }
 
@@ -331,25 +333,28 @@ export default class Create extends Component {
                                 </div>    
 
 
-                                <div>
+                                {/* <div>
                                 Exercise name <input onChange={this.handleChange} type = "text" name="exerciseName" />
                                 Sets <input onChange={this.handleChange} type = "number" name = "sets" />
                                 Reps <input onChange={this.handleChange} type = "number" name = "reps" />
                                 </div>
-                                <button onClick={this.handleAdd} > add exercise</button>
+                                <button onClick={this.handleAdd} > add exercise</button> */}
                                 
 
-                                {/* <Dayform dayObject1={this.state.dayObject1} exerciseName={this.state.exName1} sets={this.state.setName1} reps={this.state.repName1} handleChange = {this.handleChange} handleClick = {this.pushArray} />
+                                <Dayform  exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.handleAdd} />
 
-                                <Dayform exerciseName={this.state.exName2} sets={this.state.setName2} reps={this.state.repName2} handleChange = {this.handleChange} handleClick = {this.pushArray} /> */}
+                                 {/* <Dayform exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.handleAdd} /> */}
+
+                                  <br/><br/><br/><br/><br/><br/><br/>  
 
                                  <div>
                                    <Button variant="contained" color="primary"
                                     onClick = {this.postProgram} 
                                    >
-                                       Next
+                                       Create
                                    </Button>
                                </div>
+                               <br/><br/><br/><br/><br/>
 
                                 
                                     

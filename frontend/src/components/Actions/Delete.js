@@ -7,7 +7,7 @@ const Delete = props => (
 
     
     <Button color="secondary" variant="contained" value={props.id} onClick={props.onDelete}>Delete</Button>
-    {/* <Button color="secondary" variant="contained" value={props.id} onClick={props.onUpdate}>Edit</Button> */}
+    <Button color="secondary" variant="contained" value={props.id} onClick={props.onUpdate}>Edit</Button>
   </div>
 )
 
