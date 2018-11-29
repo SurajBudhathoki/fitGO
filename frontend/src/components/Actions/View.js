@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
 
-import {Grid,Paper,  List,  Button } from '@material-ui/core';
+import {Grid,Paper,  List,  Button, DialogTitle, Dialog, DialogActions } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
 import Delete from './Delete';
-
+import Edit from './Edit';
+import EditForm from './EditForm';
 
 export default class View extends Component {
 
     state = {
         programList: [],
         dayList : [],
-        exerciseList: []
+        exerciseList: [],
+        open: false,
+        isUpdating: false,
+        updateID: '',
+        programUpdate: '',
+        programName: ''
     }
+
+
+    updateProgram = (event) => {
+    
+        this.setState({isUpdating: false})
+        
+        
+        axios.put(`/api/programs/${this.state.updateID}`, {programName: this.state.programUpdate }).then(() => {
+            
+          
+            this.getPrograms();
+        })
+        
+    
+    } 
 
     componentDidMount() {
         this.getPrograms();
@@ -21,24 +42,12 @@ export default class View extends Component {
     getPrograms = () => {
         axios.get('/api/programs')
         .then((result) => {
-           
-            this.setState({programList: result.data});
-            let dayList = []
-            for(let i = 0; i < this.state.programList.length; i++){
-      
-                
-      
-                 dayList.push(this.state.programList[i].days);
-      
-                
             
-            }
+         
 
-            console.log(dayList);
-            
-                   this.setState({
-                     dayList:dayList
-                   })
+            this.setState({programList: result.data});
+         
+       
         });
 
       
@@ -46,51 +55,48 @@ export default class View extends Component {
       }
 
 
-    getDaylist = (index) =>{
-        const days = this.state.dayList
-        console.log(days)
-        if(days){
-        return days.map((day, index) =>{
-            console.log("Days Day", day)
-           
-            return day.map((value, index) =>{
-                return(
-                    <div>{value.dayName}
 
-                   {value.exercises.map((exercise,index) => {
-                       return(
-                           <List> {exercise.exerciseName}
-                                {exercise.sets} x
-                                {exercise.reps}
-                            </List>
-                       )
-                   })}   
-                   
-                    </div>
-                   
-                )
-            })
-        })
-        }
-        else{
-            return(
-                <div>Getting Days...</div>   
-            )
-        }
-    }
 
+
+    // handleClickOpen = () => {
+    //     this.setState({ open: true });
+    //   };
+    
+    //   handleClose = () => {
+    //     this.setState({ open: false });
+    //   };
 
     deleteProgram = (event) => {
 
-        axios.delete(`/api/programs/${event.target.value}`)
-        .then(() => {
+      console.log('hello');
+        this.setState({ open: false });
 
-            this.getPrograms();
-        } )
+            axios.delete(`/api/programs/${event.target.value}`)
+            .then(() => {
+               
 
-        
+                this.getPrograms();
+            } )
+    
+  
     }
 
+   
+
+
+    handleUpdate = (event) => {
+        this.setState({ programUpdate: event.target.value })
+    }
+
+
+
+    showUpdate = (event) => {
+        this.setState({ isUpdating: true, updateID: event.target.value })
+
+        console.log(this.state.updateID);
+    }
+
+ 
     render() {
         return(
             <div>
@@ -110,12 +116,31 @@ export default class View extends Component {
                                   <List key={index} >
                                       <h1> {program.programName} 
                                       
-                                      <Button color="primary" variant="contained" > edit</Button>
+                                      {/* <Button  color="primary" variant="contained" > edit</Button> */}
                                       
-                                     
 
-                                       <Delete key={program._id} id={program._id} onDelete={this.deleteProgram} />
-                                       
+                                        <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
+
+                                       <Delete key={program._id}  id={program._id}  onDelete={this.deleteProgram} 
+                                       onUpdate = {this.showUpdate}
+                                         />
+
+                                        
+
+
+
+                                        {/* <Dialog open={this.state.open} onClose={this.handleClose} >
+
+                                            <DialogTitle > Are you sure? </DialogTitle>
+
+                                            <DialogActions> 
+                                                <Button onClick={this.deleteProgram}> yes </Button>
+                                                <Button onClick={this.handleClose}> no </Button>
+
+                                            </DialogActions>
+                                        </Dialog> */}
+
+
                                        </h1>   
 
                                         {program.days.map((day, index) => {
@@ -139,9 +164,24 @@ export default class View extends Component {
                               )})
 
                           }
+
+
+                          {this.state.isUpdating
+                                        ? <EditForm value={this.state.programUpdate} changeHandler={this.handleUpdate} clickHandler={this.updateProgram}  /> 
+
+                                         :  
+                                         
+                                         <div> wew </div>
+                                    
+                                        }
                         </Paper>
                     </Grid>
                  </Grid>   
+
+
+                                  
+
+                       
             </div>
         )
     }
