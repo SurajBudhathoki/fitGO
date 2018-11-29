@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {Grid,Paper, GridList, GridListTile, GridListTileBar, List, Divider } from '@material-ui/core';
+
+import {Grid,Paper,  List,  Button } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
 
@@ -86,13 +86,13 @@ export default class View extends Component {
                     </Grid>
                     <Grid item xs={9}> 
                         <Paper className="paper" >
-                            <h1> <u>Your Programs </u></h1>
+                            <h1> <u>Your Programs </u></h1> 
                           
                           {
                               this.state.programList.map((program, index) =>  {
                                   return(
                                   <List key={index} >
-                                      <h1> {program.programName} </h1>  
+                                      <h1> {program.programName} <Button color="primary" variant="contained" > edit</Button> <Button color="secondary" variant="contained" > delete</Button> </h1>   
 
                                         {program.days.map((day, index) => {
                                             return(

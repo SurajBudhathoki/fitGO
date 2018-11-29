@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {Grid,Paper, TextField, Select, Button, Table,TableHead, TableBody, Typography, TableRow, TableCell, FormControlLabel, Checkbox, List, ListItem, FormControl, FormLabel, RadioGroup, Radio,  ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, Dialog, DialogContent, DialogTitle, DialogActions } from '@material-ui/core';
+import {Grid,Paper, TextField, Select, Button, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel,  List } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
 import Addmodal from './Addmodal';
+import Dayform from '../dayForm';
 
 
 export default class Create extends Component {
@@ -11,15 +11,11 @@ export default class Create extends Component {
         super()
         this.state = {
             exerciseList : [],
-            programName: '',
-            days: '',
+           
+            // days: '',
             numDays:null,
             programID: '',
             isUpdating: false,    
-            // reps: '',
-            // sets:'',
-            // exercise: '',
-            tihsProgram: [],
             dayNumber: [],
             dayID: '',
             open: false,
@@ -30,28 +26,14 @@ export default class Create extends Component {
             exName2: '',
             repName2: '',
             setName2: '',
-            dayObject : [
-                
-                        {
-                            dayname2: '',
-                            exercises: [{
-                                            exerciseName1: '',
-                                            sets1: null,
-                                            reps1: null
-                                        },
-                                        {
-                                            exerciseName2: '',
-                                            sets2: null,
-                                            reps2: null
-                                        },
-                                        {
-                                            exerciseName3: '',
-                                            sets3: null,
-                                            reps3: null
-                                        }
-                                    ]
-                        }
-                    ]
+
+            programsToAdd: [],
+            exercises: '',
+            sets: '',
+            reps: '',
+            programName: '',
+            dayName: '',
+            daysToAdd: []
         }
         this.handleChange =  this.handleChange.bind(this);
         this.renderNumOfDays = this.renderNumOfDays.bind(this);
@@ -71,6 +53,8 @@ export default class Create extends Component {
             [event.target.name]: event.target.value
         });
 
+        
+  
 
     }
 
@@ -89,42 +73,83 @@ export default class Create extends Component {
     handleAdd = (event) => {
         event.preventDefault();
 
-        axios.post('/api/programs', {
-            programName: this.state.programName,
+
+        // let programs = this.state.daysToAdd;
+
+        // programs.push({ 
+            
+        //     dayName: this.state.days,
+        
+        //     exercises: {
+        //         exerciseName : this.state.exerciseName,
+        //         sets: this.state.sets,
+        //         reps: this.state.reps,
+        //     }   
+        
+        // }) 
+
+        // this.setState({ daysToAdd: programs});
+        // console.log(this.state.daysToAdd);
+
+
+        let days = this.state.daysToAdd;
+
+        days.push({
+           
             days: {
-                dayName: this.state.days,
+                dayName: this.state.dayName,
 
                 exercises: {
-                    exerciseName: this.state.exercise,
+                    exerciseName : this.state.exerciseName,
                     sets: this.state.sets,
                     reps: this.state.reps,
-
                 }
             }
 
-        }).then(response => {
-            
-            console.log(this.state.dayNumber);
-
-            this.setState({programID : response.data._id});
-
-            axios.get(`/api/programs/${this.state.programID}`)
-            .then((result) => {
-    
-                console.log(result.data.days[0]._id);
-                console.log(result.data)
-
-               this.setState({ dayID : result.data.days[0]._id })  
-
-            })
-        }).catch(err => {
-            console.log(err);
         })
+
+        this.setState({ daysToAdd: days});
+
+        console.log(this.state.daysToAdd);
+
 
        
 
     }
 
+
+    postProgram = (event) => {
+
+        event.preventDefault();
+        
+        axios.post('/api/programs',  
+            
+          { 
+              programName: this.state.programName,
+               days: this.state.dayToAdd 
+        
+        }
+
+        ).then(response => {
+            
+           console.log(response.data)
+
+            // this.setState({programID : response.data._id});
+
+            // axios.get(`/api/programs/${this.state.programID}`)
+            // .then((result) => {
+    
+                
+               // console.log(result.data)
+
+
+            // })
+        }).catch(err => {
+            console.log(err);
+        })
+
+
+    }
 
 
     getExercises = () => {
@@ -148,7 +173,7 @@ export default class Create extends Component {
 
 
             const dayArray = [1,2,3,4,5,6,7];
-            // const dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday']
+
 
             const dayNumber = dayArray.slice(0, numDays);
             console.log(dayNumber);
@@ -164,42 +189,18 @@ export default class Create extends Component {
         }
 
 
-    // putExercises = (event) => {
+
+
+    // pushArray = (event) => {
     //     event.preventDefault();
 
-    //     axios.put(`/api/programs/${this.state.programID}`, { days : this.state.dayObject } )
-    //     .then((result) => {
-    //         console.log(result.data)
-    //     })
-
-    // }
-
-
-    pushArray = (event) => {
-        event.preventDefault();
-
-        const List = [];
-
-
-       const dayObject = {dayName:this.state.days, exercises:[ { exerciseName: this.state.exName1, sets: this.state.setName1, reps: this.state.repName1 }, { exerciseName: this.state.exName2, sets: this.state.setName2, reps: this.state.repName2 }
-       ]}
-
        
-
-
-        List.push(dayObject);
-        console.log(List);
-
-        this.setState({dayObject: dayObject });
-
-        
-  
-            axios.put(`/api/programs/${this.state.programID}`, { days : this.state.dayObject } )
-            .then((result) => {
-                console.log(result.data)
-            })
+    //         // axios.put(`/api/programs/${this.state.programID}`, { days : this.state.dayObject } )
+    //         // .then((result) => {
+    //         //     console.log(result.data)
+    //         // })
     
-    }
+    // }
 
        
     
@@ -278,30 +279,22 @@ export default class Create extends Component {
                                 </div>
 
                                  <br />
-                               <div>
-                                   <Button variant="contained" color="primary"
-                                   onClick = {this.handleAdd} >
-                                       Next
-                                   </Button>
-                               </div>
+                               
 
                               </form>
 
+                                <br></br><br></br>
+
+                                      
+                               
                         
-                            <button onClick = {this.handleClickOpen}> add a day </button>
+                            {/* <button onClick = {this.handleClickOpen}> add a day </button>
                                 <Dialog  disableBackdropClick
                                     disableEscapeKeyDown open={this.state.open} onClose={this.handleClose} >
                                 <DialogTitle>Pick a day </DialogTitle>
                                 <DialogContent>
                                     
-                                <Select native value = {this.state.days} onChange={this.handleChange} name="days" >
-                                    <option value="" />
-                                    
-                                      {dayList.map((day,index) => (
-                                          <option key={index}>  {day}  </option>
-                                      ))}
-                                   
-                                    </Select>
+                               
 
                                 </DialogContent>
                                 <DialogActions>
@@ -311,7 +304,7 @@ export default class Create extends Component {
                                     Confirm
                                     </Button>
                                 </DialogActions>
-                                </Dialog>
+                                </Dialog> */}
 
                                     
 
@@ -326,36 +319,49 @@ export default class Create extends Component {
                                 </Select> */}
 
                                  
+                                <div> Day: 
+                                <Select native onChange={this.handleChange} name="dayName" >
+                                    <option value="" disabled />
+                                    
+                                      {dayList.map((day,index) => (
+                                          <option key={index}>  {day}  </option>
+                                      ))}
+                                   
+                                    </Select>    
+                                </div>    
 
+
+                                <div>
                                 Exercise name <input onChange={this.handleChange} type = "text" name="exerciseName" />
                                 Sets <input onChange={this.handleChange} type = "number" name = "sets" />
                                 Reps <input onChange={this.handleChange} type = "number" name = "reps" />
+                                </div>
+                                <button onClick={this.handleAdd} > add exercise</button>
                                 
-                                Exercise name <input onChange={this.handleChange} type = "text" name="exName2" />
-                                Sets <input onChange={this.handleChange} type = "number" name = "setName2" />
-                                Reps <input onChange={this.handleChange} type = "number" name = "repName2" />
-                                <button onClick={this.pushArray} > add exercise</button>
-                                {/* <button onClick = {this.putExercises}> add exercise </button> */}
 
+                                {/* <Dayform dayObject1={this.state.dayObject1} exerciseName={this.state.exName1} sets={this.state.setName1} reps={this.state.repName1} handleChange = {this.handleChange} handleClick = {this.pushArray} />
 
+                                <Dayform exerciseName={this.state.exName2} sets={this.state.setName2} reps={this.state.repName2} handleChange = {this.handleChange} handleClick = {this.pushArray} /> */}
 
-                                {/* {this.state.numOfDays.map((days, index) => (
-                                      <List key= {index}>
-                                          Day- {days}
-                                          <Addmodal exer = {this.state.exerciseList} />
+                                 <div>
+                                   <Button variant="contained" color="primary"
+                                    onClick = {this.postProgram} 
+                                   >
+                                       Next
+                                   </Button>
+                               </div>
 
-                                      </List>
-                                  ))}    */}
+                                
+                                    
 
-
-
-
-                            {/* <div> {this.renderNumOfDays} </div>    */}
 
                         </Paper>
 
                     </Grid>
                  </Grid>
+
+                 
+              
             </div>
         )
     }
