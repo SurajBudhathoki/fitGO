@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Grid,Paper,  List,  Button } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
+import Delete from './Delete';
 
 
 export default class View extends Component {
@@ -43,6 +44,8 @@ export default class View extends Component {
       
          
       }
+
+
     getDaylist = (index) =>{
         const days = this.state.dayList
         console.log(days)
@@ -75,6 +78,19 @@ export default class View extends Component {
             )
         }
     }
+
+
+    deleteProgram = (event) => {
+
+        axios.delete(`/api/programs/${event.target.value}`)
+        .then(() => {
+
+            this.getPrograms();
+        } )
+
+        
+    }
+
     render() {
         return(
             <div>
@@ -92,7 +108,15 @@ export default class View extends Component {
                               this.state.programList.map((program, index) =>  {
                                   return(
                                   <List key={index} >
-                                      <h1> {program.programName} <Button color="primary" variant="contained" > edit</Button> <Button color="secondary" variant="contained" > delete</Button> </h1>   
+                                      <h1> {program.programName} 
+                                      
+                                      <Button color="primary" variant="contained" > edit</Button>
+                                      
+                                     
+
+                                       <Delete key={program._id} id={program._id} onDelete={this.deleteProgram} />
+                                       
+                                       </h1>   
 
                                         {program.days.map((day, index) => {
                                             return(
