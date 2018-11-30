@@ -21,23 +21,7 @@ export default class View extends Component {
     }
 
 
-    updateProgram = (event) => {
-
-        event.preventDefault();
-    
-        this.setState({isUpdating: false})
-        
-        
-        axios.put(`/api/programs/${this.state.updateID}`, {programName: this.state.programUpdate }).then(() => {
-            
-          
-            this.getPrograms();
-
-            console.log('updated');
-        })
-        
-    
-    } 
+  
 
     componentDidMount() {
         this.getPrograms();
@@ -62,32 +46,27 @@ export default class View extends Component {
 
 
 
-    // handleClickOpen = () => {
-    //     this.setState({ open: true });
-    //   };
-    
-    //   handleClose = () => {
-    //     this.setState({ open: false });
-    //   };
 
-    deleteProgram = (event) => {
 
-        event.preventDefault();
-
-            axios.delete(`/api/programs/${event.target.value}`)
-            .then(() => {
-               
-
-                this.getPrograms();
-
-                console.log('deleted');
-            } )
-    
-  
-    }
 
    
+    updateProgram = (event) => {
 
+        event.preventDefault();
+    
+        this.setState({isUpdating: false})
+        
+        
+        axios.put(`/api/programs/${this.state.updateID}`, {programName: this.state.programUpdate }).then(() => {
+            
+          
+            this.getPrograms();
+
+            console.log('updated');
+        })
+        
+    
+    } 
 
     handleUpdate = (event) => {
         this.setState({ programUpdate: event.target.value })
@@ -127,23 +106,14 @@ export default class View extends Component {
                                         {/* <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} /> */}
 
                                        <Delete  id={program._id} programName={program.programName}  onDelete={this.deleteProgram} 
-                                       onUpdate = {this.showUpdate}
+                                        onUpdate = {this.showUpdate}
                                          />
 
                                         
 
 
 
-                                        {/* <Dialog open={this.state.open} onClose={this.handleClose} >
-
-                                            <DialogTitle > Are you sure? </DialogTitle>
-
-                                            <DialogActions> 
-                                                <Button onClick={this.deleteProgram}> yes </Button>
-                                                <Button onClick={this.handleClose}> no </Button>
-
-                                            </DialogActions>
-                                        </Dialog> */}
+                                        
 
 
                                        

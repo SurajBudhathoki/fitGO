@@ -9,8 +9,6 @@ import Arms from './Exercises/Arms';
 import Shoulders from './Exercises/Shoulders';
 import Sidenav from './Navigation/Sidenav';
 
-import ExerciseList from './ExerciseList';
-import TabIndicator from '@material-ui/core/Tabs/TabIndicator';
 
 
 export default class Exercises extends Component {
@@ -22,12 +20,6 @@ export default class Exercises extends Component {
         legsList: [],
         armsList: [],
         shouldersList: [],
-        showChest: false,
-        showBack: false,
-        showArms: false,
-        showLegs: false,
-        showShoulders: false,
-        but1:'',
         value: 0,
     }
 
@@ -86,10 +78,6 @@ export default class Exercises extends Component {
         })
     }
 
-
-   
-
-
     handleChange = (event, value) => {
         this.setState({ value });
       };
@@ -98,15 +86,13 @@ export default class Exercises extends Component {
         return (
             <div>
 
-
-
                 <Grid container spacing={24}>
                     <Grid item lg={3}>
                         
                         <Sidenav />
                         
                     </Grid>
-                    <Grid item lg={9}>    
+                    <Grid item lg={9} className="exerciseGrid">    
                         <Paper className= "paper">
 
 

@@ -58,9 +58,13 @@ filter:brightness(40%);
   height: 800px;
 }
 
+.exerciseGrid {
+  width: 100%;
+  height: 700px;
+}
+
 .modal {
-  /* margin-top: 300px;
-  margin-left: 250px; */
+
   width: 250px;
   background-color: white;
 }
