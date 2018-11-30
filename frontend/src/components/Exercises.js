@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
+import {Grid,Paper, GridList, GridListTile, GridListTileBar, Tabs, Tab, AppBar } from '@material-ui/core';
 
 import Chest from './Exercises/Chest';
 import Back from './Exercises/Back';
 import Legs from './Exercises/Legs';
+import Arms from './Exercises/Arms';
+import Shoulders from './Exercises/Shoulders';
 import Sidenav from './Navigation/Sidenav';
 
 import ExerciseList from './ExerciseList';
+import TabIndicator from '@material-ui/core/Tabs/TabIndicator';
 
 
 export default class Exercises extends Component {
@@ -24,141 +27,114 @@ export default class Exercises extends Component {
         showArms: false,
         showLegs: false,
         showShoulders: false,
+        but1:'',
+        value: 0,
     }
 
     
-    // displaying chest workouts
-    handleChest =(event) => {
-        event.preventDefault();
-
-        this.setState({ showChest: true })
+    componentDidMount() {
 
         this.getChestExercises();
+        this.getBackExercises();
+        this.getArmsExercises();
+        this.getLegsExercises();
+        this.getShouldersExercises();
     }
 
+    // displaying chest workouts
     getChestExercises = () => {
         axios.get('/exercises/chest')
         .then((result) => {
-          
             this.setState({chestList: result.data});
-
         })
+
     }
 
     //displaying back workouts
-    handleBack =(event) => {
-        event.preventDefault();
-
-        this.setState({ showBack: true })
-
-        this.getBackExercises();
-    }
-
     getBackExercises = () => {
         axios.get('/exercises/back')
         .then((result) => {
-            console.log(result.data);
+
             this.setState({backList: result.data});
         })
     }
 
     //displaying legs workouts
-    handleLegs =(event) => {
-        event.preventDefault();
-
-        this.setState({ showLegs: true })
-
-        this.getLegsExercises();
-    }
-
     getLegsExercises = () => {
         axios.get('/exercises/legs')
         .then((result) => {
-            console.log(result.data);
+
             this.setState({legsList: result.data});
         })
     }
 
     //displaying arms workouts
-    handleArms =(event) => {
-        event.preventDefault();
-
-        this.setState({ showArms: true })
-
-        this.getArmsExercises();
-    }
-
     getArmsExercises = () => {
         axios.get('/exercises/arms')
         .then((result) => {
-            console.log(result.data);
+
             this.setState({armsList: result.data});
         })
     }
 
     //displaying shoulders workouts
-    handleShoulders =(event) => {
-        event.preventDefault();
-
-        this.setState({ showShoulders: true })
-
-        this.getShouldersExercises();
-    }
-
     getShouldersExercises = () => {
         axios.get('/exercises/shoulders')
         .then((result) => {
-            console.log(result.data);
+
             this.setState({shouldersList: result.data});
         })
     }
 
 
+   
+
+
+    handleChange = (event, value) => {
+        this.setState({ value });
+      };
+
     render() {    
         return (
             <div>
 
+
+
                 <Grid container spacing={24}>
-                    <Grid item xs={3}>
+                    <Grid item lg={3}>
                         
                         <Sidenav />
                         
                     </Grid>
-                    <Grid item xs={9}>    
+                    <Grid item lg={9}>    
                         <Paper className= "paper">
-                           
-                                {this.state.showChest ?  
-                                
-                                    <Chest displayChest={this.state.chestList} />
-                                :
 
-                                <ExerciseList handleChest={this.handleChest} handleBack={this.handleBack} handleArms={this.handleArms} handleLegs={this.handleLegs} handleShoulders={this.handleShoulders} />
 
-                                }
-
-                                 {this.state.showBack ?  
-                                
-                                <Back displayBack={this.state.backList} />
-                                :
-
+                              <AppBar position="static" color="default">
+                                <Tabs
+                                     value={this.state.value}
+                                    onChange={this.handleChange}
+                                    fullWidth
+                                >
+                                    <Tab label="Chest" />
+                                    <Tab label="Back" />
+                                    <Tab label="Legs" />
+                                    <Tab label="Arms" />
+                                    <Tab label="Shoulders" />
                             
-                                     <div></div>   
-
-                            } 
-
-                           
-
+                                </Tabs>
+                                </AppBar>
+                                {this.state.value === 0 && <Chest  displayChest={this.state.chestList} />}
+                                {this.state.value === 1 && <Back displayBack={this.state.backList} />}
+                                {this.state.value === 2 && <Legs displayLegs={this.state.legsList} />}
+                                {this.state.value === 3 && <Arms displayArms={this.state.armsList }/> }
+                                {this.state.value === 4 && <Shoulders displayShoulders={this.state.shouldersList} /> }
+                                <br></br>
 
 
                         </Paper>
                     </Grid>
                 </Grid>    
-
-
-               
-                
-            
-                <Legs displayLegs={this.state.legsList} />
                   
            
             </div>

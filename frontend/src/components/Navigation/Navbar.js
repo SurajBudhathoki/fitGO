@@ -43,10 +43,11 @@ render() {
                         (
                             <Toolbar>
                                   <Grid justify="space-between" container spacing={16}>
-                                    <Grid item md = {11}>
+                                    <Grid item md = {9}>
                                 <Link className="logo" to="/"> Logo </Link>
                                 </Grid> 
-                                <Grid item md= {1}>
+                                <Grid item md= {3}>
+                                 {this.props.username} 
                             <Link to="#" className="logout" onClick={this.logout}>Logout</Link>
                             </Grid>
                             </Grid>

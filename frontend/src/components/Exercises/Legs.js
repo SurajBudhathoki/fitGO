@@ -3,8 +3,7 @@ import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui
 
 const Legs = (props) => (
     <div>
-        
-        <Paper className="paper">
+
             {
                 props.displayLegs.map((exercise, index) => (
                 
@@ -20,7 +19,6 @@ const Legs = (props) => (
                  </Grid> 
                 ))     
             }   
-        </Paper>   
 
     </div>
     

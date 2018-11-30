@@ -5,6 +5,8 @@ import Sidenav from '../Navigation/Sidenav';
 const Chest = (props) => (
     <div>
        
+       {/* {props.displayChest} */}
+      
             {
                 props.displayChest.map((exercise, index) => (
                 

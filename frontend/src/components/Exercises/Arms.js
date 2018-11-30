@@ -4,7 +4,6 @@ import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui
 const Arms = (props) => (
     <div>
         
-        <Paper className="paper">
             {
                 props.displayArms.map((exercise, index) => (
                 
@@ -20,7 +19,7 @@ const Arms = (props) => (
                  </Grid> 
                 ))     
             }   
-        </Paper>   
+
 
     </div>
     

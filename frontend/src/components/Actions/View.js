@@ -22,6 +22,8 @@ export default class View extends Component {
 
 
     updateProgram = (event) => {
+
+        event.preventDefault();
     
         this.setState({isUpdating: false})
         
@@ -30,6 +32,8 @@ export default class View extends Component {
             
           
             this.getPrograms();
+
+            console.log('updated');
         })
         
     
@@ -68,14 +72,15 @@ export default class View extends Component {
 
     deleteProgram = (event) => {
 
-      console.log('hello');
-        this.setState({ open: false });
+        event.preventDefault();
 
             axios.delete(`/api/programs/${event.target.value}`)
             .then(() => {
                
 
                 this.getPrograms();
+
+                console.log('deleted');
             } )
     
   
@@ -114,14 +119,14 @@ export default class View extends Component {
                               this.state.programList.map((program, index) =>  {
                                   return(
                                   <List key={index} >
-                                      <h1> {program.programName} 
+                                      {/* <h1> {program.programName}  </h1>   */}
                                       
                                       {/* <Button  color="primary" variant="contained" > edit</Button> */}
                                       
 
                                         {/* <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} /> */}
 
-                                       <Delete key={program._id}  id={program._id}  onDelete={this.deleteProgram} 
+                                       <Delete  id={program._id} programName={program.programName}  onDelete={this.deleteProgram} 
                                        onUpdate = {this.showUpdate}
                                          />
 
@@ -141,7 +146,7 @@ export default class View extends Component {
                                         </Dialog> */}
 
 
-                                       </h1>   
+                                       
 
                                         {program.days.map((day, index) => {
                                             return(

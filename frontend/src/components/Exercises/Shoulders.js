@@ -3,8 +3,7 @@ import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui
 
 const Shoulders = (props) => (
     <div>
-        
-        <Paper className="paper">
+
             {
                 props.displayShoulders.map((exercise, index) => (
                 
@@ -20,7 +19,6 @@ const Shoulders = (props) => (
                  </Grid> 
                 ))     
             }   
-        </Paper>   
 
     </div>
     
