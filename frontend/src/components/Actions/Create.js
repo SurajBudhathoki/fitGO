@@ -11,21 +11,6 @@ export default class Create extends Component {
         super()
         this.state = {
             exerciseList : [],
-           
-            // days: '',
-            numDays:null,
-            programID: '',
-            isUpdating: false,    
-            dayNumber: [],
-            dayID: '',
-            open: false,
-            dayObject: {},
-            exName1: '',
-            repName1: '',
-            setName1: '',
-            exName2: '',
-            repName2: '',
-            setName2: '',
 
             programsToAdd: [],
             exerciseName: '',
@@ -35,9 +20,12 @@ export default class Create extends Component {
             dayName: '',
             daysToAdd: [],
             exerciseToAdd: [],
+
+            showDay: false,
+            showExercise: false,
         }
         this.handleChange =  this.handleChange.bind(this);
-        this.renderNumOfDays = this.renderNumOfDays.bind(this);
+
     }
 
     componentDidMount() {
@@ -47,29 +35,13 @@ export default class Create extends Component {
 
 
     handleChange =  (event) => {
-
-  
-       
         this.setState({
             [event.target.name]: event.target.value
         });
 
-        
-  
-
     }
 
-    handleClickOpen = (event) => {
-        event.preventDefault();
-        this.setState({ open: true });
-      };
-    
-      handleClose = (event) => {
-          event.preventDefault();
-        this.setState({ open: false });
-      };
 
-      
 
      addExercises = (event) => {
 
@@ -85,36 +57,23 @@ export default class Create extends Component {
                  
         })
 
-        this.setState({ exerciseToAdd:  exercises});
+        this.setState({ exerciseToAdd:  exercises, 
+            });
         console.log(exercises)
 
+            this.setState({ showExercise: false});
 
+        // this.setState({ 
+        //    exerciseName: "",
+        //     sets: "",
+        //     reps: "",
+        // })
      } 
+
 
     handleAdd = (event) => {
         event.preventDefault();
 
-
-        // let programs = this.state.daysToAdd;
-
-        // programs.push({ 
-            
-        //     dayName: this.state.days,
-        
-        //     exercises: {
-        //         exerciseName : this.state.exerciseName,
-        //         sets: this.state.sets,
-        //         reps: this.state.reps,
-        //     }   
-        
-        // }) 
-
-        // this.setState({ daysToAdd: programs});
-        // console.log(this.state.daysToAdd);
-
-
-
-    
 
 
         let days = this.state.daysToAdd;
@@ -123,12 +82,6 @@ export default class Create extends Component {
            
            
                  dayName: this.state.dayName,
-
-                //   exercises: {
-                //     exerciseName : this.state.exerciseName,
-                //     sets: this.state.sets,
-                //     reps: this.state.reps,
-                // }
 
                 exercises: this.state.exerciseToAdd,
            
@@ -141,6 +94,8 @@ export default class Create extends Component {
         this.setState({ daysToAdd: days});
 
         console.log(this.state.daysToAdd);
+
+        this.setState({exerciseToAdd: [], showExercise: false, showDay: false });
 
 
 
@@ -167,20 +122,11 @@ export default class Create extends Component {
             
            console.log(response.data)
 
-            // this.setState({programID : response.data._id});
-
-            // axios.get(`/api/programs/${this.state.programID}`)
-            // .then((result) => {
-    
-                
-               // console.log(result.data)
-
-
-            // })
         }).catch(err => {
             console.log(err);
         })
 
+        this.setState({ showDay: false, showExercise: false, programName: ""});
 
     }
 
@@ -194,49 +140,15 @@ export default class Create extends Component {
     }
 
 
-    renderNumOfDays = (event) => {
-         event.preventDefault();
+        handleShowDay = (event) => {
 
-         
-        const numDays = this.state.numDays;
-        console.log(numDays);
-
-
-
-
-
-            const dayArray = [1,2,3,4,5,6,7];
-
-
-            const dayNumber = dayArray.slice(0, numDays);
-            console.log(dayNumber);
-
-
-            this.setState({ dayNumber : dayNumber})
-
-
-           
-
-             
-
+            this.setState({ showDay : true});
         }
-
-
-
-
-    // pushArray = (event) => {
-    //     event.preventDefault();
-
        
-    //         // axios.put(`/api/programs/${this.state.programID}`, { days : this.state.dayObject } )
-    //         // .then((result) => {
-    //         //     console.log(result.data)
-    //         // })
-    
-    // }
+        handleShowExercise = (event) => {
 
-       
-    
+            this.setState({ showExercise : true});
+        }
 
 
     render() {
@@ -255,104 +167,27 @@ export default class Create extends Component {
                         <Paper className="paper" >
                             <h1>Create a program</h1>
                             
-                            <form>
+                            {/* <form> */}
                                 <div>
                                 <TextField type="text" label="Program Name" margin="normal"   value ={this.state.programName} onChange = {this.handleChange} name="programName" />
                                 </div>
 
-                                <div>
-                                <TextField type="number" label="Days"
-                                margin="normal" value= {this.state.numDays}
-                                onChange=  {this.handleChange} name="numDays" />
+                    
 
-                                <button onClick={this.renderNumOfDays} > ok </button>
-
-                                </div>
-
-
-                                
+                               <br />
                                
-                               
-                                <div>
+                                <Button variant = "contained" color="primary" onClick = {this.handleShowDay}> Add a day</Button>
 
-                          
-
-                                    {
-                                    this.state.dayNumber.map((day, index)=> (
-                                        <List key = {index}>
-
-
-                                                <ExpansionPanel>
-
-                                                <ExpansionPanelSummary>
-                                                day {day}
-                                                </ExpansionPanelSummary>
-
-                                                <ExpansionPanelDetails>
-                                                <div> Day: 
-                                <Select native onChange={this.handleChange} name="dayName" >
-                                    <option value="" disabled />
-                                    
-                                      {dayList.map((day,index) => (
-                                          <option key={index}>  {day}  </option>
-                                      ))}
-                                   
-                                    </Select>    
-                                </div>    
-                                <Dayform  exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.addExercises} />
-
-                                                <button onClick = {this.handleAdd}> add exercise </button>
-                                                </ExpansionPanelDetails>
-                                            </ExpansionPanel>
-                                        </List>
-                                    ))
-                                }
-
-                                </div>
-
-                                 <br />
-                               
-
-                              </form>
+                              {/* </form> */}
 
                                 <br></br><br></br>
 
-                                      
-                               
-                        
-                            {/* <button onClick = {this.handleClickOpen}> add a day </button>
-                                <Dialog  disableBackdropClick
-                                    disableEscapeKeyDown open={this.state.open} onClose={this.handleClose} >
-                                <DialogTitle>Pick a day </DialogTitle>
-                                <DialogContent>
-                                    
-                               
-
-                                </DialogContent>
-                                <DialogActions>
+                                   {this.state.showDay ?  
                                    
-
-                                <Button onClick={this.handleClose} color="primary">
-                                    Confirm
-                                    </Button>
-                                </DialogActions>
-                                </Dialog> */}
-
+                                   <div > 
                                     
-
-
-                                {/* <Select native value = {this.state.days} >
-
-                                    {this.state.numOfDays.map((day,index)=>  (
-                                        <option key = {index} >
-                                          {day}
-                                        </option>
-                                    ))}
-                                </Select> */}
-
-                                 
-                                {/* <div> Day: 
-                                <Select native onChange={this.handleChange} name="dayName" >
+                                     Day: 
+                                 <Select native onChange={this.handleChange} name="dayName" >
                                     <option value="" disabled />
                                     
                                       {dayList.map((day,index) => (
@@ -360,26 +195,47 @@ export default class Create extends Component {
                                       ))}
                                    
                                     </Select>    
+
+                                      <br/> <br/>       
+                                     <Button variant = "contained" color="primary" 
+                               onClick = {this.handleShowExercise}
+                               > Add an exercise</Button>
+                               <br/> <br/> 
                                 </div>    
-                                <Dayform  exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.handleAdd} /> */}
+                                
+                                :
+                                <div></div>
+                                }   
+                               
 
+                            {
+                                this.state.showExercise ? 
 
-
-
-
-                                {/* <div>
+                                <div>
+                                 <form>   
                                 Exercise name <input onChange={this.handleChange} type = "text" name="exerciseName" />
                                 Sets <input onChange={this.handleChange} type = "number" name = "sets" />
                                 Reps <input onChange={this.handleChange} type = "number" name = "reps" />
+                                <button onClick={this.addExercises} > Add</button>
+                                </form>
+                                <br/> <br/>
+                                <button onClick={this.handleAdd} > Confirm Day </button>
+                              
                                 </div>
-                                <button onClick={this.handleAdd} > add exercise</button> */}
+                                
+                                
+                                :
+
+                                <div></div>
+
+                            }
+                              
                                 
 
-                               
+                                 
+                                
 
-                                 {/* <Dayform exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.handleAdd} /> */}
-
-                                  <br/><br/><br/><br/><br/><br/><br/>  
+                                  <br/><br/>
 
                                  <div>
                                    <Button variant="contained" color="primary"
