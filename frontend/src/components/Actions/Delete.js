@@ -39,10 +39,10 @@ render() {
   return(
     <div key={this.props.id} >
     
-    <h2> {this.props.programName} </h2>  
+    {/* <h2> {this.props.programName} </h2>   */}
       
       <button color="secondary" variant="contained" value={this.props.id} onClick={this.handleClickOpen}>Delete</button>
-      <button color="secondary" variant="contained" value={this.props.id} onClick={this.props.onUpdate}>Edit</button>
+      {/* <button color="secondary" variant="contained" value={this.props.id} onClick={this.props.onUpdate}>Edit</button> */}
 
 
         <Modal open={this.state.open} onClose={this.handleClose}  >

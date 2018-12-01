@@ -28,12 +28,13 @@ export default class Create extends Component {
             setName2: '',
 
             programsToAdd: [],
-            exercises: '',
+            exerciseName: '',
             sets: '',
             reps: '',
             programName: '',
             dayName: '',
-            daysToAdd: []
+            daysToAdd: [],
+            exerciseToAdd: [],
         }
         this.handleChange =  this.handleChange.bind(this);
         this.renderNumOfDays = this.renderNumOfDays.bind(this);
@@ -70,6 +71,26 @@ export default class Create extends Component {
 
       
 
+     addExercises = (event) => {
+
+        event.preventDefault();
+
+            
+        let exercises = this.state.exerciseToAdd;
+           
+        exercises.push({ 
+                 exerciseName : this.state.exerciseName,
+                 sets: this.state.sets,
+                 reps: this.state.reps,
+                 
+        })
+
+        this.setState({ exerciseToAdd:  exercises});
+        console.log(exercises)
+
+
+     } 
+
     handleAdd = (event) => {
         event.preventDefault();
 
@@ -92,28 +113,36 @@ export default class Create extends Component {
         // console.log(this.state.daysToAdd);
 
 
+
+    
+
+
         let days = this.state.daysToAdd;
 
         days.push({
            
            
-                // dayName: this.state.dayName,
+                 dayName: this.state.dayName,
 
-                //  exercises: {
-                    exerciseName : this.state.exerciseName,
-                    sets: this.state.sets,
-                    reps: this.state.reps,
-               // }
+                //   exercises: {
+                //     exerciseName : this.state.exerciseName,
+                //     sets: this.state.sets,
+                //     reps: this.state.reps,
+                // }
+
+                exercises: this.state.exerciseToAdd,
            
 
         })
+
+
+
 
         this.setState({ daysToAdd: days});
 
         console.log(this.state.daysToAdd);
 
 
-       
 
     }
 
@@ -126,9 +155,11 @@ export default class Create extends Component {
             
           { 
               programName: this.state.programName,
-               days:{ 
-                 dayName: this.state.dayName,      
-                exercises: this.state.daysToAdd }
+            //    days:{ 
+            //      dayName: this.state.dayName,      
+            //     exercises: this.state.daysToAdd }
+
+                days: this.state.daysToAdd
         
         }
 
@@ -229,15 +260,14 @@ export default class Create extends Component {
                                 <TextField type="text" label="Program Name" margin="normal"   value ={this.state.programName} onChange = {this.handleChange} name="programName" />
                                 </div>
 
-                                {/* <div>
+                                <div>
                                 <TextField type="number" label="Days"
                                 margin="normal" value= {this.state.numDays}
                                 onChange=  {this.handleChange} name="numDays" />
 
                                 <button onClick={this.renderNumOfDays} > ok </button>
 
-                                 <button onClick={this.getPrograms} > get this program </button>
-                                </div> */}
+                                </div>
 
 
                                 
@@ -259,19 +289,19 @@ export default class Create extends Component {
                                                 </ExpansionPanelSummary>
 
                                                 <ExpansionPanelDetails>
-                                                <TextField type="text" label="Exercise Name"
-                                                margin="normal" value={this.state.exercise}
-                                                onChange = {this.handleChange} name="exercise" />
+                                                <div> Day: 
+                                <Select native onChange={this.handleChange} name="dayName" >
+                                    <option value="" disabled />
+                                    
+                                      {dayList.map((day,index) => (
+                                          <option key={index}>  {day}  </option>
+                                      ))}
+                                   
+                                    </Select>    
+                                </div>    
+                                <Dayform  exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.addExercises} />
 
-                                                <TextField type="number" label="Sets"
-                                                margin="normal" value= {this.state.sets}
-                                                onChange=  {this.handleChange} name="sets" />
-
-                                                <TextField type="number" label="Reps"
-                                                margin="normal" value= {this.state.reps}
-                                                onChange=  {this.handleChange} name="reps" />
-
-                                                {/* <button onClick = {this.putExercises}> add exercise </button> */}
+                                                <button onClick = {this.handleAdd}> add exercise </button>
                                                 </ExpansionPanelDetails>
                                             </ExpansionPanel>
                                         </List>
@@ -321,7 +351,7 @@ export default class Create extends Component {
                                 </Select> */}
 
                                  
-                                <div> Day: 
+                                {/* <div> Day: 
                                 <Select native onChange={this.handleChange} name="dayName" >
                                     <option value="" disabled />
                                     
@@ -331,6 +361,10 @@ export default class Create extends Component {
                                    
                                     </Select>    
                                 </div>    
+                                <Dayform  exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.handleAdd} /> */}
+
+
+
 
 
                                 {/* <div>
@@ -341,7 +375,7 @@ export default class Create extends Component {
                                 <button onClick={this.handleAdd} > add exercise</button> */}
                                 
 
-                                <Dayform  exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.handleAdd} />
+                               
 
                                  {/* <Dayform exerciseName={this.state.exerciseName} sets={this.state.sets} reps={this.state.reps} handleChange = {this.handleChange} handleClick = {this.handleAdd} /> */}
 

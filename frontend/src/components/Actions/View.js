@@ -98,25 +98,18 @@ export default class View extends Component {
                               this.state.programList.map((program, index) =>  {
                                   return(
                                   <List key={index} >
-                                      {/* <h1> {program.programName}  </h1>   */}
+                                      <h1> {program.programName}  </h1>  
                                       
                                       {/* <Button  color="primary" variant="contained" > edit</Button> */}
                                       
 
-                                        {/* <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} /> */}
+                                        <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
 
                                        <Delete  id={program._id} programName={program.programName}  onDelete={this.deleteProgram} 
-                                        onUpdate = {this.showUpdate}
+                                        //onUpdate = {this.showUpdate}
                                          />
 
-                                        
 
-
-
-                                        
-
-
-                                       
 
                                         {program.days.map((day, index) => {
                                             return(
