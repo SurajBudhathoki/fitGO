@@ -2,26 +2,36 @@ import React from 'react';
 import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 
 const Arms = (props) => (
-    <div>
+    <div className={props.root} >
+
+    {
+       
+        props.displayArms.map((exercise, index) => (
+            
+        <div key={index}>
+
+                <h1> {exercise.exerciseName} </h1>   
+                <GridList cellHeight={300}>
+          <GridListTile>
+            <img src=  
+                 {exercise.exerciseImage[0]} 
+                alt= 'ArmsImg' />
+            </GridListTile>
+            <GridListTile>
+            <img src=  
+                 {exercise.exerciseImage[1]} 
+                alt= 'ArmsImg' />
+            </GridListTile>
+             </GridList>   
+
+
+          </div> 
+         
+        ))     
         
-            {
-                props.displayArms.map((exercise, index) => (
-                
-                 <Grid  key = {`Arms${index}`}>
-                    <Grid item xs={9} >  
-                    <GridListTile>
-                        <h1> {exercise.exerciseName} </h1>   
-                        <h3>{exercise.bodyPart} </h3>
-                        <img src={exercise.exerciseImage[0]} alt= 'ArmsImg' />
-                    </GridListTile>
-                     </Grid>   
+    }   
 
-                 </Grid> 
-                ))     
-            }   
-
-
-    </div>
+</div>
     
   )
 

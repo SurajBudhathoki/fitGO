@@ -11,7 +11,7 @@ const Legs = (props) => (
                <div key={index}>
 
                        <h1> {exercise.exerciseName} </h1>   
-                       <GridList>
+                       <GridList cellHeight={300}>
                  <GridListTile>
                    <img src=  
                         {exercise.exerciseImage[0]} 

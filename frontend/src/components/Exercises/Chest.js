@@ -1,9 +1,5 @@
 import React from 'react';
 import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
-import Sidenav from './Navigation/Sidenav';
-import Image from '../images/chest/cable1.jpg';
-import Dips1 from '../images/chest/dips1.jpg';
-import Dips2 from '../images/chest/dips2.jpg';
 
 
 
@@ -14,12 +10,10 @@ const Chest = (props) => (
                
                 props.displayChest.map((exercise, index) => (
                     
-
-                //  <Grid  key = {`chest${index}`}>
                 <div key={index}>
 
                         <h1> {exercise.exerciseName} </h1>   
-                        <GridList>
+                        <GridList cellHeight={300}>
                   <GridListTile>
                     <img src=  
                          {exercise.exerciseImage[0]} 
