@@ -4,8 +4,8 @@ const EditForm = props => (
   <div>
     <h1>Edit </h1>
  
-      <input value={props.val} onChange={props.changeHandler} />
-      <input value={props.val} onChange={props.changeHandler} />
+     Program Name: <input value={props.val} onChange={props.changeHandler} />
+
       <button onClick={props.clickHandler}>Submit</button>
    
   </div>
