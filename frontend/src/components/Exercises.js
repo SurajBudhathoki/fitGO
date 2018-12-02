@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Grid,Paper, GridList, GridListTile, GridListTileBar, Tabs, Tab, AppBar } from '@material-ui/core';
 
-import Chest from './Exercises/Chest';
+import Chest from './Chest';
 import Back from './Exercises/Back';
 import Legs from './Exercises/Legs';
 import Arms from './Exercises/Arms';

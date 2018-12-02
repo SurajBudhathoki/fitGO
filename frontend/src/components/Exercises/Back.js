@@ -5,21 +5,34 @@ const Back = (props) => (
     <div>
         
         
-            {
-                props.displayBack.map((exercise, index) => (
-                
-                 <Grid  key = {`Back${index}`}>
-                    <Grid item xs={9} >  
-                    <GridListTile>
-                        <h1> {exercise.exerciseName} </h1>   
-                        <h3>{exercise.bodyPart} </h3>
-                        <img src={exercise.exerciseImage[0]} alt= 'BackImg' />
-                    </GridListTile>
-                     </Grid>   
+        {
+               
+               props.displayBack.map((exercise, index) => (
+                   
 
-                 </Grid> 
-                ))     
-            }   
+               //  <Grid  key = {`chest${index}`}>
+               <div key={index}>
+
+                       <h1> {exercise.exerciseName} </h1>   
+                       <GridList>
+                 <GridListTile>
+                   <img src=  
+                        {exercise.exerciseImage[0]} 
+                       alt= 'backImg' />
+                   </GridListTile>
+                   <GridListTile>
+                   <img src=  
+                        {exercise.exerciseImage[1]} 
+                       alt= 'backImg' />
+                   </GridListTile>
+                    </GridList>   
+
+
+                 </div> 
+                
+               ))     
+               
+           }    
       
 
     </div>

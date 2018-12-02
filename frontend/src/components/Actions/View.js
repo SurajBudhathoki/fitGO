@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Grid,Paper,  List,  Button,  Select, DialogTitle, Dialog, DialogActions } from '@material-ui/core';
+import {Grid,Paper,  List,  Button,  Select, Modal, DialogTitle, Dialog, DialogActions } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
 import Delete from './Delete';
@@ -67,19 +67,20 @@ export default class View extends Component {
 
     }  
 
-    updateArray = (event) =>{
+    updateArray = (event) => {
         event.preventDefault();
 
         let exercises = this.state.exerciseToUpdate;
-           
-        exercises.push({ 
-                 exerciseName : this.state.newExercise,
-                 sets: this.state.newSets,
-                 reps: this.state.newReps,
-                 
+
+        exercises.push({
+            exerciseName: this.state.newExercise,
+            sets: this.state.newSets,
+            reps: this.state.newReps,
+
         })
 
-        this.setState({ exerciseToUpdate:  exercises, 
+        this.setState({
+            exerciseToUpdate: exercises,
         });
 
         console.log(this.state.exerciseToUpdate);
@@ -89,30 +90,31 @@ export default class View extends Component {
     updateProgram = (event) => {
 
         event.preventDefault();
-    
-        this.setState({isUpdating: false})
-        
-      
-        
-        axios.put(`/api/programs/${this.state.updateID}`, 
-            {
-                //programName: this.state.programUpdate
 
-              days: {
-                  dayName: this.state.newDay,
-                exercises :  this.state.exerciseToUpdate,
-              }   
+        this.setState({
+            isUpdating: false
+        })
 
-            }).then(() => {
-            
-          
+
+
+        axios.put(`/api/programs/${this.state.updateID}`, {
+            //programName: this.state.programUpdate
+
+            days: {
+                dayName: this.state.newDay,
+                exercises: this.state.exerciseToUpdate,
+            }
+
+        }).then(() => {
+
+
             this.getPrograms();
 
             console.log('updated');
         })
-        
-    
-    } 
+
+
+    }
 
     handleUpdate = (event) => {
         this.setState({ [event.target.name]: event.target.value })
@@ -127,6 +129,26 @@ export default class View extends Component {
 
         console.log(this.state.updateID);
     }
+
+
+
+    deleteProgram = (event) => {
+
+        event.preventDefault();
+        //this.setState({ open: false });
+
+        axios.delete(`/api/programs/${event.target.value}`)
+        .then(() => {
+            
+
+            this.getPrograms();
+
+            console.log('deleted');
+
+        } )
+        
+    }
+
 
  
     render() {
@@ -190,7 +212,7 @@ export default class View extends Component {
 
                                           <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
 
-                                          <Delete  id={program._id} programName={program.programName}  onDelete={this.deleteProgram} />
+                                          <Delete  id={program._id}  onDelete={this.deleteProgram} />
 
                                          
 
@@ -238,9 +260,6 @@ export default class View extends Component {
                  </Grid>   
 
 
-                                  
-
-                       
             </div>
         )
     }

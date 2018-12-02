@@ -6,7 +6,7 @@ import Homepage from './components/Homepage';
 import Exercises from './components/Exercises';
 import Userpage from './components/User/Userpage';
 import Navbar from './components/Navigation/Navbar';
-import Chest from './components/Exercises/Chest';
+import Chest from './components/Chest';
 import Create from './components/Actions/Create';
 import View from './components/Actions/View';
 import './App.css';
