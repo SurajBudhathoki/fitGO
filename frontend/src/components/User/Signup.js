@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
+import {TextField, } from '@material-ui/core';
 
 export default class Signup extends Component {
     constructor() {
@@ -56,8 +57,9 @@ export default class Signup extends Component {
                     <form>
 
                            <div className="inner-wrap">
-                        <label> Username <input className = "form-input" type = "text" name = "username" value={this.state.username} onChange = {this.handleChange}  /></label>
-                        <label> Password <input className = "form-input" type = "password" name = "password" value={this.state.password} onChange = {this.handleChange}/></label>
+                           <TextField type="text" label="Username" margin="normal" onChange = {this.handleChange} name="username"  required= {true} value={this.state.username}/> <br/>
+      <TextField type="password" label="Password" margin="normal" value={this.state.password} required= {true} onChange = {this.handleChange} name="password" /> <br/>
+ 
                         <div >
                         <button className= "button submitButton" onClick={this.handleClick} type ="submit"> Sign Up</button>
                     </div>

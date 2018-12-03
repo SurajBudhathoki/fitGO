@@ -107,6 +107,25 @@ render() {
                                    
                                 
                                     <Grid item md={5}>
+                                    <IconButton onClick={this.toggleDrawer('left', true)}> 
+                    <i className="material-icons" id="menu" >menu</i>  </IconButton>
+                    <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        onClick={this.toggleDrawer('left', false)}
+                        onKeyDown={this.toggleDrawer('left', false)}
+                    >                   
+                        <List>
+                            <ListItem className="menuItems" button> <Link  to="/exercises"> View Exercises </Link>   </ListItem>
+                            <ListItem className="menuItems" button> <Link  to="/create">Create Program </Link> </ListItem>
+                            <ListItem className="menuItems" button> <Link  to="/view">View Program </Link> </ListItem>
+                            <ListItem className="menuItems" button> <Link  to="/view">Edit Program </Link> </ListItem>
+                            <ListItem className="menuItems" button> <Link  to="/view">Delete Program </Link> </ListItem>
+                        </List>                            
+                    </div>
+                </Drawer>
+
                                     </Grid>
                                     <Grid item md={5}>
                                     <Link  className="logo" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>  

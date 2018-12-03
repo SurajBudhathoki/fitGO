@@ -122,14 +122,6 @@ export default class Exercises extends Component {
                             </Grid>
                         </Grid>
 
-
-                        <Paper className= "paper">
-
-
-                            
-
-
-                        </Paper>
       
                   
            

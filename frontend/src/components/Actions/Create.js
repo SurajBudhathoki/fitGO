@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Paper, TextField, Select, Button,  } from '@material-ui/core';
+import {Grid, Paper, TextField, Select, Button, FormControl,  } from '@material-ui/core';
 import axios from 'axios';
 
 
@@ -157,20 +157,24 @@ export default class Create extends Component {
                     <Grid item xs>
                     
                     </Grid>
+
                     <Grid item xs={9}>
-                        <Paper className="paper" >
+                        {/* <Paper className="createPaper" > */}
+                        <div className = "userForm">
                             <h1>Create a program</h1>
                             
-                            
+                            <div className="inner-wrap">
                                 <div>
-                                <TextField type="text" label="Program Name" margin="normal"   value ={this.state.programName} onChange = {this.handleChange} name="programName" />
+                                    <FormControl required={true} > 
+                                <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleChange} name="programName" />
+                                </FormControl>
                                 </div>
 
                     
 
                                <br />
                                
-                                <Button variant = "contained"  onClick = {this.handleShowDay}> Day  <i className="material-icons"> today </i> </Button>
+                                <button className= "button submitButton" variant = "contained"  onClick = {this.handleShowDay}>Add a day  <i className="material-icons"> today </i> </button>
                                 
                              
 
@@ -179,9 +183,8 @@ export default class Create extends Component {
                                    {this.state.showDay ?  
                                     
                                    <div > 
-                                    
-                                     Day: 
-                                 <Select native onChange={this.handleChange} name="dayName" >
+                                  
+                                 <Select native onChange={this.handleChange} name="dayName"  >
                                     
                                     
                                       {dayList.map((day,index) => (
@@ -190,21 +193,28 @@ export default class Create extends Component {
                                    
                                     </Select>    
 
-                                            
-                                     <Button variant = "contained" 
-                               onClick = {this.handleShowExercise}
-                               > Exercise <i className="material-icons">
-                               fitness_center
-                               </i> </Button>
+                                   <br/> <br/>        
+                                    
 
-                               <br/> <br/>
-                                <Button variant="contained" onClick={this.handleAdd} > Confirm Day </Button> 
+                               
+                              
+
+                                <button className= "button submitButton"variant = "contained" 
+                               onClick = {this.handleShowExercise}
+                               > Add an exercise <i className="material-icons">
+                               fitness_center
+                               </i> </button>
+                                    
                                <br/> <br/> 
                                
+                               <button className= "button submitButton" variant="contained" onClick={this.handleAdd} > Confirm 
+                            
+                            </button>  <br/>
                                 </div>    
                                 
                                 :
                                 <div></div>
+                                
                                 }   
                                
 
@@ -212,11 +222,15 @@ export default class Create extends Component {
                                 this.state.showExercise ? 
 
                                 <div>
-                                 <form>   
-                                Exercise name <input onChange={this.handleChange} type = "text" name="exerciseName" />
-                                Sets <input onChange={this.handleChange} type = "number" name = "sets" />
-                                Reps <input onChange={this.handleChange} type = "number" name = "reps" />
-                                <button onClick={this.addExercises} > Add</button>
+                                 <form> 
+                                 <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleChange} name="exerciseName" /> <br/>
+                                 <TextField type="text" label="Sets" margin="normal" onChange = {this.handleChange} name="sets" /> <br/>
+                                 <TextField type="text" label="Reps" margin="normal" onChange = {this.handleChange} name="reps" /> <br />
+                                 
+                               {/* <label>  Exercise name <input onChange={this.handleChange} type = "text" name="exerciseName" /> </label>
+                              <label>  Sets <input onChange={this.handleChange} type = "number" name = "sets" /> </label>
+                             <label>   Reps <input onChange={this.handleChange} type = "number" name = "reps" /> </label> */}
+                                <button className="button submitButton" onClick={this.addExercises} > Add</button>
                                 </form>
                                 
                               
@@ -242,19 +256,19 @@ export default class Create extends Component {
                                <br/><br/><br/><br/><br/>
 
                                  <div>
-                                <Button variant="contained" 
+                                <button className= "button submitButton" variant="contained" 
                                 onClick = {this.postProgram} 
                                 >
-                                    Create <i className="material-icons">
-                                    check
-                                    </i>
-                                </Button>
+                                    Create 
+                                </button>
                                 </div>
                                     
 
 
-                        </Paper>
 
+                            </div>
+                        {/* </Paper> */}
+                        </div> 
                     </Grid>
                     <Grid item xs>
           

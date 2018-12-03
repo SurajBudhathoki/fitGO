@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Grid,Paper,  List,  Button,  Select, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, } from '@material-ui/core';
+import {Grid,Paper,  List,  Select, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, } from '@material-ui/core';
 import axios from 'axios';
 import Delete from './Delete';
 import Edit from './Edit';
@@ -54,7 +54,6 @@ export default class View extends Component {
 
       getSingleProgram = (event) => {
 
-        //event.preventDefault();
 
         console.log(event.target.value);
 
@@ -159,13 +158,33 @@ export default class View extends Component {
                     
                     </Grid>
                     <Grid item xs={9}>
-                        <Paper className="paper" >
-                            <h1 className="programs"> <u>Your Programs </u></h1> 
+                        <Paper className="viewPaper" >
+                       
+                            
 
                              {this.state.isUpdating
                                 ? 
-                                                    
-                                <div className="userForm" > 
+                                 <div>
+                                <h1> Edit</h1>  
+
+                                {/* <Grid container spacing={40}> 
+                                    <Grid item xs={6} >
+                                    <div className="userForm" > 
+                                <h1> Current information:</h1>
+                                <div className="inner-wrap">
+                                    Day:  Monday
+                                    
+                                  <label>  Exercise name <input  onChange={this.handleUpdate} type = "text" name="newExercise" /> </label> 
+                                  <label>  Sets <input  onChange={this.handleUpdate} type = "number" name = "newSets" /> </label> 
+                                 <label>   Reps <input  onChange={this.handleUpdate} type = "number" name = "newReps" /> </label> 
+                                  
+                                     </div>       
+                                    </div>
+                                    </Grid>
+
+                                    <Grid item xs={6}> */}
+                                    
+                                    <div className="userForm" > 
                                 <h1> Enter new information:</h1>
                                 <div className="inner-wrap">
                                     Day:  <Select native onChange={this.handleUpdate} name="newDay" >
@@ -185,10 +204,19 @@ export default class View extends Component {
                                     <button onClick = {this.updateProgram}> Edit final</button>
                                      </div>       
                                     </div>
+                                    
+                                    {/* </Grid>
+                                    
+                                </Grid>                */}
+                                
+                                    </div> 
 
-                                                    :  
-                                                    <div>
+                                     : 
+                                                    
+                                                    
+                                    <div>
 
+                    <h1 className="programs"> <u>Your Programs </u></h1> 
                                                     {
                               this.state.programList.map((program, index) =>  {
                                   return(

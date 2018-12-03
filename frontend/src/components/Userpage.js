@@ -14,19 +14,19 @@ const Userpage = (props) => {
         <Grid item xs>
         {props.username}
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
         <Paper className="paper">
                
-
-              <GridList  cellHeight={300} cols={1}>          
-               <GridListTile > <Link to ="/create">  <img src = {Create} className="homeImg" alt="createProgram" /> </Link>
-             <Link to ="/create">  <GridListTileBar 
-              title= "Create a Program" /> </Link>
+        <br/><br/><br/> 
+              <GridList  cellHeight={300} cols={1} spacing={16} >          
+               <GridListTile > <Link to ="/create">  <img src = {Create} className="homeImg" alt="createProgram" /> <GridListTileBar 
+              title= "Create a Program" />  </Link>
+             <Link to ="/create">   </Link>
               </GridListTile> 
-              <GridListTile  > <Link to ="/view">  <img src = {View}  className="homeImg" alt="viewProgram" /> </Link>
+              <GridListTile > <Link to ="/view">  <img src = {View}  className="homeImg" alt="viewProgram" />  <GridListTileBar
+              title= "View Programs" className="girdlist"/> </Link>
               <Link to ="/view"> 
-              <GridListTileBar
-              title= "View Programs"/> </Link> 
+              </Link> 
               </GridListTile>
               </GridList>
 

@@ -4,7 +4,7 @@ import Create from '../images/createprogram.jpg';
 import View from '../images/viewprograms.jpg';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Navigation/logo.PNG';
-
+import Image from '../images/gridArms.jpg'
 
 
 const Homepage = (props) => {
@@ -14,12 +14,13 @@ const Homepage = (props) => {
         <Grid item xs>
           
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={7}>
         <Paper className="paper">
               
-              hello
+    
+<img src = {Image} alt="main" />
 
-<img src = {Logo} alt="Logo" />
+<h2> Start your fitneess journey</h2>
           </Paper>
         </Grid>
         <Grid item xs>
