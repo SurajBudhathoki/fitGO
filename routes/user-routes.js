@@ -45,14 +45,14 @@ module.exports = function(app) {
     });
 
 
-    app.get('/', (req, res, next) => {
+    // app.get('/', (req, res, next) => {
    
-        if (req.user) {
-            res.json({ user: req.user })
-        } else {
-            res.json({ user: null })
-        }
-    })
+    //     if (req.user) {
+    //         res.json({ user: req.user })
+    //     } else {
+    //         res.json({ user: null })
+    //     }
+    // })
     
 
     app.post('/logout', (req, res) => {

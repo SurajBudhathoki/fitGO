@@ -20,6 +20,7 @@ class App extends Component {
       loggedIn: false,
       username: null,
       open: false,
+      test: 'test',
     }
 
     this.updateUser = this.updateUser.bind(this)
@@ -43,7 +44,7 @@ class App extends Component {
 
         <div className="content">
         
-        <Route exact path="/" component={Homepage} />
+        <Route exact path="/" component={Homepage} test={this.state.test} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" render={() =>
             <Login updateUser={this.updateUser}/>}/>

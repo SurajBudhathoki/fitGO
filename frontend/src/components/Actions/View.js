@@ -146,6 +146,11 @@ export default class View extends Component {
         
     }
 
+    goBack = (event) => {
+        event.preventDefault();
+
+        this.setState({ isUpdating : false})
+    }
 
  
     render() {
@@ -167,6 +172,8 @@ export default class View extends Component {
                                  <div>
                                 <h1> Edit</h1>  
 
+                                <button onClick={this.goBack} className= "button deleteButton" > Go back </button>
+
                                 {/* <Grid container spacing={40}> 
                                     <Grid item xs={6} >
                                     <div className="userForm" > 
@@ -187,25 +194,23 @@ export default class View extends Component {
                                     <div className="userForm" > 
                                 <h1> Enter new information:</h1>
                                 <div className="inner-wrap">
-                                    Day:  <Select native onChange={this.handleUpdate} name="newDay" >
+                                    <Select native onChange={this.handleUpdate} name="newDay" >
                                                             
                                                             
                                     {dayList.map((day,index) => (
                                     <option key={index}>  {day}  </option>
                                     ))}
                                                         
-                                    </Select>   
+                                    </Select>   <br/>
                                     
                                     <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleUpdate} name="newExercise" /> <br/>
                                  <TextField type="text" label="Sets" margin="normal" onChange = {this.handleUpdate} name="newSets" /> <br/>
                                  <TextField type="text" label="Reps" margin="normal" onChange = {this.handleUpdate} name="newReps" /> <br />
 
-                                  {/* <label>  Exercise name <input  onChange={this.handleUpdate} type = "text" name="newExercise" /> </label> 
-                                  <label>  Sets <input  onChange={this.handleUpdate} type = "number" name = "newSets" /> </label> 
-                                 <label>   Reps <input  onChange={this.handleUpdate} type = "number" name = "newReps" /> </label>  */}
-                                    <button onClick={this.updateArray} > Update</button>
+                             
+                                    <button className= "button submitButton" onClick={this.updateArray} > Update</button>
                                     <br></br>
-                                    <button onClick = {this.updateProgram}> Edit final</button>
+                                    <button className= "button submitButton"  onClick = {this.updateProgram}>  Submit</button>
                                      </div>       
                                     </div>
                                     
