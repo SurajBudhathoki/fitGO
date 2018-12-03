@@ -3,7 +3,9 @@ import React from 'react';
 const Delete = props => (
   <div key={props.id} className="Delete">
 
-    <button value={props.id} onClick={props.onDelete}>Delete</button>
+    <button className="button deleteButton" value={props.id} onClick={props.onDelete}> <i className="material-icons">
+delete
+</i> </button>
 
   </div>
 )

@@ -160,33 +160,31 @@ export default class View extends Component {
                     </Grid>
                     <Grid item xs={9}>
                         <Paper className="paper" >
-                            <h1> <u>Your Programs </u></h1> 
-                          
-                            
-                        
-
-
+                            <h1 className="programs"> <u>Your Programs </u></h1> 
 
                              {this.state.isUpdating
-                                                    ? 
+                                ? 
                                                     
-                                                    <div> 
-                                                       Day:  <Select native onChange={this.handleUpdate} name="newDay" >
+                                <div className="userForm" > 
+                                <h1> Enter new information:</h1>
+                                <div className="inner-wrap">
+                                    Day:  <Select native onChange={this.handleUpdate} name="newDay" >
                                                             
                                                             
-                                                            {dayList.map((day,index) => (
-                                                                <option key={index}>  {day}  </option>
-                                                            ))}
+                                    {dayList.map((day,index) => (
+                                    <option key={index}>  {day}  </option>
+                                    ))}
                                                         
-                                                            </Select>   
-                                                    Exercise name <input onChange={this.handleUpdate} type = "text" name="newExercise" />
-                                                    Sets <input onChange={this.handleUpdate} type = "number" name = "newSets" />
-                                                    Reps <input onChange={this.handleUpdate} type = "number" name = "newReps" />
-                                                    <button onClick={this.updateArray} > Update</button>
-                                                    <br></br>
-                                                    <button onClick = {this.updateProgram}> Edit final</button>
-
-                                                    </div>
+                                    </Select>   
+                                    
+                                  <label>  Exercise name <input  onChange={this.handleUpdate} type = "text" name="newExercise" /> </label> 
+                                  <label>  Sets <input  onChange={this.handleUpdate} type = "number" name = "newSets" /> </label> 
+                                 <label>   Reps <input  onChange={this.handleUpdate} type = "number" name = "newReps" /> </label> 
+                                    <button onClick={this.updateArray} > Update</button>
+                                    <br></br>
+                                    <button onClick = {this.updateProgram}> Edit final</button>
+                                     </div>       
+                                    </div>
 
                                                     :  
                                                     <div>

@@ -123,6 +123,20 @@ filter:brightness(40%);
   color: white;
 }
 
+.edit {
+  height: 20px;
+}
+
+.deleteButton {
+  background-color: white; 
+  color: red; 
+  border: 2px solid red;
+}
+
+.deleteButton:hover {
+  background-color: red;
+  color: white;
+}
 
 .userForm{
 	width:450px;
@@ -156,6 +170,6 @@ filter:brightness(40%);
 }
 
 
-.exerciseName {
+.exerciseName, .programs {
   color: #0200ff;
 }
