@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {Grid,Paper, TextField, Select, Button, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel,  List } from '@material-ui/core';
+import {Grid,Paper, TextField, Select, Button,  } from '@material-ui/core';
 import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
-import Addmodal from './Addmodal';
-import Dayform from '../dayForm';
+
 
 
 export default class Create extends Component {
@@ -157,13 +156,13 @@ export default class Create extends Component {
         return(
 
             <div>
-                 <Grid container spacing={24}>
+                 {/* <Grid container spacing={24}>
                     <Grid item xs={3}>
 
                         <Sidenav />
 
                     </Grid>
-                    <Grid item xs={9} className="createGrid">
+                    <Grid item xs={9} className="createGrid"> */}
                         <Paper className="paper" >
                             <h1>Create a program</h1>
                             
@@ -252,8 +251,8 @@ export default class Create extends Component {
 
                         </Paper>
 
-                    </Grid>
-                 </Grid>
+                    {/* </Grid>
+                 </Grid> */}
 
                  
               

@@ -28,8 +28,8 @@ color: white;
 }
 
 .menuItems {
-  height: 200px;
-  font-size: 40px;
+  height: 100px;
+  font-size: 20px;
  
 }
 
@@ -67,4 +67,8 @@ filter:brightness(40%);
 
   width: 250px;
   background-color: white;
+}
+
+#menu {
+  color: white;
 }

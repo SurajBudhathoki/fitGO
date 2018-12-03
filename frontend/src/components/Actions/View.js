@@ -5,8 +5,7 @@ import axios from 'axios';
 import Sidenav from '../Navigation/Sidenav';
 import Delete from './Delete';
 import Edit from './Edit';
-import EditForm from './EditForm';
-import Program from './Program';
+
 
 export default class View extends Component {
 
@@ -156,13 +155,13 @@ export default class View extends Component {
 
         return(
             <div>
-                <Grid container spacing={24}>
+                {/* <Grid container spacing={24}>
                     <Grid item xs={3}>
                         
                         <Sidenav />
                         
                     </Grid>
-                    <Grid item xs={9}> 
+                    <Grid item xs={9}>  */}
                         <Paper className="paper" >
                             <h1> <u>Your Programs </u></h1> 
                           
@@ -256,8 +255,8 @@ export default class View extends Component {
                                                          </div>
                                                 } 
                         </Paper>
-                    </Grid>
-                 </Grid>   
+                    {/* </Grid>
+                 </Grid>    */}
 
 
             </div>

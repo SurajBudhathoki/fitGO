@@ -11,13 +11,15 @@ import Create from './components/Actions/Create';
 import View from './components/Actions/View';
 import './App.css';
 
+
 class App extends Component {
 
   constructor() {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      open: false,
     }
 
     this.updateUser = this.updateUser.bind(this)

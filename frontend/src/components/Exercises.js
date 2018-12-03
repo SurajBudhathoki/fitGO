@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Grid,Paper, GridList, GridListTile, GridListTileBar, Tabs, Tab, AppBar } from '@material-ui/core';
+import {Grid,Paper, Tabs, Tab, AppBar } from '@material-ui/core';
 
 import Chest from './Exercises/Chest';
 import Back from './Exercises/Back';
 import Legs from './Exercises/Legs';
 import Arms from './Exercises/Arms';
 import Shoulders from './Exercises/Shoulders';
-import Sidenav from './Navigation/Sidenav';
+
 
 
 
@@ -86,13 +86,13 @@ export default class Exercises extends Component {
         return (
             <div>
 
-                <Grid container spacing={24}>
+                {/* <Grid container spacing={24}>
                     <Grid item lg={3}>
                         
                         <Sidenav />
                         
                     </Grid>
-                    <Grid item lg={9} className="exerciseGrid">    
+                    <Grid item lg={9} className="exerciseGrid">     */}
                         <Paper className= "paper">
 
 
@@ -119,8 +119,8 @@ export default class Exercises extends Component {
 
 
                         </Paper>
-                    </Grid>
-                </Grid>    
+                    {/* </Grid>
+                </Grid>     */}
                   
            
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid,Paper, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
+import { GridList, GridListTile, } from '@material-ui/core';
 
 const Shoulders = (props) => (
     <div className={props.root} >
