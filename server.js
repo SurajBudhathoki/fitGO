@@ -25,7 +25,12 @@ require('./routes/api-routes.js')(app);
 require('./routes/user-routes.js')(app);
 
 // Connect to the Mongo DB
-mongoose.connect('mongodb://localhost:27017/fitGO_db', { useNewUrlParser: true });
+
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/improvements";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+
 
 
 // Start the API server
