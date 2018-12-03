@@ -1,10 +1,6 @@
 import React from 'react';
-import {Grid,Paper,  GridList, GridListTile, GridListTileBar } from '@material-ui/core';
-import Create from '../images/createprogram.jpg';
-import View from '../images/viewprograms.jpg';
-import { Link } from 'react-router-dom';
-import Logo from '../components/Navigation/logo.PNG';
-import Image from '../images/gridArms.jpg'
+import {Grid,Paper,  } from '@material-ui/core';
+
 
 
 const Homepage = (props) => {

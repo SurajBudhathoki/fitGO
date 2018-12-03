@@ -31,14 +31,17 @@ export default class Navbar extends Component {
         axios.post('/logout').then(response => {
           console.log(response.data)
           if (response.status === 200) {
+
+            this.setState({
+                redirectTo: '/'
+            });
+
             this.props.updateUser({
               loggedIn: false,
               username: null
             })
 
-            this.setState({
-                redirectTo: '/'
-            });
+           
 
           }
         }).catch(err => {
@@ -148,6 +151,6 @@ render() {
         </div>
     )
 }
-}
+ }
 
 }    

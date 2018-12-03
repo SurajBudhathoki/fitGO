@@ -158,7 +158,7 @@ export default class View extends Component {
                     
                     </Grid>
                     <Grid item xs={8}>
-                        <Paper className="viewPaper" >
+                        {/* <Paper className="viewPaper" > */}
                        
                             
 
@@ -284,7 +284,7 @@ export default class View extends Component {
                           }    
                                                          </div>
                                                 } 
-                        </Paper>
+                        {/* </Paper> */}
                     </Grid>
                     <Grid item xs>
           

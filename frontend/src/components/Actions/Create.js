@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Paper, TextField, Select, Button, FormControl,  } from '@material-ui/core';
+import {Grid, TextField, Select, FormControl,  } from '@material-ui/core';
 import axios from 'axios';
 
 
@@ -174,7 +174,10 @@ export default class Create extends Component {
 
                                <br />
                                
-                                <button className= "button submitButton" variant = "contained"  onClick = {this.handleShowDay}>Add a day  <i className="material-icons"> today </i> </button>
+                                <button className= "button submitButton" variant = "contained"  onClick = {this.handleShowDay}>Add a day  
+                                {/* <i className="material-icons"> today </i>  */}
+                                
+                                </button>
                                 
                              
 
@@ -201,9 +204,11 @@ export default class Create extends Component {
 
                                 <button className= "button submitButton"variant = "contained" 
                                onClick = {this.handleShowExercise}
-                               > Add an exercise <i className="material-icons">
-                               fitness_center
-                               </i> </button>
+                               > Add Exercise
+                                {/* <i className="material-icons">
+                               fitness_center </i> */}
+
+                                </button>
                                     
                                <br/> <br/> 
                                
