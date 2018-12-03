@@ -44,18 +44,6 @@ module.exports = function(app) {
 
     });
 
-
-    app.get('/', (req, res, next) => {
-        console.log('===== user!!======')
-        console.log(req.user)
-        if (req.user) {
-            res.json({ user: req.user })
-        } else {
-            res.json({ user: null })
-        }
-    })
-    
-
     app.post('/logout', (req, res) => {
         if (req.user) {
             req.logout()
