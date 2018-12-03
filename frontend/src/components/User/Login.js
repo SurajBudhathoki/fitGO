@@ -3,6 +3,8 @@ import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 
+
+
 export default class Login extends Component {
 
     constructor() {
@@ -42,7 +44,7 @@ export default class Login extends Component {
             })
             
             this.setState({
-                redirectTo: '/'
+                redirectTo: '/userpage'
             });
          }   
 
@@ -58,24 +60,27 @@ export default class Login extends Component {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
         return ( 
-            <div >
-                <h2> Login</h2>
-                    <form>
-                        <div className ="form-group">
-                            <label> Username  </label>  
-                            <input className = "form-input" type = "text" name = "username" value={this.state.username} onChange = {this.handleChange}  />
-                        </div>
-                        <div className = "form-group">
-                            <label> Password  </label>  
-                            <input className = "form-input" type = "password" name = "password" value={this.state.password} onChange = {this.handleChange}/>
-                        </div>
-                        <div className = "form-group">
-                            <button onClick={this.handleClick} type ="submit"> Login</button>
-                        </div>  
-                    </form>  
-            </div>
+
+
+            <div className="userForm">
+            <h1>Log In </h1>
+            <form>
+   
+    <div className="inner-wrap">
+        <label> Username <input className = "form-input" type = "text" name = "username" value={this.state.username} onChange = {this.handleChange}  /></label>
+        <label> Password <input className = "form-input" type = "password" name = "password" value={this.state.password} onChange = {this.handleChange}/></label>
+        <div>
+        <button className= "button submitButton" onClick={this.handleClick} type ="submit"> Login</button>
+     </div>
+    </div>
+
+   
+</form>
+</div>
         )
         } 
     }
+
+   
 
 }

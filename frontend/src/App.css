@@ -7,16 +7,20 @@
   border: none;
   background: none;
   text-decoration: none;
-   color: white;
+   color: #0200ff;
   margin-left: 15px;
+
+  font-size: 20px;
+  font-weight: bold;
 }
+
 
 
 .paper {
   margin-top: 10px;
   margin-bottom: 10px;
  
-  height: 500;
+  height: 800px;
   overflow: "auto";
 }
 
@@ -35,7 +39,7 @@ color: white;
 
 .menuItems > a {
   text-decoration: none;
-  color: green;
+  color: #00ff5f;
 }
 
 .homeImg, .gridImg {
@@ -49,9 +53,10 @@ filter:brightness(40%);
 
 .logout {
  
-  float: right;
-  font-size: 20px;
-  color: white;
+
+  color: #0200ff;
+  text-decoration: none;
+  margin-left: 15px;
 }
 
 .createGrid {
@@ -63,12 +68,94 @@ filter:brightness(40%);
   height: 700px;
 }
 
-.modal {
-
-  width: 250px;
-  background-color: white;
-}
 
 #menu {
+  color: #0200ff;
+}
+
+.homeImg {
+  width: 100%;
+}
+
+.account {
+  margin-left: 40px;
+
+}
+
+.userTop {
+  font-size: 20px;
+  color: #0200ff;
+  margin-left: 15px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.Logo {
+  padding: 5px;
+    width: 150px;
+}
+
+.button {
+  background-color: #00ff5f;
+  border: none;
   color: white;
+  padding: 12px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.submitButton {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #00ff5f;
+}
+
+.submitButton:hover {
+  background-color: #00ff5f;
+  color: white;
+}
+
+
+.userForm{
+	width:450px;
+	padding:30px;
+	margin:60px auto;
+	background: #FFF;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+}
+.userForm .inner-wrap{
+	padding: 30px;
+	background: #F8F8F8;
+	border-radius: 6px;
+	margin-bottom: 15px;
+}
+.userForm h1{
+	background: #0200ff;
+	padding: 20px 30px 15px 30px;
+	margin: -30px -30px 30px -30px;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font: normal 30px 'Bitter', serif;
+
+}
+
+.userForm label{
+	display: block;
+	margin-bottom: 15px;
+}
+
+
+.exerciseName {
+  color: #0200ff;
 }

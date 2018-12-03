@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import {Grid,Paper,  List,  Button,  Select, Modal, DialogTitle, Dialog, DialogActions } from '@material-ui/core';
+import {Grid,Paper,  List,  Button,  Select, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, } from '@material-ui/core';
 import axios from 'axios';
-import Sidenav from '../Navigation/Sidenav';
 import Delete from './Delete';
 import Edit from './Edit';
 
@@ -134,7 +133,7 @@ export default class View extends Component {
     deleteProgram = (event) => {
 
         event.preventDefault();
-        //this.setState({ open: false });
+
 
         axios.delete(`/api/programs/${event.target.value}`)
         .then(() => {
@@ -155,17 +154,17 @@ export default class View extends Component {
 
         return(
             <div>
-                {/* <Grid container spacing={24}>
-                    <Grid item xs={3}>
-                        
-                        <Sidenav />
-                        
+                 <Grid container spacing={16}>
+                    <Grid item xs>
+                    
                     </Grid>
-                    <Grid item xs={9}>  */}
+                    <Grid item xs={9}>
                         <Paper className="paper" >
                             <h1> <u>Your Programs </u></h1> 
                           
-                          
+                            
+                        
+
 
 
                              {this.state.isUpdating
@@ -189,7 +188,6 @@ export default class View extends Component {
 
                                                     </div>
 
-                                                    // <EditForm value={this.state.programUpdate} changeHandler={this.handleUpdate} clickHandler={this.updateProgram}  /> 
                                                     :  
                                                     <div>
 
@@ -197,50 +195,56 @@ export default class View extends Component {
                               this.state.programList.map((program, index) =>  {
                                   return(
                                   <List key={index} >
-                                      <h1> {program.programName} <Button  color="primary" variant="contained" onClick={this.handleShowProgram} > View  </Button>  </h1>  
-
-                                   
                                       
-                                      {
-                                          this.state.showProgram 
-                                          ?
-                                          <div>
 
-                                                 {/* <Program key={program._id} id={program._id} programName={program.programName} days = {program.days} /> */}
+                                        <ExpansionPanel>
+                                        <ExpansionPanelSummary> 
+                                        <h1> {program.programName} </h1>
+                                        </ExpansionPanelSummary>
+                                        <ExpansionPanelDetails> 
+                                        <div>
 
 
-                                          <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
 
-                                          <Delete  id={program._id}  onDelete={this.deleteProgram} />
-
-                                         
 
                                             {program.days.map((day, index) => {
                                             return(
-                                                <List key={index}> 
-                                                  <h3> {day.dayName} </h3>  
+                                            <List key={index}> 
+                                            <h3> {day.dayName} </h3>  
 
-                                                 {/* <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} /> */}
+                                            
 
-                                                    {day.exercises.map((exercise, index) => {
-                                                        return(
-                                                            <List key={index}>
-                                                                {exercise.exerciseName}
-                                                                {exercise.sets} x
-                                                                {exercise.reps}
-                                                            </List>
-                                                        )
-                                                    })}
-                                                </List> 
+                                            {day.exercises.map((exercise, index) => {
+                                                return(
+                                                    <List key={index}>
+                                                        {exercise.exerciseName}
+                                                        {exercise.sets} x
+                                                        {exercise.reps}
+                                                    </List>
+                                                )
+                                            })}
+                                            </List> 
                                             )
-                                        })}
+                                            })}
 
-                                          </div>
-                                          :
-                                          <div></div>
-                                      }
+                                            </div>   
+
+                                                
+                                            
+
+
+
+                                        </ExpansionPanelDetails>
+                                        <Divider/>
+                                         <ExpansionPanelActions>
+                                         <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
+
+                                            <Delete  id={program._id}  onDelete={this.deleteProgram} />
+                                        </ExpansionPanelActions>       
+
+                                        </ExpansionPanel>
                                       
-                                      
+                                     
 
                                         
 
@@ -255,8 +259,11 @@ export default class View extends Component {
                                                          </div>
                                                 } 
                         </Paper>
-                    {/* </Grid>
-                 </Grid>    */}
+                    </Grid>
+                    <Grid item xs>
+          
+                    </Grid>
+                 </Grid>   
 
 
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 export default class Signup extends Component {
@@ -8,6 +9,7 @@ export default class Signup extends Component {
             username: '',
             password: '',
             confirmPassword: '',
+            redirectTo: null,
         
         }
         //using bind to create a new function  to call the this keyword with the provided value
@@ -32,6 +34,11 @@ export default class Signup extends Component {
                     password: this.state.password  
         }).then((result) => {
             console.log(result)
+
+            this.setState({
+                redirectTo: '/login'
+            });
+
         }).catch((err) => {
             console.log(err)
         })
@@ -40,26 +47,27 @@ export default class Signup extends Component {
 
     //rendering on the html
     render() {
+        if (this.state.redirectTo) {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        } else {
         return (
-            <div>
-                <h2> Sign up</h2>
+            <div className="userForm">
+                <h1> Sign up </h1>
                     <form>
-                        <div className ="form-group">
-                            <label> Username  </label>  
-                            <input className = "form-input" type = "text" name = "username" value={this.state.username} onChange = {this.handleChange}  />
-                        </div>
-                        <div className = "form-group">
-                            <label> Password  </label>  
-                            <input className = "form-input" type = "password" name = "password" value={this.state.password} onChange = {this.handleChange}/>
-                        </div>
-                        <div className = "form-group">
-                            <button onClick={this.handleClick} type ="submit"> Sign up</button>
-                        </div>  
+
+                           <div className="inner-wrap">
+                        <label> Username <input className = "form-input" type = "text" name = "username" value={this.state.username} onChange = {this.handleChange}  /></label>
+                        <label> Password <input className = "form-input" type = "password" name = "password" value={this.state.password} onChange = {this.handleChange}/></label>
+                        <div >
+                        <button className= "button submitButton" onClick={this.handleClick} type ="submit"> Sign Up</button>
+                    </div>
+                    </div>
+
                     </form>  
             </div>
         )
     }
-
+}
 
 
 }

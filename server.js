@@ -11,7 +11,7 @@ app.use(express.json());
 
 
 // For Passport
-app.use(session({ secret: 'jumping llama',resave: true, saveUninitialized:true})); // session secret
+app.use(session({ secret: 'jumping llama',resave: false, saveUninitialized:false})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

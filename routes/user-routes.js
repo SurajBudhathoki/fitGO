@@ -13,7 +13,7 @@ module.exports = function(app) {
             }
             else if (user) {
                 res.json({
-                    error: `sorry, already have user with username ${username}`
+                    error: `sorry, ${username} unavailable`
                 })
             }
             else {

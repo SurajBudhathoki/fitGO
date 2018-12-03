@@ -9,11 +9,9 @@ const Back = (props) => (
                
                props.displayBack.map((exercise, index) => (
                    
-
-               //  <Grid  key = {`chest${index}`}>
                <div key={index}>
 
-                       <h1> {exercise.exerciseName} </h1>   
+                      <h2 className="exerciseName" > {exercise.exerciseName} </h2>  
                        <GridList cellHeight={300}>
                  <GridListTile>
                    <img src=  

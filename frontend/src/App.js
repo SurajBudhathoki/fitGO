@@ -4,7 +4,7 @@ import Signup from './components/User/Signup';
 import Login from './components/User/Login';
 import Homepage from './components/Homepage';
 import Exercises from './components/Exercises';
-import Userpage from './components/User/Userpage';
+import Userpage from './components/Userpage';
 import Navbar from './components/Navigation/Navbar';
 
 import Create from './components/Actions/Create';
@@ -37,8 +37,8 @@ class App extends Component {
       <div className="App">
 
          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} username={this.state.username} />
-         {this.state.loggedIn &&
-          <p className="welcome">Welcome, {this.state.username}!</p>
+         {this.state.loggedIn 
+          // && <p className="welcome">Welcome, {this.state.username}!</p>
         }
 
         <div className="content">
@@ -47,8 +47,8 @@ class App extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/login" render={() =>
             <Login updateUser={this.updateUser}/>}/>
-        <Route path="/userpage" component={Userpage}/>
-        <Route path="/exercises" component={Exercises} />
+        <Route path="/userpage" component={Userpage} username={this.state.username}/>
+        <Route path="/exercises" component={Exercises}  />
 
         <Route path="/create" component={Create} />
         <Route path="/view" component={View} />

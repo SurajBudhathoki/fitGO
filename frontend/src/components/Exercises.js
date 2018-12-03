@@ -86,23 +86,22 @@ export default class Exercises extends Component {
         return (
             <div>
 
-                {/* <Grid container spacing={24}>
-                    <Grid item lg={3}>
-                        
-                        <Sidenav />
-                        
-                    </Grid>
-                    <Grid item lg={9} className="exerciseGrid">     */}
-                        <Paper className= "paper">
+ 
 
-
-                              <AppBar position="static" color="default">
-                                <Tabs
+                     <Grid container spacing={16}>
+                            <Grid item xs>
+                            
+                            </Grid>
+                            <Grid item xs={9}>
+                            <Paper className="paper">
+                                
+                            <AppBar position="static" color="default">
+                                <Tabs style={{ color: 'blue' }} 
                                      value={this.state.value}
                                     onChange={this.handleChange}
                                     fullWidth
                                 >
-                                    <Tab label="Chest" />
+                                    <Tab className="tab" selected={true} label="Chest" />
                                     <Tab label="Back" />
                                     <Tab label="Legs" />
                                     <Tab label="Arms" />
@@ -116,11 +115,22 @@ export default class Exercises extends Component {
                                 {this.state.value === 3 && <Arms displayArms={this.state.armsList }/> }
                                 {this.state.value === 4 && <Shoulders displayShoulders={this.state.shouldersList} /> }
                                 <br></br>
+                            </Paper>
+                            </Grid>
+                            <Grid item xs>
+                            
+                            </Grid>
+                        </Grid>
+
+
+                        <Paper className= "paper">
+
+
+                            
 
 
                         </Paper>
-                    {/* </Grid>
-                </Grid>     */}
+      
                   
            
             </div>

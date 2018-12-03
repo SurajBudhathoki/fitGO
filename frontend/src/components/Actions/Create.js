@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Grid,Paper, TextField, Select, Button,  } from '@material-ui/core';
+import {Grid, Paper, TextField, Select, Button,  } from '@material-ui/core';
 import axios from 'axios';
-import Sidenav from '../Navigation/Sidenav';
+
 
 
 
@@ -34,6 +34,9 @@ export default class Create extends Component {
 
 
     handleChange =  (event) => {
+
+        console.log(event.target.value)
+
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -62,11 +65,7 @@ export default class Create extends Component {
 
             this.setState({ showExercise: false});
 
-        // this.setState({ 
-        //    exerciseName: "",
-        //     sets: "",
-        //     reps: "",
-        // })
+
      } 
 
 
@@ -109,9 +108,7 @@ export default class Create extends Component {
             
           { 
               programName: this.state.programName,
-            //    days:{ 
-            //      dayName: this.state.dayName,      
-            //     exercises: this.state.daysToAdd }
+
 
                 days: this.state.daysToAdd
         
@@ -151,22 +148,20 @@ export default class Create extends Component {
 
 
     render() {
-        const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday'] 
+        const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday' ] 
 
         return(
 
             <div>
-                 {/* <Grid container spacing={24}>
-                    <Grid item xs={3}>
-
-                        <Sidenav />
-
+                 <Grid container spacing={16}>
+                    <Grid item xs>
+                    
                     </Grid>
-                    <Grid item xs={9} className="createGrid"> */}
+                    <Grid item xs={9}>
                         <Paper className="paper" >
                             <h1>Create a program</h1>
                             
-                            {/* <form> */}
+                            
                                 <div>
                                 <TextField type="text" label="Program Name" margin="normal"   value ={this.state.programName} onChange = {this.handleChange} name="programName" />
                                 </div>
@@ -175,19 +170,19 @@ export default class Create extends Component {
 
                                <br />
                                
-                                <Button variant = "contained" color="primary" onClick = {this.handleShowDay}> Add a day</Button>
-
-                              {/* </form> */}
+                                <Button variant = "contained"  onClick = {this.handleShowDay}> Day  <i className="material-icons"> today </i> </Button>
+                                
+                             
 
                                 <br></br><br></br>
 
                                    {this.state.showDay ?  
-                                   
+                                    
                                    <div > 
                                     
                                      Day: 
                                  <Select native onChange={this.handleChange} name="dayName" >
-                                    <option value="" disabled />
+                                    
                                     
                                       {dayList.map((day,index) => (
                                           <option key={index}>  {day}  </option>
@@ -195,11 +190,17 @@ export default class Create extends Component {
                                    
                                     </Select>    
 
-                                      <br/> <br/>       
-                                     <Button variant = "contained" color="primary" 
+                                            
+                                     <Button variant = "contained" 
                                onClick = {this.handleShowExercise}
-                               > Add an exercise</Button>
+                               > Exercise <i className="material-icons">
+                               fitness_center
+                               </i> </Button>
+
+                               <br/> <br/>
+                                <Button variant="contained" onClick={this.handleAdd} > Confirm Day </Button> 
                                <br/> <br/> 
+                               
                                 </div>    
                                 
                                 :
@@ -217,9 +218,11 @@ export default class Create extends Component {
                                 Reps <input onChange={this.handleChange} type = "number" name = "reps" />
                                 <button onClick={this.addExercises} > Add</button>
                                 </form>
-                                <br/> <br/>
-                                <button onClick={this.handleAdd} > Confirm Day </button>
+                                
                               
+                                <br/><br/>
+
+                               
                                 </div>
                                 
                                 
@@ -228,31 +231,35 @@ export default class Create extends Component {
                                 <div></div>
 
                             }
-                              
+
+                             
                                 
 
                                  
                                 
 
-                                  <br/><br/>
-
-                                 <div>
-                                   <Button variant="contained" color="primary"
-                                    onClick = {this.postProgram} 
-                                   >
-                                       Create
-                                   </Button>
-                               </div>
+                                 
                                <br/><br/><br/><br/><br/>
 
-                                
+                                 <div>
+                                <Button variant="contained" 
+                                onClick = {this.postProgram} 
+                                >
+                                    Create <i className="material-icons">
+                                    check
+                                    </i>
+                                </Button>
+                                </div>
                                     
 
 
                         </Paper>
 
-                    {/* </Grid>
-                 </Grid> */}
+                    </Grid>
+                    <Grid item xs>
+          
+                    </Grid>
+                 </Grid>
 
                  
               
