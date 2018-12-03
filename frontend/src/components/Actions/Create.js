@@ -232,9 +232,7 @@ export default class Create extends Component {
                                  <TextField type="text" label="Sets" margin="normal" onChange = {this.handleChange} name="sets" /> <br/>
                                  <TextField type="text" label="Reps" margin="normal" onChange = {this.handleChange} name="reps" /> <br />
                                  
-                               {/* <label>  Exercise name <input onChange={this.handleChange} type = "text" name="exerciseName" /> </label>
-                              <label>  Sets <input onChange={this.handleChange} type = "number" name = "sets" /> </label>
-                             <label>   Reps <input onChange={this.handleChange} type = "number" name = "reps" /> </label> */}
+                               
                                 <button className="button submitButton" onClick={this.addExercises} > Add</button>
                                 </form>
                                 

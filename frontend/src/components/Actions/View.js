@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Grid,Paper,  List,  Select, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, } from '@material-ui/core';
+import {Grid,Paper,  List,  Select, ExpansionPanel, TextField, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, } from '@material-ui/core';
 import axios from 'axios';
 import Delete from './Delete';
 import Edit from './Edit';
@@ -196,9 +196,13 @@ export default class View extends Component {
                                                         
                                     </Select>   
                                     
-                                  <label>  Exercise name <input  onChange={this.handleUpdate} type = "text" name="newExercise" /> </label> 
+                                    <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleUpdate} name="newExercise" /> <br/>
+                                 <TextField type="text" label="Sets" margin="normal" onChange = {this.handleUpdate} name="newSets" /> <br/>
+                                 <TextField type="text" label="Reps" margin="normal" onChange = {this.handleUpdate} name="newReps" /> <br />
+
+                                  {/* <label>  Exercise name <input  onChange={this.handleUpdate} type = "text" name="newExercise" /> </label> 
                                   <label>  Sets <input  onChange={this.handleUpdate} type = "number" name = "newSets" /> </label> 
-                                 <label>   Reps <input  onChange={this.handleUpdate} type = "number" name = "newReps" /> </label> 
+                                 <label>   Reps <input  onChange={this.handleUpdate} type = "number" name = "newReps" /> </label>  */}
                                     <button onClick={this.updateArray} > Update</button>
                                     <br></br>
                                     <button onClick = {this.updateProgram}> Edit final</button>
