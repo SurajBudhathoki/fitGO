@@ -14,13 +14,20 @@ const Homepage = (props) => {
         <Grid item xs>
           
         </Grid>
-        <Grid item xs={7}>
-        <Paper className="paper">
+        <Grid item xs={8}>
+        <Paper className="mainPaper">
               
-    
-<img src = {Image} alt="main" />
+            <div className="imageContainer">
 
-<h2> Start your fitneess journey</h2>
+            {/* <Link to = '/login' className= "started" >
+                Get Started
+             </Link> */}
+            {/* <img src = {Image} alt="main" className= "mainImage" /> */}
+               <button className= "button started" >  Get Started </button>
+            </div>
+
+
+<h1> Start your fitness journey</h1>
           </Paper>
         </Grid>
         <Grid item xs>

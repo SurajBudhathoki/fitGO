@@ -157,7 +157,7 @@ export default class View extends Component {
                     <Grid item xs>
                     
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={8}>
                         <Paper className="viewPaper" >
                        
                             

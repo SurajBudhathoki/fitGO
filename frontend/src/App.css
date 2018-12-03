@@ -125,14 +125,26 @@ filter:brightness(40%);
 }
 
 .submitButton {
+  background-color: #00ff5f;
+  color: white;
+}
+
+.submitButton:hover {
+
+
   background-color: white; 
   color: black; 
   border: 2px solid #00ff5f;
 }
 
-.submitButton:hover {
-  background-color: #00ff5f;
-  color: white;
+.createButton {
+  padding: 2px;
+}
+
+.createButton:hover {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #00ff5f;
 }
 
 .edit {
@@ -140,14 +152,16 @@ filter:brightness(40%);
 }
 
 .deleteButton {
-  background-color: white; 
-  color: red; 
-  border: 2px solid red;
+
+  background-color: red;
+  color: white;
 }
 
 .deleteButton:hover {
-  background-color: red;
-  color: white;
+  background-color: white; 
+  color: red; 
+  border: 2px solid red;
+
 }
 
 .userForm{
@@ -184,4 +198,66 @@ filter:brightness(40%);
 
 .exerciseName, .programs {
   color: #0200ff;
+}
+
+
+
+.imageContainer {
+  position: relative;
+  background: black;
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
+
+}
+.imageContainer:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.5;
+  background-image: url('./images/gridArms.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  -ms-background-size: cover;
+-o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.imageContainer button {
+ 
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  
+
+  margin-top: 200px;
+  padding-top: 20px;
+  padding-right: 60px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+
+  opacity: 1;
+  background-color: #00ff5f;
+  color: white;
+ 
+} 
+
+.imageContainer button:hover {
+
+
+  background-color: white; 
+  color: black; 
+  border: 2px solid #00ff5f;
+}
+
+.mainPaper {
+  margin-top: 10px;
+  height: 600px;
 }
