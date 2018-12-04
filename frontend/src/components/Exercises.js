@@ -96,10 +96,12 @@ export default class Exercises extends Component {
                             <Paper className="paper">
                                 
                             <AppBar position="static" color="default">
-                                <Tabs style={{ color: 'blue' }} 
+                                <Tabs 
+                                className= "tabs"
+
                                      value={this.state.value}
                                     onChange={this.handleChange}
-                                    fullWidth
+                                    fullWidth 
                                 >
                                     <Tab className="tab" selected={true} label="Chest" />
                                     <Tab label="Back" />

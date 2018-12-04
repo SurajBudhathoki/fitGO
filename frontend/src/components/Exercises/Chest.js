@@ -12,14 +12,14 @@ const Chest = (props) => (
                     
                 <div key={index}>
 
-                       <h2 className="exerciseName" > {exercise.exerciseName} </h2>  
+                    <h2 className="exerciseName" > {exercise.exerciseName} </h2>    
                         <GridList cellHeight={300}>
-                  <GridListTile>
+                  <GridListTile className="chestImg" >
                     <img src=  
                          {exercise.exerciseImage[0]} 
-                        alt= 'chestImg' />
+                        alt= 'chestImg'  />
                     </GridListTile>
-                    <GridListTile>
+                    <GridListTile className="chestImg" >
                     <img src=  
                          {exercise.exerciseImage[1]} 
                         alt= 'chestImg' />
@@ -28,7 +28,8 @@ const Chest = (props) => (
 
 
                   </div> 
-                 
+
+
                 ))     
                 
             }   

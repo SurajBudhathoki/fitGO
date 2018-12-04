@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Grid,Paper,  List,  Select, ExpansionPanel, TextField, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, } from '@material-ui/core';
+import {Grid,Paper,  List,  Select, ExpansionPanel, TextField, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, Button, Snackbar, IconButton,  } from '@material-ui/core';
 import axios from 'axios';
 import Delete from './Delete';
 import Edit from './Edit';
@@ -139,7 +139,7 @@ export default class View extends Component {
             
 
             this.getPrograms();
-
+            this.setState({ open: true });
             console.log('deleted');
 
         } )
@@ -152,154 +152,135 @@ export default class View extends Component {
         this.setState({ isUpdating : false})
     }
 
+    // handleClick = () => {
+    //     this.setState({ open: true });
+    //   };
+    
+      handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({ open: false });
+      };
  
     render() {
         const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday'] 
 
         return(
             <div>
-                 <Grid container spacing={16}>
+                <Grid container spacing={16}>
                     <Grid item xs>
-                    
                     </Grid>
+
                     <Grid item xs={8}>
-                        {/* <Paper className="viewPaper" > */}
-                       
+                        {this.state.isUpdating
+                         ? 
+                        <div>
+                            <h1> Edit</h1>  
+                            <button onClick={this.goBack} className= "button deleteButton">
+                            Go back </button>
                             
-
-                             {this.state.isUpdating
-                                ? 
-                                 <div>
-                                <h1> Edit</h1>  
-
-                                <button onClick={this.goBack} className= "button deleteButton" > Go back </button>
-
-                                {/* <Grid container spacing={40}> 
-                                    <Grid item xs={6} >
-                                    <div className="userForm" > 
-                                <h1> Current information:</h1>
-                                <div className="inner-wrap">
-                                    Day:  Monday
-                                    
-                                  <label>  Exercise name <input  onChange={this.handleUpdate} type = "text" name="newExercise" /> </label> 
-                                  <label>  Sets <input  onChange={this.handleUpdate} type = "number" name = "newSets" /> </label> 
-                                 <label>   Reps <input  onChange={this.handleUpdate} type = "number" name = "newReps" /> </label> 
-                                  
-                                     </div>       
-                                    </div>
-                                    </Grid>
-
-                                    <Grid item xs={6}> */}
-                                    
-                                    <div className="userForm" > 
+                            <div className="userForm" > 
                                 <h1> Enter new information:</h1>
                                 <div className="inner-wrap">
                                     <Select native onChange={this.handleUpdate} name="newDay" >
-                                                            
-                                                            
+                                                                                   
                                     {dayList.map((day,index) => (
                                     <option key={index}>  {day}  </option>
                                     ))}
                                                         
-                                    </Select>   <br/>
+                                    </Select> <br/>
                                     
                                     <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleUpdate} name="newExercise" /> <br/>
-                                 <TextField type="text" label="Sets" margin="normal" onChange = {this.handleUpdate} name="newSets" /> <br/>
-                                 <TextField type="text" label="Reps" margin="normal" onChange = {this.handleUpdate} name="newReps" /> <br />
+                                    <TextField type="text" label="Sets" margin="normal" onChange = {this.handleUpdate} name="newSets" /> <br/>
+                                    <TextField type="text" label="Reps" margin="normal" onChange = {this.handleUpdate} name="newReps" /> <br />
 
-                             
                                     <button className= "button submitButton" onClick={this.updateArray} > Update</button>
                                     <br></br>
                                     <button className= "button submitButton"  onClick = {this.updateProgram}>  Submit</button>
-                                     </div>       
-                                    </div>
-                                    
-                                    {/* </Grid>
-                                    
-                                </Grid>                */}
-                                
-                                    </div> 
-
-                                     : 
-                                                    
-                                                    
-                                    <div>
-
-                    <h1 className="programs"> <u>Your Programs </u></h1> 
-                                                    {
-                              this.state.programList.map((program, index) =>  {
-                                  return(
-                                  <List key={index} >
-                                      
+                                </div>       
+                            </div>         
+                        </div> 
+                        : 
+                        <div className = "viewContainer">
+                            <h1 className="programs"> Your Programs </h1> 
+                            {
+                            this.state.programList.map((program, index) =>  {
+                                return(
+                                    <List key={index} >
 
                                         <ExpansionPanel>
-                                        <ExpansionPanelSummary> 
-                                        <h1> {program.programName} </h1>
-                                        </ExpansionPanelSummary>
-                                        <ExpansionPanelDetails> 
-                                        <div>
-
-
-
-
-                                            {program.days.map((day, index) => {
-                                            return(
-                                            <List key={index}> 
-                                            <h3> {day.dayName} </h3>  
-
-                                            
-
-                                            {day.exercises.map((exercise, index) => {
+                                            <ExpansionPanelSummary> 
+                                                <h1> {program.programName} </h1>
+                                            </ExpansionPanelSummary>
+                                            <ExpansionPanelDetails> 
+                                                <div>
+                                                {program.days.map((day, index) => {
                                                 return(
-                                                    <List key={index}>
-                                                        {exercise.exerciseName}
-                                                        {exercise.sets} x
-                                                        {exercise.reps}
-                                                    </List>
+                                                <List key={index}> 
+                                                    <h3> {day.dayName} </h3>  
+
+                                                    {day.exercises.map((exercise, index) => {
+                                                        return(
+                                                        <List key={index}>
+                                                            {exercise.exerciseName}
+                                                            {exercise.sets} x
+                                                            {exercise.reps}
+                                                        </List>
+                                                        )
+                                                    })}
+                                                </List> 
                                                 )
-                                            })}
-                                            </List> 
-                                            )
-                                            })}
+                                                })}
+                                                </div>   
+                                            </ExpansionPanelDetails>
+                                            <Divider/>
+                                            <ExpansionPanelActions>
+                                                <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
+                                                <Delete  id={program._id}  onDelete={this.deleteProgram} />
+                                            </ExpansionPanelActions>       
 
-                                            </div>   
-
-                                                
-                                            
-
-
-
-                                        </ExpansionPanelDetails>
-                                        <Divider/>
-                                         <ExpansionPanelActions>
-                                         <Edit key={program._id} id={program._id} onUpdate = {this.showUpdate} />
-
-                                            <Delete  id={program._id}  onDelete={this.deleteProgram} />
-                                        </ExpansionPanelActions>       
-
-                                        </ExpansionPanel>
-                                      
-                                     
-
-                                        
-
-
-
-                                        
-                                              
-                                  </List> 
+                                        </ExpansionPanel>            
+                                    </List> 
                               )})
 
-                          }    
-                                                         </div>
-                                                } 
-                        {/* </Paper> */}
+                            }    
+                        </div>
+                        } 
+                       
                     </Grid>
                     <Grid item xs>
-          
                     </Grid>
                  </Grid>   
 
+                 <div>
+                    <Snackbar
+                        anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={3500}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id"> Program Deleted </span>}
+                    action={[
+
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={this.props.close}
+                        onClick={this.handleClose}
+                        >
+                           X
+                        </IconButton>,
+                    ]}
+                    />
+                </div>           
 
             </div>
         )

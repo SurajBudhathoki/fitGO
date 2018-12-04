@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import {Grid, TextField, Select, FormControl,  } from '@material-ui/core';
+import {Grid, TextField, Select, FormControl, Snackbar, IconButton, Divider  } from '@material-ui/core';
 import axios from 'axios';
-
-
 
 
 export default class Create extends Component {
@@ -10,7 +8,9 @@ export default class Create extends Component {
         super()
         this.state = {
             exerciseList : [],
-
+            open: false,
+            dayOpen: false,
+            exerciseOpen: false,
             programsToAdd: [],
             exerciseName: '',
             sets: '',
@@ -35,8 +35,6 @@ export default class Create extends Component {
 
     handleChange =  (event) => {
 
-        console.log(event.target.value)
-
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -44,12 +42,11 @@ export default class Create extends Component {
     }
 
 
-
+    //adding exercises 
      addExercises = (event) => {
 
         event.preventDefault();
-
-            
+           
         let exercises = this.state.exerciseToAdd;
            
         exercises.push({ 
@@ -61,62 +58,46 @@ export default class Create extends Component {
 
         this.setState({ exerciseToAdd:  exercises, 
             });
-        console.log(exercises)
+        this.setState({ exerciseOpen: true });  
 
-            this.setState({ showExercise: false});
-
+        this.setState({ showExercise: false});
 
      } 
 
-
+     //adding days
     handleAdd = (event) => {
         event.preventDefault();
-
-
 
         let days = this.state.daysToAdd;
 
         days.push({
-           
-           
-                 dayName: this.state.dayName,
-
+                dayName: this.state.dayName,
                 exercises: this.state.exerciseToAdd,
-           
-
         })
 
 
-
-
         this.setState({ daysToAdd: days});
-
-        console.log(this.state.daysToAdd);
+        this.setState({ dayOpen: true });   
 
         this.setState({exerciseToAdd: [], showExercise: false, showDay: false });
 
-
-
     }
 
-
+    //posting the program to the database
     postProgram = (event) => {
 
         event.preventDefault();
         
         axios.post('/api/programs',  
-            
-          { 
-              programName: this.state.programName,
-
-
-                days: this.state.daysToAdd
-        
-        }
+            { 
+            programName: this.state.programName,
+            days: this.state.daysToAdd
+            }
 
         ).then(response => {
-            
+
            console.log(response.data)
+           this.setState({ open: true });
 
         }).catch(err => {
             console.log(err);
@@ -126,7 +107,7 @@ export default class Create extends Component {
 
     }
 
-
+    //getting exercises
     getExercises = () => {
         axios.get('/api/exercises')
         .then((result)=>{
@@ -135,17 +116,24 @@ export default class Create extends Component {
         })
     }
 
-
-        handleShowDay = (event) => {
-
-            this.setState({ showDay : true});
-        }
+    //showing the day form
+    handleShowDay = (event) => {
+        this.setState({ showDay : true});
+    }
        
-        handleShowExercise = (event) => {
+    //showing the exercise form
+    handleShowExercise = (event) => {
 
-            this.setState({ showExercise : true});
-        }
+        this.setState({ showExercise : true});
+    }
 
+    //closing the snackbar
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+            }
+            this.setState({ open: false, dayOpen: false, exerciseOpen: false });
+          };
 
     render() {
         const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday' ] 
@@ -154,131 +142,155 @@ export default class Create extends Component {
 
             <div>
                  <Grid container spacing={16}>
-                    <Grid item xs>
-                    
+                    <Grid item xs>                   
                     </Grid>
 
                     <Grid item xs={9}>
-                        {/* <Paper className="createPaper" > */}
                         <div className = "userForm">
                             <h1>Create a program</h1>
                             
                             <div className="inner-wrap">
                                 <div>
                                     <FormControl required={true} > 
-                                <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleChange} name="programName" />
-                                </FormControl>
-                                </div>
-
-                    
-
-                               <br />
+                                    <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleChange} name="programName" />
+                                    </FormControl>
+                                </div> <br/>
+                                <Divider /><br />
                                
-                                <button className= "button submitButton" variant = "contained"  onClick = {this.handleShowDay}>Add a day  
-                                {/* <i className="material-icons"> today </i>  */}
-                                
+                                <button className= "button submitButton" variant = "contained"  onClick = {this.handleShowDay}>
+                                Add a day                                  
                                 </button>
-                                
-                             
 
                                 <br></br><br></br>
 
-                                   {this.state.showDay ?  
-                                    
-                                   <div > 
-                                  
-                                 <Select native onChange={this.handleChange} name="dayName"  >
-                                    
-                                    
-                                      {dayList.map((day,index) => (
+                                {
+                                  this.state.showDay ?      
+                                   <div >                                  
+                                        <Select native onChange={this.handleChange} name="dayName"  >
+                                        {dayList.map((day,index) => (
                                           <option key={index}>  {day}  </option>
-                                      ))}
-                                   
-                                    </Select>    
+                                        ))}
+                                        </Select>    
+                                        <button className= "button confirmButton" variant="contained" onClick={this.handleAdd} > Confirm 
+                                        </button>  <br/><br/> <br/>                       
+                                        <Divider />
+                                        <br />        
 
-                                   <br/> <br/>        
-                                    
-
-                               
-                              
-
-                                <button className= "button submitButton"variant = "contained" 
-                               onClick = {this.handleShowExercise}
-                               > Add Exercise
-                                {/* <i className="material-icons">
-                               fitness_center </i> */}
-
-                                </button>
-                                    
-                               <br/> <br/> 
-                               
-                               <button className= "button submitButton" variant="contained" onClick={this.handleAdd} > Confirm 
+                                        <button className= "button submitButton"variant = "contained" 
+                                         onClick = {this.handleShowExercise}> Add Exercise
+                                        </button>  <br/> <br/>
+                                    </div>    
+                                 :
+                                    <div></div>
                             
-                            </button>  <br/>
-                                </div>    
-                                
-                                :
-                                <div></div>
-                                
                                 }   
                                
 
-                            {
-                                this.state.showExercise ? 
+                                {
+                                  this.state.showExercise ? 
 
+                                    <div>
+                                        <form> 
+                                        <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleChange} name="exerciseName" /> <br/>
+                                        <TextField type="text" label="Sets" margin="normal" onChange = {this.handleChange} name="sets" /> <br/>
+                                        <TextField type="text" label="Reps" margin="normal" onChange = {this.handleChange} name="reps" /> <br />
+                            
+                                        <button className="button confirmButton" onClick={this.addExercises} > Confirm</button>
+                                         </form>
+                                         <br />
+                                        <Divider />
+                                        <br/><br/>
+                                    </div>                            
+                                 :
+                                    <div></div>
+
+                                }                             
+                               
+                               <br/><br/><br/><br/>
+                                    <Divider /> <br/>
                                 <div>
-                                 <form> 
-                                 <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleChange} name="exerciseName" /> <br/>
-                                 <TextField type="text" label="Sets" margin="normal" onChange = {this.handleChange} name="sets" /> <br/>
-                                 <TextField type="text" label="Reps" margin="normal" onChange = {this.handleChange} name="reps" /> <br />
-                                 
-                               
-                                <button className="button submitButton" onClick={this.addExercises} > Add</button>
-                                </form>
-                                
-                              
-                                <br/><br/>
-
-                               
+                                    <button className= "button submitButton" variant="contained" 
+                                    onClick = {this.postProgram} > Create </button>
                                 </div>
-                                
-                                
-                                :
-
-                                <div></div>
-
-                            }
-
-                             
-                                
-
-                                 
-                                
-
-                                 
-                               <br/><br/><br/><br/><br/>
-
-                                 <div>
-                                <button className= "button submitButton" variant="contained" 
-                                onClick = {this.postProgram} 
-                                >
-                                    Create 
-                                </button>
-                                </div>
-                                    
-
-
 
                             </div>
-                        {/* </Paper> */}
+
                         </div> 
                     </Grid>
                     <Grid item xs>
-          
                     </Grid>
                  </Grid>
 
-                 
+                {/* Program Created Snackbar */}
+                <div>
+                    <Snackbar anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={3500}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id"> Program Created! </span>}
+                    action={[
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={this.props.close}
+                        onClick={this.handleClose}
+                        > X </IconButton>,
+                    ]}
+                    />
+                </div>
+
+                {/* Day Added Snackbar  */}
+                <Snackbar anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.dayOpen}
+                    autoHideDuration={2000}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id"> Day Added! </span>}
+                    action={[
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={this.props.close}
+                        onClick={this.handleClose}
+                        > X</IconButton>,
+                    ]}
+                    />
+
+                {/* Exercise Added Snackbar  */}
+                <Snackbar anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.exerciseOpen}
+                    autoHideDuration={2000}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id"> Exercise Added! </span>}
+                    action={[
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={this.props.close}
+                        onClick={this.handleClose}
+                        > X </IconButton>,
+                    ]}
+                    />
               
             </div>
         )

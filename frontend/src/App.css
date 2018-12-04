@@ -157,6 +157,20 @@ filter:brightness(90%);
   border: 2px solid #00ff5f;
 }
 
+.confirmButton {
+  background-color: #0200ff;
+  color: white;
+  
+}
+
+.confirmButton:hover {
+
+
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0200ff;
+}
+
 .createButton {
   padding: 2px;
 }
@@ -216,11 +230,30 @@ filter:brightness(90%);
 }
 
 
-.exerciseName, .programs {
+.programs {
+  /* color: #0200ff; */
+  background: #0200ff;
+	padding: 20px 30px 15px 30px;
+	/* margin: -30px -30px 30px -30px; */
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+}
+
+.exerciseName {
+  background-color: #0200ff;
+  color: #FFF;
+  padding: 10px;
+  margin-bottom: 0px;
+}
+
+.tabs {
+  font-weight: bold;
   color: #0200ff;
 }
 
-
+.tab {
+  font-weight: bold;
+}
 
 .imageContainer {
   position: relative;
@@ -295,4 +328,13 @@ filter:brightness(90%);
 
 h3 {
   color: #0200ff
+}
+
+.chestImg {
+  height: 300px;
+
+}
+
+.viewContainer {
+  height: 800px;
 }
