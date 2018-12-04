@@ -98,7 +98,7 @@ export default class Exercises extends Component {
                             <AppBar position="static" color="default">
                                 <Tabs 
                                 className= "tabs"
-
+                                    scrollable
                                      value={this.state.value}
                                     onChange={this.handleChange}
                                     fullWidth 

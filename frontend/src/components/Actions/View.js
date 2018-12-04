@@ -256,27 +256,27 @@ export default class View extends Component {
                         </div> 
                         : 
                         <div className = "viewContainer">
-                            <h1 className="programs"> Your Programs </h1> 
+                            <h1 className="programsHeader "> Your Programs </h1> 
                             {
                             this.state.programList.map((program, index) =>  {
                                 return(
                                     <div key={index} >
 
-                                        <ExpansionPanel>
+                                        <ExpansionPanel className = "expansion" >
                                             <ExpansionPanelSummary> 
                                                 <h1 className ="programName" > {program.programName} </h1>
                                             </ExpansionPanelSummary>
                                             <ExpansionPanelDetails> 
-                                                <div> 
+                                                <div className= "dayList"  > 
 
                                                 {program.days.map((day, index) => {
                                                 return(
-                                                <List key={index}> 
+                                                <List key={index} > 
                                                     <h3 className="programs" > {day.dayName} </h3>  
-                                                    <Table>
-                                                        <TableHead>
-                                                            <TableRow> 
-                                                            <TableCell> Exercise Name </TableCell>
+                                                    <Table className= "exerciseTable" >
+                                                        <TableHead  >
+                                                            <TableRow  > 
+                                                            <TableCell  > Exercise Name </TableCell>
                                                             <TableCell> Sets</TableCell>
                                                             <TableCell> Reps </TableCell>
                                                             </TableRow>

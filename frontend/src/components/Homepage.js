@@ -43,7 +43,7 @@ export default class Homepage extends Component {
                         </Grid>
                         <Grid item xs>
                             <img src = {GridPrograms} alt="gridProGridPrograms" className="gridImages"  />
-                            <h3>  View Programs</h3>                  
+                            <h3>  Customize Programs</h3>                  
                         </Grid>
                         <Grid item xs>
                             <img src = {GridExercises} alt="gridExGridExercises" className="gridImages"  />

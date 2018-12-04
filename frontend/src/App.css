@@ -239,6 +239,15 @@ filter:brightness(90%);
 	color: #fff;
 }
 
+.programsHeader {
+   
+  background: #0200ff;
+	padding: 20px 30px 15px 30px;
+	/* width: 250px; */
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+  }
+
 .exerciseName {
   background-color: #0200ff;
   color: #FFF;
@@ -343,3 +352,73 @@ h3 {
   color: #00ff5f;
   
 }
+
+@media only screen and (max-width: 700px) {
+
+
+  .acc {
+    margin-left:  175px;
+  }
+
+  .logogrid {
+    margin-right: 150px;
+  }
+
+  .chestImg {
+    width:  200px;
+  }
+
+  .userForm {
+    width: 250px;
+  }
+
+  .dayName{
+    width: 50px;
+  }
+
+  .dayList {
+    max-width: 100%;
+  }
+
+  .exerciseTable {
+    margin-left: -30px;
+    
+  }
+
+  .expansion {
+    width: 310px;
+  }
+
+  .programs {
+    width: 200px;
+  }
+
+  .programsHeader {
+   
+  background: #0200ff;
+	padding: 20px 30px 15px 30px;
+	width: 250px;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+  }
+
+}
+
+@media only screen and (max-width: 650px) {
+
+  /* .logogrid {
+    margin-right: 10px;
+  } */
+
+  /* .menuButton {
+    margin-right: 10px;
+  }
+
+  .navs {
+    margin-right: 50px;
+  }
+
+  .logo {
+    margin-right: 100px;
+  } */
+} 

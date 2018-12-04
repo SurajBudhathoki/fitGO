@@ -71,7 +71,7 @@ render() {
                                     <Grid item md = {5}>
                              
 
-                                <IconButton onClick={this.toggleDrawer('left', true)}> 
+                                <IconButton className ="menuButton"  onClick={this.toggleDrawer('left', true)}> 
                     <i className="material-icons" id="menu" >menu</i>  </IconButton>
                     <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
                     <div
@@ -93,8 +93,8 @@ render() {
                 </Drawer>
                                 </Grid>
                                
-                                <Grid item md={5}>
-                                    <Link  className="logo" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>  
+                                <Grid item md={5}  >
+                                    <Link  className="logogrid" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>  
                                     </Grid> 
                                 <Grid item md= {2} className= "userTop">
                                <Link to = "/userpage" className="acc" > 

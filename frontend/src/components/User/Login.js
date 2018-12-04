@@ -84,10 +84,13 @@ export default class Login extends Component {
     <div className="inner-wrap">
 
       <TextField type="text" label="Username" margin="normal" onChange = {this.handleChange} name="username"  helperText = {this.state.userText} error = {this.state.error} value={this.state.username} required= {true} /> <br/>
-      <TextField type="password" label="Password" margin="normal" value={this.state.password} required= {true} onChange = {this.handleChange} name="password" helperText = {this.state.passwordText} error = {this.state.error}  /> <br/>
-
+      <TextField type="password" label="Password" margin="normal" value={this.state.password} required= {true} onChange = {this.handleChange} name="password" helperText = {this.state.passwordText} error = {this.state.error}  /> <br/> <br/>
+            
         <div>
-        <button className= "button submitButton" onClick={this.handleClick} type ="submit"> Login</button>
+        <button className= "button submitButton" onClick={this.handleClick} type ="submit"> Login</button> <br/>
+        <div>
+            <p> Don't have an account? <a href = '/signup'> Sign up now! </a> </p>    
+        </div>
      </div>
     </div>
 
