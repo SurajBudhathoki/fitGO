@@ -112,6 +112,7 @@ export default class Create extends Component {
         axios.get('/api/exercises')
         .then((result)=>{
             this.setState({exerciseList : result.data});
+            console.log(result.data);
 
         })
     }
@@ -190,8 +191,13 @@ export default class Create extends Component {
                                   this.state.showExercise ? 
 
                                     <div>
-                                        <form> 
-                                        <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleChange} name="exerciseName" /> <br/>
+                                        <form>
+                                        <Select native onChange={this.handleChange} name="exerciseName"  >
+                                        {this.state.exerciseList.map((exercise,index) => (
+                                          <option key={index}>  {exercise.exerciseName}  </option>
+                                        ))}
+                                        </Select>    
+                                        {/* <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleChange} name="exerciseName" /> <br/> */}
                                         <TextField type="text" label="Sets" margin="normal" onChange = {this.handleChange} name="sets" /> <br/>
                                         <TextField type="text" label="Reps" margin="normal" onChange = {this.handleChange} name="reps" /> <br />
                             
@@ -228,7 +234,7 @@ export default class Create extends Component {
                         horizontal: 'center',
                     }}
                     open={this.state.open}
-                    autoHideDuration={3500}
+                    autoHideDuration={3000}
                     onClose={this.handleClose}
                     ContentProps={{
                         'aria-describedby': 'message-id',

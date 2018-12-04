@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Grid,Paper,  List,  Select, ExpansionPanel, TextField, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, Button, Snackbar, IconButton,  } from '@material-ui/core';
+import {Grid, List,  Select, ExpansionPanel, TextField, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, Button, Snackbar, IconButton, Table, TableHead, TableCell, TableRow, TableBody  } from '@material-ui/core';
 import axios from 'axios';
 import Delete from './Delete';
 import Edit from './Edit';
@@ -25,9 +25,6 @@ export default class View extends Component {
         exerciseToUpdate: []
     }
 
-
-  
-
     componentDidMount() {
         this.getPrograms();
     }
@@ -35,11 +32,8 @@ export default class View extends Component {
     getPrograms = () => {
         axios.get('/api/programs')
         .then((result) => {
-            
-         
 
             this.setState({programList: result.data});
-         
        
         });
 
@@ -208,28 +202,42 @@ export default class View extends Component {
                             {
                             this.state.programList.map((program, index) =>  {
                                 return(
-                                    <List key={index} >
+                                    <div key={index} >
 
                                         <ExpansionPanel>
                                             <ExpansionPanelSummary> 
-                                                <h1> {program.programName} </h1>
+                                                <h1 className ="programName" > {program.programName} </h1>
                                             </ExpansionPanelSummary>
                                             <ExpansionPanelDetails> 
-                                                <div>
+                                                <div> 
+
                                                 {program.days.map((day, index) => {
                                                 return(
                                                 <List key={index}> 
-                                                    <h3> {day.dayName} </h3>  
-
-                                                    {day.exercises.map((exercise, index) => {
+                                                    <h3 className="programs" > {day.dayName} </h3>  
+                                                    <Table>
+                                                        <TableHead>
+                                                            <TableRow> 
+                                                            <TableCell> Exercise Name </TableCell>
+                                                            <TableCell> Sets</TableCell>
+                                                            <TableCell> Reps </TableCell>
+                                                            </TableRow>
+                                                        </TableHead> 
+                                                        <TableBody>
+                                                        {day.exercises.map((exercise, index) => {
                                                         return(
-                                                        <List key={index}>
-                                                            {exercise.exerciseName}
-                                                            {exercise.sets} x
-                                                            {exercise.reps}
-                                                        </List>
+                                                        <TableRow key={index}>
+                                                          <TableCell>   {exercise.exerciseName} </TableCell>
+                                                          <TableCell>  {exercise.sets}  </TableCell>
+                                                          <TableCell>   {exercise.reps} </TableCell>
+                                                        </TableRow>
                                                         )
                                                     })}
+
+                                                        </TableBody>      
+                                                    </Table>  
+                                                    
+                                                
                                                 </List> 
                                                 )
                                                 })}
@@ -242,7 +250,7 @@ export default class View extends Component {
                                             </ExpansionPanelActions>       
 
                                         </ExpansionPanel>            
-                                    </List> 
+                                    </div> 
                               )})
 
                             }    

@@ -21,94 +21,43 @@ export default class Homepage extends Component {
     }
 
     render() {
-     
-
-            if (this.state.redirectTo) {
-                return <Redirect to={{ pathname: this.state.redirectTo }} />
-            } else {
+        if (this.state.redirectTo) {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        } else {
             return ( 
-
             <div>
-            <Grid container spacing={16}>
-        <Grid item xs>
-          
-        </Grid>
-        <Grid item xs={8}>
-        {/* <Paper className="mainPaper"> */}
-              
-            <div className="imageContainer">
+                <Grid container spacing={16}>
+                    <Grid item xs>
+                    </Grid>
+                    <Grid item xs={8}>             
+                        <div className="imageContainer">
+                            <button className= "button started" onClick={this.handleStarted} >  Get Started </button>
+                        </div>
 
-            
-               <button className= "button started" onClick={this.handleStarted} >  Get Started </button>
-            </div>
-
-
-        <h1 className ="journey"> Start your fitness journey!</h1> 
+                        <h1 className ="journey"> Start your fitness journey!</h1> 
+                        <Grid container spacing={16}>
+                        <Grid item xs>
+                            <img src = {GridCreate} alt="gridCreate"  className="gridImages" />
+                        
+                            <h3> Create Programs </h3> 
+                        </Grid>
+                        <Grid item xs>
+                            <img src = {GridPrograms} alt="gridProGridPrograms" className="gridImages"  />
+                            <h3>  View Programs</h3>                  
+                        </Grid>
+                        <Grid item xs>
+                            <img src = {GridExercises} alt="gridExGridExercises" className="gridImages"  />
+                            <h3>  View Exercises </h3>  
+                        </Grid>
+                        </Grid> 
+                    </Grid>
+                    <Grid item xs>
+                    </Grid>
+                </Grid>
   
-        <Grid container spacing={16}>
-                <Grid item xs>
-                    <img src = {GridCreate} alt="gridCreate"  className="gridImages" />
-                  
-                 <h3> Create Programs </h3> 
-
-                </Grid>
-                <Grid item xs>
-                <img src = {GridPrograms} alt="gridProGridPrograms" className="gridImages"  />
-                    <h3>  View Programs</h3>
-                   
-                </Grid>
-                <Grid item xs>
-                <img src = {GridExercises} alt="gridExGridExercises" className="gridImages"  />
-                    <h3>  View Exercises </h3>
-                   
-                </Grid>
-                </Grid> 
-
-          {/* </Paper> */}
-        </Grid>
-        <Grid item xs>
-          
-          </Grid>
-      </Grid>
-
-                     
-           
-        </div>
-            
-        )
+            </div>
+            )
+        }
     }
-}
 }   
 
-// const Homepage = (props) => {
-//     return(
-    //     <div>
-    //         <Grid container spacing={16}>
-    //     <Grid item xs>
-          
-    //     </Grid>
-    //     <Grid item xs={8}>
-    //     <Paper className="mainPaper">
-              
-    //         <div className="imageContainer">
-
-            
-    //            <button className= "button started" >  Get Started </button>
-    //         </div>
-
-
-    //     <h1> Start your fitness journey</h1> 
-  
-    //       </Paper>
-    //     </Grid>
-    //     <Grid item xs>
-          
-    //       </Grid>
-    //   </Grid>
-                  
-           
-    //     </div>
-//     )
-// }
-
-// export default Homepage;
