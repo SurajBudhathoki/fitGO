@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import {Grid, List,  Select, ExpansionPanel, TextField, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, Button, Snackbar, IconButton, Table, TableHead, TableCell, TableRow, TableBody  } from '@material-ui/core';
+import {Grid, List,  Select, ExpansionPanel, TextField, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, Snackbar, IconButton, Table, TableHead, TableCell, TableRow, TableBody  } from '@material-ui/core';
 import axios from 'axios';
 import Delete from './Delete';
 import Edit from './Edit';
+
 
 
 export default class View extends Component {
@@ -22,12 +23,20 @@ export default class View extends Component {
         newExercise:'',
         newSets: '',
         newReps: '',
-        exerciseToUpdate: []
+        exerciseToUpdate: [],
+        daysToUpdate: [],
+        dayOpen: false,
+        exerciseOpen: false,
+        programOpen: false,
+ 
     }
 
     componentDidMount() {
         this.getPrograms();
+         this.getExercises();
     }
+
+
 
     getPrograms = () => {
         axios.get('/api/programs')
@@ -45,20 +54,9 @@ export default class View extends Component {
         this.setState({ showProgram: true})
       }
 
+ 
 
-      getSingleProgram = (event) => {
-
-
-        console.log(event.target.value);
-
-        axios.get(`/api/programs/${event.target.value}`)
-        .then((result) => {
-             console.log(result.data);
-        })
-
-    }  
-
-    updateArray = (event) => {
+    updateExercise = (event) => {
         event.preventDefault();
 
         let exercises = this.state.exerciseToUpdate;
@@ -71,12 +69,29 @@ export default class View extends Component {
         })
 
         this.setState({
-            exerciseToUpdate: exercises,
+            exerciseToUpdate: exercises, newExercise : '', newSets: '', newReps: ''
         });
+
+        this.setState({ exerciseOpen: true });  
 
         console.log(this.state.exerciseToUpdate);
     }
 
+    updateDay = (event) => {
+        event.preventDefault();
+
+        let days = this.state.daysToUpdate;
+
+        days.push({
+            dayName: this.state.newDay,
+            exercises: this.state.exerciseToUpdate,
+        })
+
+        this.setState({ daysToUpdate: days,  exerciseToUpdate: [] })
+        this.setState({ dayOpen: true }); 
+
+        console.log(this.state.daysToUpdate);
+    }
    
     updateProgram = (event) => {
 
@@ -88,19 +103,18 @@ export default class View extends Component {
 
 
 
-        axios.put(`/api/programs/${this.state.updateID}`, {
-            //programName: this.state.programUpdate
+        axios.put(`/api/programs/${this.state.updateID}`, 
+            {
+            programName: this.state.programName,
 
-            days: {
-                dayName: this.state.newDay,
-                exercises: this.state.exerciseToUpdate,
-            }
+            days: this.state.daysToUpdate,
+            
 
         }).then(() => {
 
 
             this.getPrograms();
-
+            this.setState({ programOpen: true });
             console.log('updated');
         })
 
@@ -119,8 +133,26 @@ export default class View extends Component {
         this.setState({ isUpdating: true, updateID: event.target.value })
 
         console.log(this.state.updateID);
+
     }
 
+       //getting exercises
+       getExercises = () => {
+        axios.get('/api/exercises')
+        .then((result)=>{
+            this.setState({exerciseList : result.data});
+            console.log(result.data);
+
+        })
+    }
+
+    //closing the snackbar
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+            }
+            this.setState({ open:false, programOpen: false, dayOpen: false, exerciseOpen: false });
+          };
 
 
     deleteProgram = (event) => {
@@ -146,17 +178,9 @@ export default class View extends Component {
         this.setState({ isUpdating : false})
     }
 
-    // handleClick = () => {
-    //     this.setState({ open: true });
-    //   };
+
     
-      handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        this.setState({ open: false });
-      };
+
  
     render() {
         const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday'] 
@@ -175,22 +199,39 @@ export default class View extends Component {
                             <button onClick={this.goBack} className= "button deleteButton">
                             Go back </button>
                             
+
                             <div className="userForm" > 
                                 <h1> Enter new information:</h1>
                                 <div className="inner-wrap">
+                                <div>
+                                    
+                                    <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleUpdate} name="programName" />
+                                    
+                                </div> <br/>
+                                <Divider /><br />
+
                                     <Select native onChange={this.handleUpdate} name="newDay" >
                                                                                    
                                     {dayList.map((day,index) => (
                                     <option key={index}>  {day}  </option>
                                     ))}
                                                         
-                                    </Select> <br/>
+                                    </Select> <br/> <br /> <button className = "button confirmButton" onClick = {this.updateDay} > Update Day </button> <br/> <br />
+                                    <Divider /> <br/>
                                     
-                                    <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleUpdate} name="newExercise" /> <br/>
+                                    <Select native onChange={this.handleUpdate} name="newExercise"  >
+                                        {this.state.exerciseList.map((exercise,index) => (
+                                          <option key={index}>  {exercise.exerciseName}  </option>
+                                        ))}
+                                        </Select> 
+                                    
+                                     <br/>
                                     <TextField type="text" label="Sets" margin="normal" onChange = {this.handleUpdate} name="newSets" /> <br/>
                                     <TextField type="text" label="Reps" margin="normal" onChange = {this.handleUpdate} name="newReps" /> <br />
 
-                                    <button className= "button submitButton" onClick={this.updateArray} > Update</button>
+                                    <button className= "button confirmButton" onClick={this.updateExercise} > Update Exercise</button>
+                                    <br></br> <br/>
+                                    <Divider />
                                     <br></br>
                                     <button className= "button submitButton"  onClick = {this.updateProgram}>  Submit</button>
                                 </div>       
@@ -256,17 +297,20 @@ export default class View extends Component {
                             }    
                         </div>
                         } 
+
+                        
                        
                     </Grid>
                     <Grid item xs>
                     </Grid>
                  </Grid>   
 
+                {/* Program delete snackbar  */}
                  <div>
                     <Snackbar
                         anchorOrigin={{
                         vertical: 'bottom',
-                        horizontal: 'left',
+                        horizontal: 'center',
                     }}
                     open={this.state.open}
                     autoHideDuration={3500}
@@ -288,7 +332,82 @@ export default class View extends Component {
                         </IconButton>,
                     ]}
                     />
-                </div>           
+                </div> 
+
+                {/*  update day snackbar  */}
+
+                     <Snackbar anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.dayOpen}
+                    autoHideDuration={2000}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id"> Day Updated! </span>}
+                    action={[
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={this.props.close}
+                        onClick={this.handleClose}
+                        > X</IconButton>,
+                    ]}
+                    />
+
+
+                {/* update exercise snackbar */}
+
+                     <Snackbar anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.exerciseOpen}
+                    autoHideDuration={2000}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id"> Exercise Updated! </span>}
+                    action={[
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={this.props.close}
+                        onClick={this.handleClose}
+                        > X </IconButton>,
+                    ]}
+                    />
+
+                {/*  update program snackbar */}
+
+                    <div>
+                    <Snackbar anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.programOpen}
+                    autoHideDuration={3000}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id"> Program Edited! </span>}
+                    action={[
+                        <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={this.props.close}
+                        onClick={this.handleClose}
+                        > X </IconButton>,
+                    ]}
+                    />
+                </div>
 
             </div>
         )

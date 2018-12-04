@@ -5,9 +5,7 @@ const Edit = props => (
 
     <button className= "button submitButton" value={props.id} onClick={props.onUpdate}> 
     Edit
-    {/* <i className="material-icons edit">
-edit
-</i> */}
+
  </button>
 
   </div>
