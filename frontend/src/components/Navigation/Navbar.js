@@ -95,8 +95,8 @@ render() {
                                     <Link  className="logo" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>  
                                     </Grid> 
                                 <Grid item md= {2} className= "userTop">
-                              
-                                <i className ="material-icons account"> account_circle</i> {this.props.username} 
+                               <Link to = "/userpage" className="acc" > 
+                                <i className ="material-icons account"> account_circle</i> </Link>{this.props.username} 
                                 
                             <Link to="#" className="logout" onClick={this.logout}>Logout</Link>
                             </Grid>

@@ -20,7 +20,7 @@ class App extends Component {
       loggedIn: false,
       username: null,
       open: false,
-      test: 'test',
+    
     }
 
     this.updateUser = this.updateUser.bind(this)
@@ -38,13 +38,13 @@ class App extends Component {
       <div className="App">
 
          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} username={this.state.username} />
-         {this.state.loggedIn 
+         {/* {this.state.loggedIn 
           // && <p className="welcome">Welcome, {this.state.username}!</p>
-        }
+        } */}
 
         <div className="content">
         
-        <Route exact path="/" component={Homepage} test={this.state.test} />
+        <Route exact path="/" component={Homepage} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" render={() =>
             <Login updateUser={this.updateUser}/>}/>

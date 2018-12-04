@@ -15,10 +15,10 @@ const Userpage = (props) => {
         {props.username}
         </Grid>
         <Grid item xs={8}>
-        <Paper className="paper">
+        {/* <Paper className="paper"> */}
                
-        <br/><br/><br/> 
-              <GridList  cellHeight={300} cols={1} spacing={16} >          
+        <br/>
+              {/* <GridList  cellHeight={300} cols={1} spacing={16} >          
                <GridListTile > <Link to ="/create">  <img src = {Create} className="homeImg" alt="createProgram" /> <GridListTileBar 
               title= "Create a Program" />  </Link>
              <Link to ="/create">   </Link>
@@ -28,15 +28,33 @@ const Userpage = (props) => {
               <Link to ="/view"> 
               </Link> 
               </GridListTile>
-              </GridList>
+              </GridList> */}
+                <Grid spacing={16} >
+            <Grid item xs>
+            <Link to ="/create" className="userLinks">
+            <img src = {Create} className="homeImg" alt="createProgram" />
+            <h3 className="prog"> Create a Program</h3>
+            </Link>
+            </Grid>
+            <Grid item xs>
+            <Link to ="/view" className="userLinks">
+            <img src = {View}  className="homeImg" alt="viewProgram" />
+            
+            <h3 className="prog"> View Programs </h3>
+            </Link>
+            </Grid>
+           
+          
+          </Grid>    
 
-          </Paper>
+          {/* </Paper> */}
         </Grid>
         <Grid item xs>
           
         </Grid>
       </Grid>
                   
+            
            
         </div>
     )

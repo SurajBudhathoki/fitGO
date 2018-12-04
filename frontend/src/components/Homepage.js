@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
-import {Grid,Paper,  } from '@material-ui/core';
+import {Grid,  } from '@material-ui/core';
 import {Redirect} from 'react-router-dom';
+import GridCreate from '../images/gridChest.jpg';
+import GridPrograms from '../images/gridBack.jpg';
+import GridExercises from '../images/gridLegs.jpg'
 
 export default class Homepage extends Component {
     state = {
@@ -31,7 +34,7 @@ export default class Homepage extends Component {
           
         </Grid>
         <Grid item xs={8}>
-        <Paper className="mainPaper">
+        {/* <Paper className="mainPaper"> */}
               
             <div className="imageContainer">
 
@@ -40,15 +43,35 @@ export default class Homepage extends Component {
             </div>
 
 
-        <h1> Start your fitness journey</h1> 
+        <h1 className ="journey"> Start your fitness journey!</h1> 
   
-          </Paper>
+        <Grid container spacing={16}>
+                <Grid item xs>
+                    <img src = {GridCreate} alt="gridCreate"  className="gridImages" />
+                  
+                 <h3> Create Programs </h3> 
+
+                </Grid>
+                <Grid item xs>
+                <img src = {GridPrograms} alt="gridProGridPrograms" className="gridImages"  />
+                    <h3>  View Programs</h3>
+                   
+                </Grid>
+                <Grid item xs>
+                <img src = {GridExercises} alt="gridExGridExercises" className="gridImages"  />
+                    <h3>  View Exercises </h3>
+                   
+                </Grid>
+                </Grid> 
+
+          {/* </Paper> */}
         </Grid>
         <Grid item xs>
           
           </Grid>
       </Grid>
-                  
+
+                     
            
         </div>
             
