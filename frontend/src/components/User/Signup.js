@@ -11,6 +11,9 @@ export default class Signup extends Component {
             password: '',
             confirmPassword: '',
             redirectTo: null,
+            userText: '',
+            passwordText: '',
+            error: false,
         
         }
         //using bind to create a new function  to call the this keyword with the provided value
@@ -30,6 +33,13 @@ export default class Signup extends Component {
 
         event.preventDefault();
 
+        if(this.state.username === '' || this.state.password === '' ) {
+            
+
+            this.setState({ userText: "Plese enter username" , passwordText : "Please enter password", error: true })
+        }
+        else {
+
         axios.post('/api/users', {
                     username: this.state.username,
                     password: this.state.password  
@@ -44,6 +54,7 @@ export default class Signup extends Component {
             console.log(err)
         })
 
+        }
     }
 
     //rendering on the html
@@ -57,8 +68,8 @@ export default class Signup extends Component {
                     <form>
 
                            <div className="inner-wrap">
-                           <TextField type="text" label="Username" margin="normal" onChange = {this.handleChange} name="username"  required= {true} value={this.state.username}/> <br/>
-      <TextField type="password" label="Password" margin="normal" value={this.state.password} required= {true} onChange = {this.handleChange} name="password" /> <br/>
+                           <TextField type="text" label="Username" margin="normal" onChange = {this.handleChange} name="username"  required= {true} value={this.state.username} helperText = {this.state.userText} error = {this.state.error}   /> <br/>
+                            <TextField type="password" label="Password" margin="normal" value={this.state.password} required= {true} onChange = {this.handleChange} helperText = {this.state.passwordText} error = {this.state.error} name="password" /> <br/>
  
                         <div >
                         <button className= "button submitButton" onClick={this.handleClick} type ="submit"> Sign Up</button>

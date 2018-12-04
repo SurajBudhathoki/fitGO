@@ -28,6 +28,10 @@ export default class View extends Component {
         dayOpen: false,
         exerciseOpen: false,
         programOpen: false,
+        error:  false,
+        programText: false,
+        setsText: false,
+        repsText: false,
  
     }
 
@@ -61,6 +65,11 @@ export default class View extends Component {
 
         let exercises = this.state.exerciseToUpdate;
 
+        if( this.state.newSets === '' || this.state.newReps === '' ) {
+
+            this.setState ({ error: true, setsText: "Please enter number of sets", repsText: "Please enter number of reps" })
+        }
+        else {
         exercises.push({
             exerciseName: this.state.newExercise,
             sets: this.state.newSets,
@@ -72,9 +81,10 @@ export default class View extends Component {
             exerciseToUpdate: exercises, newExercise : '', newSets: '', newReps: ''
         });
 
-        this.setState({ exerciseOpen: true });  
+        this.setState({ exerciseOpen: true, error: false, setsText: '', repsText: '' });  
 
         console.log(this.state.exerciseToUpdate);
+        }
     }
 
     updateDay = (event) => {
@@ -97,6 +107,14 @@ export default class View extends Component {
 
         event.preventDefault();
 
+
+        if(this.state.programName === '') {
+
+            this.setState ({ programText: "Please enter program name", error : true })
+        }
+
+        else {
+
         this.setState({
             isUpdating: false
         })
@@ -114,11 +132,11 @@ export default class View extends Component {
 
 
             this.getPrograms();
-            this.setState({ programOpen: true });
-            console.log('updated');
+            this.setState({ programOpen: true, error: false, programText: '', });
+           
         })
 
-
+        }
     }
 
     handleUpdate = (event) => {
@@ -141,7 +159,6 @@ export default class View extends Component {
         axios.get('/api/exercises')
         .then((result)=>{
             this.setState({exerciseList : result.data});
-            console.log(result.data);
 
         })
     }
@@ -205,7 +222,7 @@ export default class View extends Component {
                                 <div className="inner-wrap">
                                 <div>
                                     
-                                    <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleUpdate} name="programName" />
+                                    <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleUpdate} helperText = {this.state.programText} error= {this.state.error}name="programName" />
                                     
                                 </div> <br/>
                                 <Divider /><br />
@@ -226,8 +243,8 @@ export default class View extends Component {
                                         </Select> 
                                     
                                      <br/>
-                                    <TextField type="text" label="Sets" margin="normal" onChange = {this.handleUpdate} name="newSets" /> <br/>
-                                    <TextField type="text" label="Reps" margin="normal" onChange = {this.handleUpdate} name="newReps" /> <br />
+                                    <TextField type="text" label="Sets" margin="normal" error ={this.state.error} helperText ={this.state.setsText} onChange = {this.handleUpdate} name="newSets" /> <br/>
+                                    <TextField type="text" label="Reps" margin="normal" error = {this.state.error} helperText ={this.state.repsText} onChange = {this.handleUpdate} name="newReps" /> <br />
 
                                     <button className= "button confirmButton" onClick={this.updateExercise} > Update Exercise</button>
                                     <br></br> <br/>

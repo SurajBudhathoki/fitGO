@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { AppBar, Toolbar,  Grid} from '@material-ui/core/';
-import { List, ListItem, Drawer, IconButton} from '@material-ui/core';
+import { List, ListItem, Drawer, IconButton, Divider} from '@material-ui/core';
 import axios from 'axios';
 import Logo from '../Navigation/logo.PNG';
 
@@ -81,6 +81,8 @@ render() {
                         onKeyDown={this.toggleDrawer('left', false)}
                     >                   
                         <List>
+                            <ListItem className="menuItems" button> <Link to ="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link> </ListItem>
+                            <Divider />
                             <ListItem className="menuItems" button> <Link  to="/exercises"> View Exercises </Link>   </ListItem>
                             <ListItem className="menuItems" button> <Link  to="/create">Create Program </Link> </ListItem>
                             <ListItem className="menuItems" button> <Link  to="/view">View Program </Link> </ListItem>
@@ -120,11 +122,13 @@ render() {
                         onKeyDown={this.toggleDrawer('left', false)}
                     >                   
                         <List>
+                            <ListItem className="menuItems" button> <Link to ="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link> </ListItem>
+                            <Divider />
                             <ListItem className="menuItems" button> <Link  to="/exercises"> View Exercises </Link>   </ListItem>
-                            <ListItem className="menuItems" button> <Link  to="/create">Create Program </Link> </ListItem>
+                            {/* <ListItem className="menuItems" button> <Link  to="/create">Create Program </Link> </ListItem>
                             <ListItem className="menuItems" button> <Link  to="/view">View Program </Link> </ListItem>
                             <ListItem className="menuItems" button> <Link  to="/view">Edit Program </Link> </ListItem>
-                            <ListItem className="menuItems" button> <Link  to="/view">Delete Program </Link> </ListItem>
+                            <ListItem className="menuItems" button> <Link  to="/view">Delete Program </Link> </ListItem> */}
                         </List>                            
                     </div>
                 </Drawer>

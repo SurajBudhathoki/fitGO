@@ -22,6 +22,10 @@ export default class Create extends Component {
 
             showDay: false,
             showExercise: false,
+            error:  false,
+            programText: false,
+            setsText: false,
+            repsText: false,
         }
         this.handleChange =  this.handleChange.bind(this);
 
@@ -48,7 +52,13 @@ export default class Create extends Component {
         event.preventDefault();
            
         let exercises = this.state.exerciseToAdd;
-           
+
+        if( this.state.sets === '' || this.state.reps === '' ) {
+
+            this.setState ({ error: true, setsText: "Please enter number of sets", repsText: "Please enter number of reps" })
+        }
+        
+        else { 
         exercises.push({ 
                  exerciseName : this.state.exerciseName,
                  sets: this.state.sets,
@@ -58,10 +68,11 @@ export default class Create extends Component {
 
         this.setState({ exerciseToAdd:  exercises, 
             });
-        this.setState({ exerciseOpen: true });  
+        this.setState({ exerciseOpen: true, error: false, setsText: '', repsText: '' });  
 
         this.setState({ showExercise: false});
 
+        }
      } 
 
      //adding days
@@ -87,6 +98,14 @@ export default class Create extends Component {
     postProgram = (event) => {
 
         event.preventDefault();
+
+
+        if(this.state.programName === '') {
+
+            this.setState ({ programText: "Please enter program name", error : true })
+        }
+
+        else {
         
         axios.post('/api/programs',  
             { 
@@ -103,7 +122,8 @@ export default class Create extends Component {
             console.log(err);
         })
 
-        this.setState({ showDay: false, showExercise: false, programName: ""});
+        this.setState({ showDay: false, error: false, programText: '', showExercise: false, programName: ""});
+        }
 
     }
 
@@ -153,7 +173,7 @@ export default class Create extends Component {
                             <div className="inner-wrap">
                                 <div>
                                     <FormControl required={true} > 
-                                    <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleChange} name="programName" />
+                                    <TextField type="text" label="Program Name" margin="normal" required={true}  value ={this.state.programName} onChange = {this.handleChange} helperText = {this.state.programText} error= {this.state.error}  name="programName" />
                                     </FormControl>
                                 </div> <br/>
                                 <Divider /><br />
@@ -197,9 +217,9 @@ export default class Create extends Component {
                                           <option key={index}>  {exercise.exerciseName}  </option>
                                         ))}
                                         </Select>    
-                                        {/* <TextField type="text" label="Exercise Name" margin="normal" onChange = {this.handleChange} name="exerciseName" /> <br/> */}
-                                        <TextField type="text" label="Sets" margin="normal" onChange = {this.handleChange} name="sets" /> <br/>
-                                        <TextField type="text" label="Reps" margin="normal" onChange = {this.handleChange} name="reps" /> <br />
+                                        
+                                        <TextField type="text" label="Sets" margin="normal" error ={this.state.error} helperText ={this.state.setsText} onChange = {this.handleChange} name="sets" /> <br/>
+                                        <TextField type="text" label="Reps" margin="normal" error = {this.state.error} helperText ={this.state.repsText} onChange = {this.handleChange} name="reps" /> <br />
                             
                                         <button className="button confirmButton" onClick={this.addExercises} > Confirm</button>
                                          </form>

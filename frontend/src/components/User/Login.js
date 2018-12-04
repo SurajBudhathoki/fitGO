@@ -13,7 +13,10 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            redirectTo: null
+            redirectTo: null,
+            userText: '',
+            passwordText: '',
+            error: false,
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -32,6 +35,15 @@ export default class Login extends Component {
 
         event.preventDefault();
 
+        if(this.state.username === '' || this.state.password === '' ) {
+
+
+            this.setState({ userText: "plese enter username" , passwordText : "please enter password", error: true })
+        }
+        else {
+
+
+        
         axios.post('/login', {
             username: this.state.username,
             password: this.state.password
@@ -56,6 +68,8 @@ export default class Login extends Component {
 
     }
 
+    }
+
     render() {
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
@@ -69,8 +83,8 @@ export default class Login extends Component {
    
     <div className="inner-wrap">
 
-      <TextField type="text" label="Username" margin="normal" onChange = {this.handleChange} name="username"  value={this.state.username} required= {true} /> <br/>
-      <TextField type="password" label="Password" margin="normal" value={this.state.password} required= {true} onChange = {this.handleChange} name="password" /> <br/>
+      <TextField type="text" label="Username" margin="normal" onChange = {this.handleChange} name="username"  helperText = {this.state.userText} error = {this.state.error} value={this.state.username} required= {true} /> <br/>
+      <TextField type="password" label="Password" margin="normal" value={this.state.password} required= {true} onChange = {this.handleChange} name="password" helperText = {this.state.passwordText} error = {this.state.error}  /> <br/>
 
         <div>
         <button className= "button submitButton" onClick={this.handleClick} type ="submit"> Login</button>
