@@ -26,7 +26,7 @@ export default class Homepage extends Component {
         } else {
             return ( 
             <div>
-                <Grid container spacing={16}>
+                <Grid container >
                     <Grid item xs>
                     </Grid>
                     <Grid item xs={8}>             

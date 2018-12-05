@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const Userpage = (props) => {
     return(
         <div>
-            <Grid container spacing={16}>
+            <Grid container>
         <Grid item xs>
         
         </Grid>

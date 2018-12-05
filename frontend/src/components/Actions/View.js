@@ -204,7 +204,7 @@ export default class View extends Component {
 
         return(
             <div>
-                <Grid container spacing={16}>
+                <Grid container>
                     <Grid item xs>
                     </Grid>
 
@@ -217,7 +217,7 @@ export default class View extends Component {
                             Go back </button>
                             
 
-                            <div className="userForm" > 
+                            <div className="editForm" > 
                                 <h1> Enter new information:</h1>
                                 <div className="inner-wrap">
                                 <div>

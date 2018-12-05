@@ -33,7 +33,7 @@ export default class Exercises extends Component {
             this.setState({chestList: result.data});
         })
     }
-    
+
     //displaying back workouts
     getBackExercises = () => {
         axios.get('/exercises/back')
@@ -80,7 +80,7 @@ export default class Exercises extends Component {
 
  
 
-                     <Grid container spacing={16}>
+                     <Grid container>
                             <Grid item xs>
                             
                             </Grid>

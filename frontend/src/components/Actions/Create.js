@@ -162,7 +162,7 @@ export default class Create extends Component {
         return(
 
             <div>
-                 <Grid container spacing={16}>
+                 <Grid container >
                     <Grid item xs>                   
                     </Grid>
 

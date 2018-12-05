@@ -61,7 +61,7 @@ render() {
         <div >
 
                 
-                <AppBar position= "static"   style={{ backgroundColor: 'white' }} >
+                <AppBar className="appbar" position= "static"   style={{ backgroundColor: 'white' }} >
                     <Toolbar>
 
                       {loggedIn ?  
