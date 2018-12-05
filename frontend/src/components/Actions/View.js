@@ -200,7 +200,7 @@ export default class View extends Component {
 
  
     render() {
-        const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday'] 
+        const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday' ] 
 
         return(
             <div>
@@ -358,7 +358,7 @@ export default class View extends Component {
                         horizontal: 'center',
                     }}
                     open={this.state.dayOpen}
-                    autoHideDuration={2000}
+                    autoHideDuration={3000}
                     onClose={this.handleClose}
                     ContentProps={{
                         'aria-describedby': 'message-id',

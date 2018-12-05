@@ -157,7 +157,7 @@ export default class Create extends Component {
           };
 
     render() {
-        const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday' ] 
+        const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday'  ] 
 
         return(
 
@@ -166,7 +166,7 @@ export default class Create extends Component {
                     <Grid item xs>                   
                     </Grid>
 
-                    <Grid item xs={9}>
+                    <Grid item xs={9} className= "createGrid" >
                         <div className = "userForm">
                             <h1>Create a program</h1>
                             

@@ -5,9 +5,6 @@ const Delete = props => (
 
     <button className="button deleteButton"  value={props.id} onClick={props.onDelete}> 
     Delete
-    {/* <i className="material-icons">
-delete
-</i>  */}
 </button>
 
   </div>

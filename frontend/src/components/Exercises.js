@@ -1,20 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Grid,Paper, Tabs, Tab, AppBar } from '@material-ui/core';
-
 import Chest from './Exercises/Chest';
 import Back from './Exercises/Back';
 import Legs from './Exercises/Legs';
 import Arms from './Exercises/Arms';
 import Shoulders from './Exercises/Shoulders';
 
-
-
-
 export default class Exercises extends Component {
 
     state = {
-       
         backList: [],
         chestList: [],
         legsList: [],
@@ -23,9 +18,7 @@ export default class Exercises extends Component {
         value: 0,
     }
 
-    
     componentDidMount() {
-
         this.getChestExercises();
         this.getBackExercises();
         this.getArmsExercises();
@@ -39,9 +32,8 @@ export default class Exercises extends Component {
         .then((result) => {
             this.setState({chestList: result.data});
         })
-
     }
-
+    
     //displaying back workouts
     getBackExercises = () => {
         axios.get('/exercises/back')
