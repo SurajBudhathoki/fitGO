@@ -58,20 +58,17 @@ render() {
     } else {
 
     return (
-        <div>
+        <div >
 
-             
-                <AppBar  title={Logo} position="static" className = "appbar" style={{ backgroundColor: 'white' }}>
-                    <div>
-                  
-                        {loggedIn ? 
-                        (
-                            <Toolbar>
-                                  <Grid justify="space-between" container spacing={16}>
-                                    <Grid item md = {5}>
-                             
+                
+                <AppBar position= "static"   style={{ backgroundColor: 'white' }} >
+                    <Toolbar>
 
-                                <IconButton className ="menuButton"  onClick={this.toggleDrawer('left', true)}> 
+                      {loggedIn ?  
+                      
+                      <Grid container style={{ color: 'blue' }} >
+                        <Grid item xs>
+                        <IconButton className ="menuButton"  onClick={this.toggleDrawer('left', true)}> 
                     <i className="material-icons" id="menu" >menu</i>  </IconButton>
                     <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
                     <div
@@ -91,28 +88,24 @@ render() {
                         </List>                            
                     </div>
                 </Drawer>
-                                </Grid>
-                               
-                                <Grid item md={5}  >
-                                    <Link  className="logogrid" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>  
-                                    </Grid> 
-                                <Grid item md= {2} className= "userTop">
-                               <Link to = "/userpage" className="acc" > 
-                                <i className ="material-icons account"> account_circle</i> </Link>{this.props.username} 
+                        </Grid>
+                        <Grid item xs>
+                        <Link  className="logogrid" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>
+                        </Grid>
+                        <Grid item xs={3} className= "navGrid" >
+                        <Link to = "/userpage" className="acc" > 
+                                <i className ="material-icons "> account_circle</i> {this.props.username}  </Link>
                                 
                             <Link to="#" className="logout" onClick={this.logout}>Logout</Link>
-                            </Grid>
-                            </Grid>   
-                            </Toolbar>
-                        ) : (
-                                <Toolbar  >
-                                    <Grid justify="space-between" container spacing={16}>
-                                   
-                                   
-                                   
-                                
-                                    <Grid item md={5}>
-                                    <IconButton onClick={this.toggleDrawer('left', true)}> 
+                        </Grid>
+                     </Grid>   :
+
+
+                          
+
+                            <Grid container style={{ color: 'blue' }} >
+                        <Grid item xs>
+                        <IconButton className ="menuButton"  onClick={this.toggleDrawer('left', true)}> 
                     <i className="material-icons" id="menu" >menu</i>  </IconButton>
                     <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
                     <div
@@ -125,32 +118,25 @@ render() {
                             <ListItem className="menuItems" button> <Link to ="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link> </ListItem>
                             <Divider />
                             <ListItem className="menuItems" button> <Link  to="/exercises"> View Exercises </Link>   </ListItem>
-                            {/* <ListItem className="menuItems" button> <Link  to="/create">Create Program </Link> </ListItem>
-                            <ListItem className="menuItems" button> <Link  to="/view">View Program </Link> </ListItem>
-                            <ListItem className="menuItems" button> <Link  to="/view">Edit Program </Link> </ListItem>
-                            <ListItem className="menuItems" button> <Link  to="/view">Delete Program </Link> </ListItem> */}
+
                         </List>                            
                     </div>
                 </Drawer>
+                        </Grid>
+                        <Grid item xs>
+                        <Link  className="logogrid" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>
+                        </Grid>
+                        <Grid item xs={3} className= "navGrid" >
+                        <Link  className="login" to="/login"> Login </Link>
+                                    <Link className="signup" to="/signup"> Sign up </Link>
+                        </Grid>
+                      </Grid> }
 
-                                    </Grid>
-                                    <Grid item md={5}>
-                                    <Link  className="logo" to="/"> <img src = {Logo} alt="Logo" className= "Logo" /> </Link>  
-                                    </Grid>
 
-                                    <Grid item md={2} className="navGrid">
-                                    <Link  className="navs" to="/login"> Login </Link>
-                                    <Link className="navs" to="/signup"> Sign up </Link>
-                                    
-                                    </Grid>
-                                  </Grid>  
-                                </Toolbar>
-
-                                
-                            )}
-                    </div>
-                   
+                    </Toolbar>
                 </AppBar>
+             
+               
 
         </div>
     )

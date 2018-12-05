@@ -2,26 +2,49 @@
   text-align: center;
 }
 
-.navs {
+.signup {
   list-style-type:none;
   border: none;
   background: none;
   text-decoration: none;
    color: #0200ff;
-  margin-left: 15px;
-
+  margin-right: 25px;
+ margin-left: 15px;
   font-size: 20px;
   font-weight: bold;
 }
 
+.login {
+  margin-left: 200px;
+  list-style-type:none;
+  border: none;
+  background: none;
+  text-decoration: none;
+   color: #0200ff;
+   font-size: 20px;
+  font-weight: bold;
+}
 
+.acc {
+  text-decoration: none;
+  color: #0200ff;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 180px;
+}
+
+.logout {
+  font-weight: bold;
+  color: red;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 20px;
+}
 
 .paper {
   margin-top: 10px;
   margin-bottom: 10px;
- 
-  /* height: 1600px; */
-  /* overflow: "auto"; */
+
 }
 
 .viewPaper {
@@ -53,21 +76,12 @@ color: white;
 }
 
 .homeImg, .gridImg {
-  /* opacity: 0.7; */
+
 filter:brightness(90%);
 }
 
-.welcome {
-  float: right;
-}
 
-.logout {
- 
 
-  color: red;
-  text-decoration: none;
-  margin-left: 15px;
-}
 
 .createGrid {
   height: 800px;
@@ -104,15 +118,13 @@ filter:brightness(90%);
 }
 
 .account {
-  margin-left: 40px;
+  margin-left: 30px;
   text-decoration: none;
 
 }
 
-.acc {
-  text-decoration: none;
-  color: #0200ff;
-}
+
+
 
 .userTop {
   font-size: 20px;
@@ -220,7 +232,7 @@ filter:brightness(90%);
 	margin: -30px -30px 30px -30px;
 	border-radius: 10px 10px 0 0;
 	color: #fff;
-	/* font: normal 30px 'Bitter', serif; */
+
 
 }
 
@@ -231,10 +243,10 @@ filter:brightness(90%);
 
 
 .programs {
-  /* color: #0200ff; */
+
   background: #0200ff;
 	padding: 20px 30px 15px 30px;
-	/* margin: -30px -30px 30px -30px; */
+
 	border-radius: 10px 10px 0 0;
 	color: #fff;
 }
@@ -243,7 +255,7 @@ filter:brightness(90%);
    
   background: #0200ff;
 	padding: 20px 30px 15px 30px;
-	/* width: 250px; */
+
 	border-radius: 10px 10px 0 0;
 	color: #fff;
   }
@@ -256,13 +268,9 @@ filter:brightness(90%);
 }
 
 .tabs {
-  font-weight: bold;
   color: #0200ff;
 }
 
-.tab {
-  font-weight: bold;
-}
 
 .imageContainer {
   position: relative;
@@ -353,27 +361,50 @@ h3 {
   
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1024px) {
 
+  .login {
+    margin-left: 0px;
+  }
 
   .acc {
-    margin-left:  175px;
+    margin-left: 0px;
+  }
+}  
+
+@media only screen  and (max-width: 740px) {
+
+
+  .login {
+    margin-left: 0px;
+  }
+
+  .signup {
+    margin-left: 0px;
+  }
+
+  .acc {
+    margin-left: 0px;
+  }
+
+  .userTop {
+    margin-right: 250px;
+    padding: 20px;
+    padding-right: 50px;
   }
 
   .logogrid {
     margin-right: 150px;
   }
 
-  .chestImg {
-    width:  200px;
-  }
+
 
   .userForm {
-    width: 250px;
+    width: 240px;
   }
 
   .dayName{
-    width: 50px;
+    width: 40px;
   }
 
   .dayList {
@@ -381,44 +412,26 @@ h3 {
   }
 
   .exerciseTable {
-    margin-left: -30px;
+    margin-left: -40px;
     
   }
 
   .expansion {
-    width: 310px;
+    width: 280px;
   }
 
   .programs {
-    width: 200px;
+    width: 180px;
   }
 
   .programsHeader {
    
   background: #0200ff;
 	padding: 20px 30px 15px 30px;
-	width: 250px;
+	width: 220px;
 	border-radius: 10px 10px 0 0;
 	color: #fff;
   }
 
 }
 
-@media only screen and (max-width: 650px) {
-
-  /* .logogrid {
-    margin-right: 10px;
-  } */
-
-  /* .menuButton {
-    margin-right: 10px;
-  }
-
-  .navs {
-    margin-right: 50px;
-  }
-
-  .logo {
-    margin-right: 100px;
-  } */
-} 
